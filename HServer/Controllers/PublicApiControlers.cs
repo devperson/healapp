@@ -93,7 +93,7 @@ namespace HServer.Controllers
         public string ToAbsoluteUrl(string relativeUrl)
         {            
             var url = HttpContext.Current.Request.Url;
-            var port = !url.IsDefaultPort ? (":" + url.Port) : String.Empty;
+            var port = (url.AbsoluteUri.Contains("localhost") || url.AbsoluteUri.Contains("pc")) ? (":" + url.Port) : String.Empty;
 
             return String.Format("{0}://{1}{2}{3}", url.Scheme, url.Host, port, VirtualPathUtility.ToAbsolute(relativeUrl));
         }    
