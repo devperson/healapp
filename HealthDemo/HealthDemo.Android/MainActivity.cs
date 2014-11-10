@@ -15,7 +15,7 @@ using Android.Content;
 
 namespace HealthDemo.Droid
 {
-    [Activity(Label = "HealthDemo", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]//, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Health Demo", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]//, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : XFormsApplicationDroid
     {
         protected override void OnCreate(Bundle bundle)
