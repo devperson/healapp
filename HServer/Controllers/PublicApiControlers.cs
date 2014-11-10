@@ -67,13 +67,13 @@ namespace HServer.Controllers
         
         [NonAction]
         public DoctorModel ToDoctorModel(Doctor d)
-        {
+        {            
             return new DoctorModel
             {
                 Id = d.Id,
                 Title = d.Name,
                 Bio = d.Bio,
-                ImageUrl = string.Format("{0}/Images/Doctors/{1}", HttpContext.Current.Request.Url.AbsoluteUri, d.ImageFileName),
+                ImageUrl = this.ToAbsoluteUrl(string.Format("/Images/Doctors/{0}", d.ImageFileName)),
                 Department = d.Department.Name,
                 SubDepartment = d.SubDepartment != null ? d.SubDepartment.Name : "",
                 Position = d.Position.Name,
@@ -89,25 +89,14 @@ namespace HServer.Controllers
         /// <param name="relativeUrl">App-Relative path</param>
         /// <returns>Provided relativeUrl parameter as fully qualified Url</returns>
         /// <example>~/path/to/foo to http://www.web.com/path/to/foo</example>
-        //[NonAction]
-        //public string ToAbsoluteUrl(string relativeUrl)
-        //{            
-        //    if (string.IsNullOrEmpty(relativeUrl))
-        //        return relativeUrl;
-        //    var r = HttpContext.Current.Request;
-        //    if (HttpContext.Current == null)
-        //        return relativeUrl;
+        [NonAction]
+        public string ToAbsoluteUrl(string relativeUrl)
+        {            
+            var url = HttpContext.Current.Request.Url;
+            var port = !url.IsDefaultPort ? (":" + url.Port) : String.Empty;
 
-        //    if (relativeUrl.StartsWith("/"))
-        //        relativeUrl = relativeUrl.Insert(0, "~");
-        //    if (!relativeUrl.StartsWith("~/"))
-        //        relativeUrl = relativeUrl.Insert(0, "~/");
-
-        //    var url = HttpContext.Current.Request.Url;
-        //    var port = url.Port != 80 ? (":" + url.Port) : String.Empty;
-
-        //    return String.Format("{0}://{1}{2}{3}", url.Scheme, url.Host, port, VirtualPathUtility.ToAbsolute(relativeUrl));
-        //}    
+            return String.Format("{0}://{1}{2}{3}", url.Scheme, url.Host, port, VirtualPathUtility.ToAbsolute(relativeUrl));
+        }    
     }
 
     public class PositionController : ApiController
