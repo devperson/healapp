@@ -13,12 +13,13 @@ namespace HealthDemo.Pages
         private DoctorViewModel VM { get; set; }
         public ProfilePage()
             : base()
-        {
-            VM = ViewModelLocator.DoctorVM;
+        {            
             this.BindingContext = VM.SelectedDoctor;
         }
         protected override void RenderContentView(StackLayout parent)
         {
+            VM = ViewModelLocator.DoctorVM;
+
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 10, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 
@@ -35,12 +36,12 @@ namespace HealthDemo.Pages
                 Orientation = StackOrientation.Vertical,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                Padding = new Thickness(15, 20, 0, 0),
+                Padding = new Thickness(15, 5, 5, 10),
                 Spacing = 0
             };
 
             var lblDTitle = new Label()
-            {
+            {                
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(15)
             };
@@ -73,7 +74,7 @@ namespace HealthDemo.Pages
 
             var stackLayoutDetails = new StackLayout() { BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, Padding = new Thickness(15, 15, 7, 15), Spacing = 10 };
             stackLayoutDetails.Children.Add(CreateDetailsItem("Bio:", "Bio"));
-            stackLayoutDetails.Children.Add(CreateDetailsItem("Qualifications:", "Qualification"));
+            stackLayoutDetails.Children.Add(this.CreateQualificationsItem());
             stackLayoutDetails.Children.Add(CreateDetailsItem("Language:", "Language"));
             var frame1 = new Frame() { HasShadow = false, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 20) };
             var frmae2 = new Frame() { HasShadow = false, OutlineColor = Color.Black, BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = 1 };
@@ -113,6 +114,37 @@ namespace HealthDemo.Pages
             return stackLayout;
         }
 
+        private StackLayout CreateQualificationsItem()
+        {
+            StackLayout stackQualifications = new StackLayout() { Spacing = 0, Orientation = StackOrientation.Vertical };
+            var lblDTitle = new Label()
+            {
+                TextColor = Color.Black,
+                Font = Font.SystemFontOfSize(15, FontAttributes.Bold),
+                Text = "Qualifications:"
+            };
+
+            foreach (var item in VM.SelectedDoctor.QualifiList)
+            {
+                var lblDetails = new Label()
+                {
+                    TextColor = Color.Black,
+                    Font = Font.SystemFontOfSize(13),
+                    Text = item
+                };
+                stackQualifications.Children.Add(lblDetails);
+            }            
+
+            //if (hasBinding)
+            //    lblDetails.SetBinding(Label.TextProperty, new Binding(binding));
+            //else lblDetails.Text = binding;
+
+            var stackLayout = new StackLayout() { Spacing = 0, HorizontalOptions = LayoutOptions.FillAndExpand };
+            stackLayout.Children.Add(lblDTitle);
+            stackLayout.Children.Add(stackQualifications);
+
+            return stackLayout;
+        }
 
         protected override void OnBackPressed()
         {

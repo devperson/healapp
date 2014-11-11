@@ -155,8 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="restsharp">
-      <Visible>False</Visible>
       <Version>104.4.0.1</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

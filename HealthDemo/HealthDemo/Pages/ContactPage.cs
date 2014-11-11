@@ -96,14 +96,14 @@ namespace HealthDemo.Pages
             return telLayout;
         }
 
-        protected override void OnMasterViewRendered()
-        {
-            if (Device.OS == TargetPlatform.iOS)
-            {
-                //there seems some bug in xamarin because title croped to ten px
-                titleLayout.HeightRequest += 5;
-                titleImage.HeightRequest += 5;
-            }
-        }
+        //protected override void OnMasterViewRendered()
+        //{
+        //    if (Device.OS == TargetPlatform.iOS)
+        //    {
+        //        //there seems some bug in xamarin because title croped to ten px
+        //        titleLayout.HeightRequest += 5;
+        //        titleImage.HeightRequest += 5;
+        //    }
+        //}
     }
 }

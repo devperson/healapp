@@ -94,7 +94,8 @@ namespace HServer.Models.DataAccess
             doc4.Department = depMI;
             doc4.SubDepartment = new SubDepartment() { Name = "Neurology"}; 
             doc4.Bio = "Dr. Ghassan joined Al Ain Hospital during 2009, after three years as a specialist neurologist at NMC Speciality Hospitals in Dubai, Abu Dhabi and Al Ain. He came to the UAE in 2006 from England following additional training courses during 2005-2006. Before this, he was working as a specialist neurologist and university teacher in Iraq at Al Kindy Teaching Hospital/Medical College - Baghdad University.";            
-            doc4.Qualifications.Add(new Qualification { Name = "FICMS (neurology board) - 2002. MBChB (Iraqi Medical College) - 1994." });            
+            doc4.Qualifications.Add(new Qualification { Name = "FICMS (neurology board) - 2002." });
+            doc4.Qualifications.Add(new Qualification { Name = "MBChB (Iraqi Medical College) - 1994." });
             doc4.Languages.Add(lanEn);
             doc4.Languages.Add(lanAr);
             context.Doctors.Add(doc4);

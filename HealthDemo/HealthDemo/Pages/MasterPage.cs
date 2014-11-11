@@ -121,7 +121,7 @@ namespace HealthDemo.Pages
 
             //title
             var titleHeight = Device.OnPlatform(30, 40, 30);
-            titleLayout = new AbsoluteLayout() { HeightRequest = titleHeight, HorizontalOptions = LayoutOptions.FillAndExpand };
+            titleLayout = new AbsoluteLayout() { MinimumHeightRequest = titleHeight, HeightRequest = titleHeight, HorizontalOptions = LayoutOptions.FillAndExpand };
             titleImage = new Image
             {
                 Aspect = Aspect.Fill,
@@ -158,7 +158,7 @@ namespace HealthDemo.Pages
             RenderContentView(contentStack);
             
             //toolbar
-            toolbarLayout = new AbsoluteLayout() { HeightRequest = 40, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.End };
+            toolbarLayout = new AbsoluteLayout() { MinimumHeightRequest = 40, HeightRequest = 40, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.End };
             toolbarBackground = new Image() 
             {
                 Aspect = Aspect.Fill,
@@ -167,7 +167,7 @@ namespace HealthDemo.Pages
             };
             var toolbarStack = new StackLayout() 
             { 
-                Orientation = StackOrientation.Horizontal, Spacing = 0, 
+                Orientation = StackOrientation.Horizontal, Spacing = 0,
                 VerticalOptions = LayoutOptions.FillAndExpand, 
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
@@ -309,7 +309,7 @@ namespace HealthDemo.Pages
             BackgroundColor = Color.Transparent;
             TextColor = Color.Black;
             WidthRequest = 75;
-            VerticalOptions = LayoutOptions.FillAndExpand;
+            VerticalOptions = LayoutOptions.CenterAndExpand;
             Font = Font.SystemFontOfSize(14);
         }
     }
