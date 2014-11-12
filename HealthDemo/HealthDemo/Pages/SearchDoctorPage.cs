@@ -13,6 +13,7 @@ namespace HealthDemo.Pages
     {
         private Button btnSearch;
         private Picker btnCombo;
+        public static string HeaderTitle = "Find a Doctor";
         private DoctorViewModel VM { get; set; }
         public SearchDoctorPage() : base() 
         {
@@ -82,7 +83,7 @@ namespace HealthDemo.Pages
 
             parent.Children.Add(content);
 
-            lblTitle.Text = "Find a Doctor";
+            lblTitle.Text = HeaderTitle;
         }
 
         private  AbsoluteLayout CreateComboBox()
@@ -105,7 +106,7 @@ namespace HealthDemo.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
+            lvMenu.SelectedItem = GetCurrentPageAsMenu();
             VM.LoadSpeicalties(() =>
                 {
                     if (btnCombo.Items == null || (btnCombo.Items != null && btnCombo.Items.Count == 0))

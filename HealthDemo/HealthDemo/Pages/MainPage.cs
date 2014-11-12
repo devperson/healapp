@@ -61,7 +61,12 @@ namespace HealthDemo.Pages
                 BackgroundColor = Color.White,
                 Text = text
             };
+        }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            lvMenu.SelectedItem = GetCurrentPageAsMenu();
         }
     }
 }

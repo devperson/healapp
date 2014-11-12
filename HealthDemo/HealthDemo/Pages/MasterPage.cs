@@ -19,6 +19,7 @@ namespace HealthDemo.Pages
         protected AbsoluteLayout titleLayout, toolbarLayout;
         protected Image titleImage, toolbarBackground;
         public Frame LoadingIndicator;
+        protected ListView lvMenu;
         public MasterPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -77,7 +78,10 @@ namespace HealthDemo.Pages
         }
 
         private void RenderTemplateView()
-        {   
+        {
+            LoadingIndicator = CreateActivityIndicator();
+            menuLayout = CreateMenuLayout();
+
             var rootAbsoluteLAyout = new AbsoluteLayout(){VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var rootStack = new StackLayout() { Spacing = 0, BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
 
@@ -154,7 +158,7 @@ namespace HealthDemo.Pages
                 Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, 
                 HorizontalOptions = LayoutOptions.FillAndExpand, Spacing = 0, Padding = 0
             };
-
+            
             RenderContentView(contentStack);
             
             //toolbar
@@ -188,8 +192,7 @@ namespace HealthDemo.Pages
             rootStack.Children.Add(contentStack);
             rootStack.Children.Add(toolbarLayout);
 
-            LoadingIndicator = CreateActivityIndicator();
-            menuLayout = CreateMenuLayout();
+            
             rootAbsoluteLAyout.Children.Add(rootStack, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             rootAbsoluteLAyout.Children.Add(LoadingIndicator, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             rootAbsoluteLAyout.Children.Add(menuLayout, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
@@ -254,48 +257,95 @@ namespace HealthDemo.Pages
         public StackLayout CreateMenuLayout()
         {
             var rootStack = new StackLayout() { Spacing = 0, TranslationX = 400, BackgroundColor = Color.FromHex("52000000"), Orientation = StackOrientation.Horizontal, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
-            var listview = new ListView() { BackgroundColor = Color.White, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
-            listview.ItemTemplate = new DataTemplate(typeof(SimpleCell2));
-            listview.ItemsSource = new List<string>()
-            {
-                "Section1",
-                "Section2",
-                "Section3",
-                "Section4",
-                "Section5",
-            }.Select(s => new { Title = s});
-            
-            listview.ItemSelected += (s, e) =>
-                {
 
+            var titleHeight = Device.OnPlatform(30, 40, 30);
+            var lblMenuTitle = new Label()
+            {
+                TextColor = Color.White,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                MinimumHeightRequest = titleHeight,
+                HeightRequest = titleHeight,
+                XAlign = TextAlignment.Start,
+                YAlign = TextAlignment.Center,
+                BackgroundColor = Color.FromHex("FF4EA3D2"),
+                Font = Font.SystemFontOfSize(15),
+                Text = "  Menu"
+            };
+            lvMenu = new ListView() { BackgroundColor = Color.White, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
+            lvMenu.ItemTemplate = new DataTemplate(typeof(SimpleCell2));
+            lvMenu.RowHeight = Device.OnPlatform(60, 70, 60);
+
+            lvMenu.ItemsSource = MenuItems;
+            lvMenu.ItemSelected += (s, e) =>
+                {
+                    var selected = e.SelectedItem as MenuItem;
+                    switch (selected.PageType)
+                    {
+                        case PageType.Main:
+                            if (lblTitle.Text != MainPage.HeaderTitle)
+                                Navigation.PopToRootAsync();
+                            break;
+                        case PageType.SearchDoctor:
+                            if (lblTitle.Text != SearchDoctorPage.HeaderTitle)
+                                Navigation.PushAsync(new SearchDoctorPage());
+                            break;
+                        case PageType.HealthTipList:
+                            if (lblTitle.Text != CategoryListPage.HeaderTitle)
+                                Navigation.PushAsync(new CategoryListPage());
+                            break;
+                        default:
+                            break;
+                    }
+                    HideMenu();
                 };
+
+            var menuContent = new StackLayout() { Spacing = 0, Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
+            menuContent.Children.Add(lblMenuTitle);
+            menuContent.Children.Add(lvMenu);
+
             var hideButton = new Button() { VerticalOptions = LayoutOptions.FillAndExpand, WidthRequest = 79, BackgroundColor = Color.Transparent };
             hideButton.Clicked += (s, e) =>
                 {
-                    listview.SelectedItem = null;
-                    if (Device.OS == TargetPlatform.Android)
-                    {
-                        Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-                        {
-
-                            if (menuLayout.TranslationX == 400)
-                                return false;
-                            else
-                            {
-                                menuLayout.TranslationX += 20;
-                                return true;
-                            }
-                        });
-                    }
-                    else
-                    {
-                        menuLayout.TranslateTo(400, 0);
-                    }
+                    HideMenu();
                 };
             rootStack.Children.Add(hideButton);
-            rootStack.Children.Add(listview);
+            rootStack.Children.Add(menuContent);
             return rootStack;
         }
+
+        public MenuItem GetCurrentPageAsMenu()
+        {
+            return MenuItems.FirstOrDefault(s => s.Title == lblTitle.Text);
+        }
+
+        private void HideMenu()
+        {
+            if (Device.OS == TargetPlatform.Android)
+            {
+                Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+                {
+
+                    if (menuLayout.TranslationX == 400)
+                        return false;
+                    else
+                    {
+                        menuLayout.TranslationX += 20;
+                        return true;
+                    }
+                });
+            }
+            else
+            {
+                menuLayout.TranslateTo(400, 0);
+            }
+        }
+
+        public static List<MenuItem> MenuItems = new List<MenuItem>()
+            {   
+                new MenuItem(){Title = CategoryListPage.HeaderTitle, PageType = Pages.PageType.HealthTipList},
+                new MenuItem(){Title = SearchDoctorPage.HeaderTitle, PageType = Pages.PageType.SearchDoctor},
+                new MenuItem(){Title = MainPage.HeaderTitle, PageType = Pages.PageType.Main}
+            };
 
         protected virtual void RenderContentView(StackLayout parent) { }
         protected virtual void OnMasterViewRendered() { }
@@ -312,5 +362,18 @@ namespace HealthDemo.Pages
             VerticalOptions = LayoutOptions.CenterAndExpand;
             Font = Font.SystemFontOfSize(14);
         }
+    }
+
+    public class MenuItem
+    {
+        public string Title { get; set; }
+        public PageType PageType { get; set; }
+    }
+
+    public enum PageType
+    {
+        Main,
+        SearchDoctor,
+        HealthTipList
     }
 }

@@ -14,10 +14,10 @@ namespace HealthDemo.Pages
     {
         private TipViewModel VM { get; set; }
         private ListView lvCategories;
+        public static string HeaderTitle = "Categories";
         public CategoryListPage()
             : base()
         {
-            lblTitle.Text = "Categories";
             VM = ViewModelLocator.TipVM;
             BindingContext = VM;
 
@@ -29,6 +29,7 @@ namespace HealthDemo.Pages
                     Navigation.PushAsync(new HealthTipListPage());
             };
             VM.ShowAlert = this.DisplayAlert;
+            lblTitle.Text = HeaderTitle;
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -48,7 +49,7 @@ namespace HealthDemo.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            lvMenu.SelectedItem = GetCurrentPageAsMenu();
             VM.LoadCategories();
         }
     }

@@ -46,7 +46,6 @@ namespace HealthDemo.ViewModels
         }
 
         private IWebService _service;
-
         public IWebService WebService
         {
             get 

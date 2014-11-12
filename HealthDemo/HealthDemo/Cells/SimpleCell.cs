@@ -49,13 +49,14 @@ namespace HealthDemo.Cells
         public SimpleCell2()
             : base()
         {
+            var topMargin = Device.OnPlatform(10, 15, 10);
             var rootLayout = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = Color.Transparent,
-                Padding = new Thickness(8, 10, 8, 10)
+                Padding = new Thickness(8, topMargin, 8, topMargin)
             };
 
             var lblTitle = new Label()
