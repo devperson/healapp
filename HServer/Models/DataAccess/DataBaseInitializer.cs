@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HServer.Models.DataAccess
 {    
-    public class DataBaseInitializer : DropCreateDatabaseAlways<DataBaseContext>
+    public class DataBaseInitializer : CreateDatabaseIfNotExists<DataBaseContext>
     {
         protected override void Seed(DataBaseContext context)
         {
