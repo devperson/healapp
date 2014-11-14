@@ -57,7 +57,7 @@ namespace HealthDemo.Pages
                 Font = Font.SystemFontOfSize(14),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.StartAndExpand,
-                HeightRequest = 150
+                MinimumHeightRequest = 150
             };
             lblDescription.SetBinding(Label.TextProperty, new Binding("Description"));
 

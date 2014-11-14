@@ -74,7 +74,7 @@ namespace HealthDemo
 
         public async void GetInsurances(Action<InsuranceResponse> onCompleted)
         {
-            var asyncResult = await ExecuteServiceMethod<InsuranceResponse>("position", Method.GET, content =>
+            var asyncResult = await ExecuteServiceMethod<InsuranceResponse>("insurance", Method.GET, content =>
             {
                 var response = new InsuranceResponse() { Result = JsonConvert.DeserializeObject<List<Insurance>>(content) };
                 return response;
