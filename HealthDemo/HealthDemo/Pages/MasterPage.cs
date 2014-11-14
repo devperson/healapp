@@ -293,6 +293,18 @@ namespace HealthDemo.Pages
                             if (lblTitle.Text != CategoryListPage.HeaderTitle)
                                 Navigation.PushAsync(new CategoryListPage());
                             break;
+                        case PageType.Insurances:
+                            if (lblTitle.Text != InsuranceListPage.HeaderTitle)
+                                Navigation.PushAsync(new InsuranceListPage());
+                            break;
+                        case PageType.FAQ:
+                            if (lblTitle.Text != FaqListPage.HeaderTitle)
+                                Navigation.PushAsync(new FaqListPage());
+                            break;
+                        case PageType.News:
+                            if (lblTitle.Text != NewsListPage.HeaderTitle)
+                                Navigation.PushAsync(new NewsListPage());
+                            break;
                         default:
                             break;
                     }
@@ -344,6 +356,9 @@ namespace HealthDemo.Pages
             {   
                 new MenuItem(){Title = CategoryListPage.HeaderTitle, PageType = Pages.PageType.HealthTipList},
                 new MenuItem(){Title = SearchDoctorPage.HeaderTitle, PageType = Pages.PageType.SearchDoctor},
+                new MenuItem(){Title = InsuranceListPage.HeaderTitle, PageType = Pages.PageType.Insurances},
+                new MenuItem(){Title = FaqListPage.HeaderTitle, PageType = Pages.PageType.FAQ},
+                new MenuItem(){Title = NewsListPage.HeaderTitle, PageType = Pages.PageType.News},
                 new MenuItem(){Title = MainPage.HeaderTitle, PageType = Pages.PageType.Main}
             };
 
@@ -374,6 +389,9 @@ namespace HealthDemo.Pages
     {
         Main,
         SearchDoctor,
-        HealthTipList
+        HealthTipList,
+        Insurances,
+        FAQ,
+        News
     }
 }

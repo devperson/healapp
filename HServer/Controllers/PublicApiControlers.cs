@@ -16,12 +16,7 @@ namespace HServer.Controllers
         TipCategoryRepository context = new TipCategoryRepository();
         public IEnumerable<TipCategory> Get()
         {
-            return context.GetAll();
-            //return context.GetIgerly().Select(tc => new TipCategoryModel
-            //                                {
-            //                                    Name = tc.Name,
-            //                                    Tips = tc.Tips.Select(t => new TipModel { Name = t.Name, Description = t.Description }).ToList()
-            //                                }).ToList();
+            return context.GetAll();            
         }
     }
 
@@ -103,6 +98,33 @@ namespace HServer.Controllers
     {
         DepartmentRepository context = new DepartmentRepository();
         public IEnumerable<Position> Get()
+        {
+            return context.GetAll();
+        }
+    }
+
+    public class FaqController : ApiController
+    {
+        Repository<Faq> context = new Repository<Faq>(new DataBaseContext());
+        public IEnumerable<Faq> Get()
+        {
+            return context.GetAll();
+        }
+    }
+
+    public class NewsController : ApiController
+    {
+        Repository<News> context = new Repository<News>(new DataBaseContext());
+        public IEnumerable<News> Get()
+        {
+            return context.GetAll();
+        }
+    }
+
+    public class InsuranceController : ApiController
+    {
+        Repository<Insurance> context = new Repository<Insurance>(new DataBaseContext());
+        public IEnumerable<Insurance> Get()
         {
             return context.GetAll();
         }

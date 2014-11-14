@@ -33,7 +33,9 @@ namespace HServer.Models.DataAccess
         public DbSet<Tip> Tips { get; set; }
         public DbSet<TipCategory> TipCategories { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-
-        public DbSet<Department> Departments { get; set; } 
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<Faq> Faqs { get; set; }
+        public DbSet<Insurance> Insurances { get; set; }
     }
 }

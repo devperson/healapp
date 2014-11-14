@@ -28,5 +28,38 @@ namespace HealthDemo.ViewModels
             }
         }
 
+        private static InsuranceViewModel _insuranceVM;
+        public static InsuranceViewModel InsuranceVM
+        {
+            get
+            {
+                if (_insuranceVM == null)
+                    _insuranceVM = new InsuranceViewModel();
+                return _insuranceVM;
+            }
+        }
+
+        private static FaqViewModel _FaqVM;
+        public static FaqViewModel FaqVM
+        {
+            get
+            {
+                if (_FaqVM == null)
+                    _FaqVM = new FaqViewModel();
+                return _FaqVM;
+            }
+        }
+
+        private static NewsViewModel _newsVM;
+        public static NewsViewModel NewsVM
+        {
+            get
+            {
+                if (_newsVM == null)
+                    _newsVM = new NewsViewModel();
+                return _newsVM;
+            }
+        }
+
     }
 }

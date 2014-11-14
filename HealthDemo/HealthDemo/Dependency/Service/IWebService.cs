@@ -15,5 +15,7 @@ namespace HealthDemo.Service
         void GetCategories(Action<CategoryResponse> onCompleted);
         void GetHealthTipsByCategory(int categoryID, Action<HealthTipResponse> onCompleted);
         void GetSpeicalties(Action<PositionResponse> onCompleted);
+        void GetInsurances(Action<InsuranceResponse> onCompleted);
+        void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase;
     }
 }

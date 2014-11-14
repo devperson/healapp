@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace HServer
 {
@@ -24,17 +20,6 @@ namespace HServer
             // To disable tracing in your application, please comment out or remove the following line of code
             // For more information, refer to: http://www.asp.net/web-api
             config.EnableSystemDiagnosticsTracing();
-
-            //var jsonSerializerSettings = new JsonSerializerSettings
-            //{
-            //    PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            //};
-
-            //GlobalConfiguration.Configuration.Formatters.Clear();
-            //GlobalConfiguration.Configuration.Formatters.Add(new JsonNetFormatter(jsonSerializerSettings));
-            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }

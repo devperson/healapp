@@ -56,8 +56,7 @@ namespace HServer.Models.DataAccess
     {
         public PositionModelConfig()
         {
-            HasKey(x => x.Id);
-            //this.HasOptional(x => x.Department).WithMany(c => c.Positions).HasForeignKey(x => x.DepartmentId);
+            HasKey(x => x.Id);            
         }
     }
 
@@ -72,6 +71,30 @@ namespace HServer.Models.DataAccess
     public class LanguageModelConfig : EntityTypeConfiguration<Language>
     {
         public LanguageModelConfig()
+        {
+            HasKey(x => x.Id);
+        }
+    }
+
+    public class FaqModelConfig : EntityTypeConfiguration<Faq>
+    {
+        public FaqModelConfig()
+        {
+            HasKey(x => x.Id);
+        }
+    }
+
+    public class NewsModelConfig : EntityTypeConfiguration<News>
+    {
+        public NewsModelConfig()
+        {
+            HasKey(x => x.Id);
+        }
+    }
+
+    public class InsuranceModelConfig : EntityTypeConfiguration<Insurance>
+    {
+        public InsuranceModelConfig()
         {
             HasKey(x => x.Id);
         }

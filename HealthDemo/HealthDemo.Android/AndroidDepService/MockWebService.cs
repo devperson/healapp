@@ -80,5 +80,55 @@ namespace HealthDemo
                                     }
                 });
         }
+
+        public void GetInsurances(Action<InsuranceResponse> onCompleted)
+        {
+            onCompleted(new InsuranceResponse()
+            {
+                Success = true,
+                Result = new List<Insurance>()
+                                    {
+                                        new Insurance(){Title = "Insurance1", ID = 1, Description = "Description1"},
+                                        new Insurance(){Title = "Insurance2", ID = 2, Description = "Description2"},
+                                        new Insurance(){Title = "Insurance3", ID = 3, Description = "Description3"},
+                                        new Insurance(){Title = "Insurance4", ID = 4, Description = "Description4"},
+                                        new Insurance(){Title = "Insurance5", ID = 5, Description = "Description5"}
+                                    }
+            });
+        }
+
+
+        public void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase
+        {
+            var response = Activator.CreateInstance<T>();
+            if (response is FaqResponse)
+            {
+                var list = new List<Faq>()
+                                    {
+                                        new Faq(){Title = "Question1", ID = 1, Description = "Answer1"},
+                                        new Faq(){Title = "Question2", ID = 1, Description = "Answer2"},
+                                        new Faq(){Title = "Question3", ID = 1, Description = "Answer3"},
+                                        new Faq(){Title = "Question4", ID = 1, Description = "Answer4"},
+                                        new Faq(){Title = "Question5", ID = 1, Description = "Answer5"}
+                                    };
+                response.GetType().GetProperty("Result").SetValue(response, list);
+                response.Success = true;
+                onCompleted(response);
+            }
+            else if(typeof(T) == typeof(NewsResponse))
+            {
+                var list = new List<News>()
+                                    {
+                                        new News(){Title = "Al Ain Hospital launches UAE’s first specialised Children’s Rheumatology Clinic", ID = 1, Date = DateTime.Now, Description = "Details1"},
+                                        new News(){Title = "Al Ain Hospital launches UAE’s first specialised Children’s Rheumatology Clinic", ID = 2,Date = DateTime.Now, Description = "Details2"},
+                                        new News(){Title = "Al Ain Hospital launches UAE’s first specialised Children’s Rheumatology Clinic", ID = 3,Date = DateTime.Now, Description = "Details3"},
+                                        new News(){Title = "Al Ain Hospital launches UAE’s first specialised Children’s Rheumatology Clinic", ID = 4,Date = DateTime.Now, Description = "Details4"},
+                                        new News(){Title = "Al Ain Hospital launches UAE’s first specialised Children’s Rheumatology Clinic", ID = 5,Date = DateTime.Now, Description = "Details5"}
+                                    };
+                response.GetType().GetProperty("Result").SetValue(response, list);
+                response.Success = true;
+                onCompleted(response);
+            }
+        }
     }
 }

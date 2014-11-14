@@ -72,6 +72,16 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        public async void GetInsurances(Action<InsuranceResponse> onCompleted)
+        {
+            var asyncResult = await ExecuteServiceMethod<InsuranceResponse>("position", Method.GET, content =>
+            {
+                var response = new InsuranceResponse() { Result = JsonConvert.DeserializeObject<List<Insurance>>(content) };
+                return response;
+            });
+            onCompleted(asyncResult);
+        }
+
         public Task<T> ExecuteServiceMethod<T>(string resource, Method method, Func<string, T> deserialiser, object requestObject = null) where T : ResponseBase
         {
             var restRequest = new RestRequest(resource, method);
@@ -121,6 +131,22 @@ namespace HealthDemo
             string htmlContent = "<!DOCTYPE";
             if (responsString.Contains(htmlContent))
                 throw new Exception("Server is down please try later.");
+        }
+
+
+
+
+
+        public async void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase
+        {
+            var asyncResult = await ExecuteServiceMethod<T>(uri, Method.GET, content =>
+            {
+                var response = Activator.CreateInstance<T>();
+                var list = JsonConvert.DeserializeObject<List<modelT>>(content);
+                response.GetType().GetProperty("Result").SetValue(response, list);
+                return response;
+            });
+            onCompleted(asyncResult);
         }
     }
 }

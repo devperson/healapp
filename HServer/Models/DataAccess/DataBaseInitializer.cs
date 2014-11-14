@@ -120,6 +120,109 @@ namespace HServer.Models.DataAccess
             context.SaveChanges();
             //###########################################################################################
             #endregion
+
+            #region ADDING FAQS
+            //###################ADDING FAQS#######################################
+            Faq f1 = new Faq();
+            f1.Question = "Q1";
+            f1.Answer = "Answer 1";
+            context.Faqs.Add(f1);
+
+            Faq f2 = new Faq();
+            f2.Question = "Q2";
+            f2.Answer = "Answer 2";
+            context.Faqs.Add(f2);
+
+            Faq f3 = new Faq();
+            f3.Question = "Q2";
+            f3.Answer = "Answer 3";
+            context.Faqs.Add(f3);
+
+            context.SaveChanges();
+            //#####################################################################
+            #endregion
+
+            #region ADDING Insurance
+            //###################ADDING Insurence#######################################
+            Insurance in1 = new Insurance();
+            in1.Title = "ADNIC";
+            in1.Description = "Only Platinum";
+            context.Insurances.Add(in1);            
+
+            Insurance in2 = new Insurance();
+            in2.Title = "Al Hilal takaful";
+            in2.Description = "GN + SEHA & CN + SEHA";
+            context.Insurances.Add(in2);
+
+            Insurance in3 = new Insurance();
+            in3.Title = "SAICO";
+            in3.Description = "Open Network";
+            context.Insurances.Add(in3);
+
+            context.SaveChanges();
+            //#####################################################################
+            #endregion
+
+            #region ADDING News
+            //###################ADDING Insurence#######################################
+            News n1 = new News();
+            n1.Date = new DateTime(2014, 3, 9);
+            n1.Title = "Al Ain Hospital launches UAE’s first specialised Children’s Rheumatology Clinic";
+            n1.Description = @"Al Ain Hospital, owned and operated by Abu Dhabi Health Services Company PJSC (SEHA), has launched the nation’s first Paediatric Rheumatology Clinic.
+“We had a soft internal launch in October 2013, but now we are fully geared to handle the large volumes of  child patients expected from across the country as we are the only hospital in the UAE that has a specialised rheumatology department for children,” emphasised Dr. Elsadeg Mohamed Sharif, consultant paediatrician at Al Ain Hospital’s Paediatric Rheumatology Clinic.
+The Clinic is a “one-stop facility” offering the entire spectrum of treatment modalities – from diagnosis to advanced treatment including the usage of biologics which are protein-based drugs derived from living organisms cultured in a laboratory.
+Patients also have access to allied services including excellent radiology, anaesthetic and paediatric ophthalmology care.
+ “Prior to the launch of this Clinic children with rheumatological problems have been under the care of adult rheumatologists, but now patients have the advantage of being
+ 
+treated by doctors who have dual speciality in paediatrics and rheumatology,” added Dr. Sharif.
+The most common ailment that comes under the purview of paediatric rheumatology is juvenile idiopathic arthritis, also known as juvenile rheumatoid arthritis, which  causes the inflation of the joints. This the most prevalent form of arthritis in children and adolescents.
+Other common complaints are Familial Mediterranean Fever which is a hereditary inflammation disease and Systemic Lupus Erythematosus, commonly known as SLE or lupus, which is a disease  that can affect any part of the body. As in other autoimmune diseases, the immune system attacks the body's cells and tissue, resulting in inflammation and tissue damage.
+“To combat these diseases we use some latest, state-of-the-art treatment modalities at our clinic, including intra-articular corticosteroid injection, methotrexate subcutaneous  injection and biologic drug injection,” explained Rd. Sharif.
+Intra-articular corticosteroids or steroids are medicines injected directly into the joint space of a painful, inflamed arthritic joint. Steroids which are similar to natural substances produced by the body (hormones) help reduce inflammation.
+Methotrexate subcutaneous injection involves injecting the drug into the fatty layer of tissue under the skin. Biologic drug injection uses biologics, which include medicinal products such as vaccines, blood or blood component, tissue, living cells etc. created by biological processes and not chemically synthesised, that are used as therapeutics to treat diseases.  
+ 
+“With the launch we expect to provide excellent care to about 10 – 12 patients a day at the Clinic which is located in Al Ain Hospital complex,” explained Dr. Sharif.
+“Among our plans for future are the development of  physiotherapy and occupational therapy services and establishing outreach clinics,” outlined Dr. Sharif.";
+            context.News.Add(n1);
+
+            News n2 = new News();
+            n2.Date = new DateTime(2012, 6, 28);
+            n2.Title = "Al Ain Hospital Expands Internal Medicine Facilities";
+            n2.Description = @"Al Ain Hospital, owned and operated by Abu Dhabi Health Services Company PJSC (SEHA) and managed by Medical University of Vienna and VAMED, today announced renewing and expanding its internal medicine consultancy practice to serve the rising number of patients to its specialist clinics.
+In a statement, the hospital said that in its continuing endeavor to serve the Al Ain community better with enhanced standards of medical facilities, it has added 122 more beds to its internal medicine facilities and increased the number of consultancy clinics to 20, adding four new units. 
+The four new clinics under the Internal Medical Institute include consultancies in diabetics, ENT, foot care and eye care. Apart from these clinics, the Internal Medical Institute is also offering advisory on healthy eating habits and behavioral changes for diabetic patients.
+The hospital said the clinics under the ambit of the Internal Medical Institute receive some 67,000 patients a year and enhancing the facilities and standards will help the healthcare body serve the community better.
+Mr. George Jepson, CEO of Al Ain Hospital said:”.Our aim and mandate is to provide complete medical consultancy services and expert treatment facilities to the UAE nationals and expats. We have best-in-class internal medicine clinics with cutting-edge expertise across various disciplines to serve the community better.”
+Dr. Talaat Diab, Consultant, Internal Medicine and Deputy Director of Al Ain Hospital’s Internal Medical Institute said that the new developments including new disciplines and services at higher standards were a great achievement which will add value to the hospital’s positioning as a community-focused healthcare institute.
+“We are proud of these new developments and these enhancements at the Internal Medical Institute have come in the context of rising number of patients to the clinics. In the last five months alone, we received some 32,000 patients in our internal medicine clinics,” he said.";
+            context.News.Add(n2);
+
+            News n3 = new News();
+            n3.Date = new DateTime(2008, 4, 1);
+            n3.Title = "Opening Professorial Medical Unit";
+            n3.Description = @"Goal
+ The primary goal of the PMU is to provide a role model for clinical care in an academic environment, with components of expertise in clinical service, education and teaching of resident doctors, interns and students. This is based on the philosophy that excellence in patient care is best achieved when delivered in an atmosphere of enquiry, debate and teaching.
+
+ Mechanisms Of Delivery Of Care
+
+The PMU cooperates with the other Medical Units in the Medical Institute in the acute on-call and in-patient care of severely ill patients, working under the clinical leadership of a Consultant Physician certified by the FMHS Internal Medicine Board. This consultant is supported by an experienced AAH Specialist in Internal Medicine with an adjunct academic appointment at FMHS, a Resident from the Al Ain Medical District Residency Training Programme (Arab Board-accredited), as well as an intern and medical students.
+ The PMU staff takes part in the department-wide morning report and contributes to the hospital’s CME and other educational activities.  Teaching rounds led by the FMHS consultant are conducted daily on PMU patients.
+ A dedicated PMU out-patient clinic provides continuity of care for patients discharged from the in-patient PMU facility.  In addition to on-call admissions, the FMHS Internal Consultant Physicians also admit patients directly to PMU for work up, diagnosis and management.
+ All of the FMHS Internal Consultant Physicians admit patients directly to PMU in addition to on-call admissions, for work up, diagnosis and management.
+
+ Teaching
+ In addition to clinical care, the weekly PMU teaching activities include ‘the case of the week’, the discussion of journal articles, and a clinical-radiological conference. The PMU has a dedicated teaching room with a-v facilities and internet access. The Faculty-led morning report for medical students is held daily and residents also attend a dedicated academic half-day at the FMHS under the direction of the Programmer Directors.
+
+ Research
+ The PMU has a dedicated Research Office for conducting clinical trials and other research, both of which are actively ongoing.
+ Assessment, Aduit, Guidelines
+ Audits are undertaken to ascertain patient satisfaction and quality of care in various areas such as antimicrobial prescribing, and clinical pathways for selected medical emergencies are also being prepared.
+";
+            context.News.Add(n3);
+
+            context.SaveChanges();
+            //#####################################################################
+            #endregion
         }
     }
 }
