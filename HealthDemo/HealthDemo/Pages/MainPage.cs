@@ -11,7 +11,7 @@ namespace HealthDemo.Pages
     public class MainPage : MasterPage
     {
         public static string HeaderTitle = "Main Page";
-        ImageButton btnDoctors, btnTips;
+        ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq;
         public MainPage() : base() 
         {
             btnDoctors.Clicked += (s, e) =>
@@ -26,7 +26,38 @@ namespace HealthDemo.Pages
 
         protected override void RenderContentView(StackLayout parent)
         {
-            var content = new StackLayout()
+            ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
+            var stackLayout = new StackLayout() { Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
+
+            var itemContent = CreateItemStacklayout();
+            btnDoctors = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.png", "Doctor.png", "Images/Doctor.png")), "Find Doctors");
+            btnTips = CreateButton(ImageSource.FromFile(Device.OnPlatform("HealthTips.png", "HealthTips.png", "Images/HealthTips.png")), "Health Tips");
+            itemContent.Children.Add(btnDoctors);
+            itemContent.Children.Add(btnTips);
+            stackLayout.Children.Add(itemContent);
+
+            var itemContent2 = CreateItemStacklayout();
+            btnInsurance = CreateButton(ImageSource.FromFile(Device.OnPlatform("creditcardicon.png", "creditcardicon.png", "Images/creditcardicon.png")), "Insurance");
+            btnNews = CreateButton(ImageSource.FromFile(Device.OnPlatform("news.png", "news.png", "Images/news.png")), "News");
+            itemContent2.Children.Add(btnInsurance);
+            itemContent2.Children.Add(btnNews);
+            stackLayout.Children.Add(itemContent2);
+
+            var itemContent3 = CreateItemStacklayout();
+            btnFaq = CreateButton(ImageSource.FromFile(Device.OnPlatform("faq.png", "faq.png", "Images/faq.png")), "Faq");
+            itemContent3.Children.Add(btnFaq);
+            stackLayout.Children.Add(itemContent3);
+
+            scrollview.Content = stackLayout;
+            parent.Children.Add(scrollview);
+
+            btnBack.Source = null;
+            lblTitle.Text = HeaderTitle;
+        }
+
+        private static StackLayout CreateItemStacklayout()
+        {
+            var itemContent = new StackLayout()
             {
                 Padding = new Thickness(0, 50, 0, 0),
                 Orientation = StackOrientation.Horizontal,
@@ -34,16 +65,7 @@ namespace HealthDemo.Pages
                 VerticalOptions = LayoutOptions.StartAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             };
-
-            btnDoctors = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.png", "Doctor.png", "Images/Doctor.png")), "Find Doctors");
-            btnTips = CreateButton(ImageSource.FromFile(Device.OnPlatform("HealthTips.png", "HealthTips.png", "Images/HealthTips.png")), "Health Tips");
-            content.Children.Add(btnDoctors);
-            content.Children.Add(btnTips);
-
-            parent.Children.Add(content);
-
-            btnBack.Source = null;
-            lblTitle.Text = HeaderTitle;
+            return itemContent;
         }
 
         private ImageButton CreateButton(ImageSource imgSource, string text)
