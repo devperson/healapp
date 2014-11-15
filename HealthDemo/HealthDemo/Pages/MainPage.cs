@@ -22,6 +22,19 @@ namespace HealthDemo.Pages
                 {
                     Navigation.PushAsync(new CategoryListPage());
                 };
+            btnInsurance.Clicked += (s, e) =>
+            {
+                Navigation.PushAsync(new InsuranceListPage());
+            };
+            btnNews.Clicked += (s, e) =>
+            {
+                Navigation.PushAsync(new NewsListPage());
+            };
+            btnFaq.Clicked += (s, e) =>
+            {
+                Navigation.PushAsync(new FaqListPage());
+            };
+
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -59,7 +72,7 @@ namespace HealthDemo.Pages
         {
             var itemContent = new StackLayout()
             {
-                Padding = new Thickness(0, 50, 0, 0),
+                Padding = new Thickness(0, 20, 0, 0),
                 Orientation = StackOrientation.Horizontal,
                 Spacing = Device.OnPlatform(0, 25, 10),
                 VerticalOptions = LayoutOptions.StartAndExpand,

@@ -164,9 +164,9 @@
     <BundleResource Include="Resources\roundedCorners.xml" />
     <BundleResource Include="Resources\upper.png" />
     <BundleResource Include="Resources\placeholder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="iOSDepService\" />
+    <BundleResource Include="Resources\creditcardicon.png" />
+    <BundleResource Include="Resources\faq.png" />
+    <BundleResource Include="Resources\news.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="restsharp">
