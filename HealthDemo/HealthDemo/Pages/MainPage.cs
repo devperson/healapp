@@ -72,6 +72,8 @@ namespace HealthDemo.Pages
             stackLayout.Children.Add(itemContent3);
 
             scrollview.Content = stackLayout;
+            if (Device.OS == TargetPlatform.Android)
+                scrollview.IsClippedToBounds = true;
             parent.Children.Add(scrollview);
 
             btnBack.Source = null;

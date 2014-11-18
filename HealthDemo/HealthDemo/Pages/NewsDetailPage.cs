@@ -79,6 +79,8 @@ namespace HealthDemo.Pages
             stlayout.Children.Add(header);
             stlayout.Children.Add(content);
             rootScrollView.Content = stlayout;
+            if (Device.OS == TargetPlatform.Android)
+                rootScrollView.IsClippedToBounds = true;
             //rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedNews"));
             parent.Children.Add(rootScrollView);
         }

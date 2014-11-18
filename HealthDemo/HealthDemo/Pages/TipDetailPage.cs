@@ -63,6 +63,8 @@ namespace HealthDemo.Pages
             stlayout.Children.Add(stkl);
             stlayout.Children.Add(frame1);
             rootScrollView.Content = stlayout;
+            if (Device.OS == TargetPlatform.Android)
+                rootScrollView.IsClippedToBounds = true;
             //rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedTip"));
             parent.Children.Add(rootScrollView);
         }

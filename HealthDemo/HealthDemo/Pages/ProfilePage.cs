@@ -95,7 +95,8 @@ namespace HealthDemo.Pages
             stlayout.Children.Add(headerLayout);
             stlayout.Children.Add(frame1);
             rootScrollView.Content = stlayout;
-
+            if (Device.OS == TargetPlatform.Android)//fixig scrollview bug in android(overlapping)
+                rootScrollView.IsClippedToBounds = true;
             parent.Children.Add(rootScrollView);
         }
 
