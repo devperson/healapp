@@ -15,6 +15,7 @@ namespace HealthDemo.Pages
             : base(false)
         {            
             //this.BindingContext = VM.SelectedDoctor;
+            lblTitle.Text = "Doctor profile";
         }
         protected override void RenderContentView(StackLayout parent)
         {
