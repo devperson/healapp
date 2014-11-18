@@ -12,13 +12,13 @@ namespace HealthDemo.Pages
     {
         private DoctorViewModel VM { get; set; }
         public ProfilePage()
-            : base()
+            : base(false)
         {            
-            this.BindingContext = VM.SelectedDoctor;
+            //this.BindingContext = VM.SelectedDoctor;
         }
         protected override void RenderContentView(StackLayout parent)
         {
-            VM = ViewModelLocator.DoctorVM;
+            VM = ViewModelLocator.DoctorVM;            
 
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 10, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -76,10 +76,20 @@ namespace HealthDemo.Pages
             stackLayoutDetails.Children.Add(CreateDetailsItem("Bio:", "Bio"));
             stackLayoutDetails.Children.Add(this.CreateQualificationsItem());
             stackLayoutDetails.Children.Add(CreateDetailsItem("Language:", "Language"));
-            var frame1 = new Frame() { HasShadow = false, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 20) };
-            var frmae2 = new Frame() { HasShadow = false, OutlineColor = Color.Black, BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = 1 };
+            var frame1 = new ContentView() 
+            { 
+                //HasShadow = false, 
+                HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 20) 
+            };
+            var frmae2 = new ContentView() 
+            { 
+                //HasShadow = false, OutlineColor = Color.Black, 
+                BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = 1 
+            };
             frmae2.Content = stackLayoutDetails;
-            frame1.Content = frmae2;
+            var border = new StackLayout() { BackgroundColor = Color.Black, Orientation = StackOrientation.Vertical, Padding = 1 };
+            border.Children.Add(frmae2);
+            frame1.Content = border;
 
             stlayout.Children.Add(headerLayout);
             stlayout.Children.Add(frame1);
@@ -148,7 +158,7 @@ namespace HealthDemo.Pages
 
         protected override void OnBackPressed()
         {
-            VM.SelectedDoctor = null;
+            //VM.SelectedDoctor = null;
         }
     }
 }

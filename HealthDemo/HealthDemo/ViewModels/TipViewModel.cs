@@ -28,8 +28,16 @@ namespace HealthDemo.ViewModels
             }
         }
 
-        
-        public HealthTip SelectedTip { get; set; }
+        HealthTip _selectedTip;
+        public HealthTip SelectedTip 
+        {
+            get { return _selectedTip; }
+            set
+            {
+                _selectedTip = value;
+                RaisePropertyChanged("SelectedCategory");
+            }
+        }
         public List<HealthCategory> CategoryList { get; set; }
         public List<HealthTip> TipsList { get; set; }
 

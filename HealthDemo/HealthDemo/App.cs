@@ -11,7 +11,14 @@ namespace HealthDemo
     {
         public static Page GetMainPage()
         {
-            return new NavigationPage(new MainPage());
+            PageViewLocator.NavigationPage = new NavigationPageEx(new MainPage());
+            //PageViewLocator.NavigationPage.Popped += (s, e) =>
+            //{
+            //    ((MasterPage)e.Page).Content = null;
+            //};			
+
+
+            return PageViewLocator.NavigationPage;
         }
     }
 }

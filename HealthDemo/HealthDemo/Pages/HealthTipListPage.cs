@@ -27,7 +27,13 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as HealthTip;
                     VM.SelectedTip = selected;
                     lvTips.SelectedItem = null;
-                    Navigation.PushAsync(new TipDetailPage());
+
+                    if (PageViewLocator.TipDetailPage == null)
+                        PageViewLocator.TipDetailPage = new TipDetailPage();
+                    PageViewLocator.TipDetailPage.BindingContext = selected;
+                    this.Navigation.PushAsync(PageViewLocator.TipDetailPage);       
+
+                    //Navigation.PushAsync(new TipDetailPage());
                 }
             };
             VM.ShowAlert = this.DisplayAlert;
@@ -55,7 +61,7 @@ namespace HealthDemo.Pages
 
         protected override void OnBackPressed()
         {
-            VM.SelectedCategory = null;
+            //VM.SelectedCategory = null;
         }
     }
 }

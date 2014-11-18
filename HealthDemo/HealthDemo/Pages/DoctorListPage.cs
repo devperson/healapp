@@ -18,15 +18,22 @@ namespace HealthDemo.Pages
             : base()
         {
             lblTitle.Text = "Search Result";
-            VM = ViewModelLocator.DoctorVM;
+            VM = ViewModelLocator.DoctorVM;            
             BindingContext = VM;
 
             lvResult.ItemSelected += (s, e) =>
             {
-                //var selected = e.SelectedItem as Doctor;
-                //VM.SelectedDoctor = selected;
                 if (e.SelectedItem != null)
-                    Navigation.PushAsync(new ProfilePage());
+                {
+                    var selected = e.SelectedItem as Doctor;
+                    VM.SelectedDoctor = selected;
+                    lvResult.SelectedItem = null;
+
+                    if (PageViewLocator.ProfilePage == null)
+                        PageViewLocator.ProfilePage = new ProfilePage();
+                    PageViewLocator.ProfilePage.BindingContext = selected;
+                    Navigation.PushAsync(PageViewLocator.ProfilePage);
+                }
             };
         }
 
@@ -38,8 +45,9 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.FillAndExpand, RowHeight = 110, 
                 ItemTemplate = new DataTemplate(typeof(DoctorCell)) 
             };
+
             lvResult.SetBinding(ListView.ItemsSourceProperty, new Binding("DoctorList"));
-            lvResult.SetBinding(ListView.SelectedItemProperty, new Binding("SelectedDoctor", BindingMode.TwoWay));
+            //lvResult.SetBinding(ListView.SelectedItemProperty, new Binding("SelectedDoctor", BindingMode.TwoWay));
             parent.Children.Add(lvResult);
         }
 

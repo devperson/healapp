@@ -16,11 +16,13 @@ using XLabs.Ioc;
 using Xamarin.Forms.Labs.Mvvm;
 using Xamarin.Forms.Labs;
 using XLabs.Serialization;
+using HealthDemo.Droid;
+using HealthDemo.Pages;
 
 namespace HealthDemo.Droid
 {
     [Activity(Label = "Health Demo", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]//, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : XFormsApplicationDroid
+	public class MainActivity : XFormsApplicationDroid
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -38,7 +40,7 @@ namespace HealthDemo.Droid
 
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
-            SetPage(App.GetMainPage());
+            SetPage(App.GetMainPage());				
         }
 
         /// <summary>
@@ -62,6 +64,7 @@ namespace HealthDemo.Droid
 
             Resolver.SetResolver(resolverContainer.GetResolver());
         }
+
     }
 }
 

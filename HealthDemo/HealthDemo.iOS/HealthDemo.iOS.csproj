@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -25,6 +25,7 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
+    <MtouchUseSGen>true</MtouchUseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -93,12 +94,7 @@
     <Compile Include="..\HealthDemo.Android\AndroidDepService\MockWebService.cs">
       <Link>iOSDepService\MockWebService.cs</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HealthDemo\HealthDemo.csproj">
-      <Name>HealthDemo</Name>
-      <Project>{862AFDC0-3F1A-4488-986A-D4B167613A5B}</Project>
-    </ProjectReference>
+    <Compile Include="iOSRenderer\NavigationRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
@@ -154,24 +150,31 @@
     <BundleResource Include="Resources\Default%402x.png" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\accesory.png" />
-    <BundleResource Include="Resources\arrow.png" />
     <BundleResource Include="Resources\comboback.png" />
-    <BundleResource Include="Resources\Doctor.png" />
-    <BundleResource Include="Resources\downhealth.png" />
-    <BundleResource Include="Resources\HealthTips.png" />
     <BundleResource Include="Resources\logo.png" />
     <BundleResource Include="Resources\menu.png" />
     <BundleResource Include="Resources\roundedCorners.xml" />
     <BundleResource Include="Resources\upper.png" />
     <BundleResource Include="Resources\placeholder.png" />
-    <BundleResource Include="Resources\creditcardicon.png" />
-    <BundleResource Include="Resources\faq.png" />
-    <BundleResource Include="Resources\news.png" />
+    <BundleResource Include="Resources\arrow.jpg" />
+    <BundleResource Include="Resources\creditcardicon.jpg" />
+    <BundleResource Include="Resources\Doctor.jpg" />
+    <BundleResource Include="Resources\downhealth.jpg" />
+    <BundleResource Include="Resources\faq.jpg" />
+    <BundleResource Include="Resources\HealthTips.jpg" />
+    <BundleResource Include="Resources\logo.jpg" />
+    <BundleResource Include="Resources\news.jpg" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="restsharp">
       <Version>104.4.0.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HealthDemo\HealthDemo.csproj">
+      <Project>{862AFDC0-3F1A-4488-986A-D4B167613A5B}</Project>
+      <Name>HealthDemo</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

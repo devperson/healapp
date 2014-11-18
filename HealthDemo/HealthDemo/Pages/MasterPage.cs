@@ -18,70 +18,80 @@ namespace HealthDemo.Pages
         protected StackLayout contentStack, menuLayout;
         protected AbsoluteLayout titleLayout, toolbarLayout;
         protected Image titleImage, toolbarBackground;
-        public Frame LoadingIndicator;
+        public ContentView LoadingIndicator; //Frame
         protected ListView lvMenu;
-        public MasterPage()
+        private bool WithLoadIndecator = true, WIthMenu;
+        
+        public MasterPage(bool withLoadIndicator=true, bool withMenu = true)
         {
+            WithLoadIndecator = withLoadIndicator;
+            WIthMenu = withMenu;
             NavigationPage.SetHasNavigationBar(this, false);
-            RenderTemplateView();
-            LoadingIndicator.SetBinding(Frame.IsVisibleProperty, new Binding("IsLoading"));
+            RenderTemplateView();            			
 
             btnBack.Clicked += (s, e) =>
-            {
-                OnBackPressed();
-                if (lblTitle.Text != MainPage.HeaderTitle)
-                    Navigation.PopAsync();
+            {   
+                PageViewLocator.ReadyToPush = false;
+                if (lblTitle.Text != MainPage.HeaderTitle)                    
+					Navigation.PopAsync();               
             };
 
             btnInfo.Clicked += (s, e) =>
             {
                 if (lblTitle.Text != AboutPage.HeaderTitle)
-                    Navigation.PushAsync(new AboutPage());
+                {
+                    PageViewLocator.ReadyToPush = true;
+                    //if (PageViewLocator.AboutPage == null)
+                        //PageViewLocator.AboutPage = new AboutPage();
+                    PushWithClear(new AboutPage());                    
+				}
             };
 
             btnContact.Clicked += (s, e) =>
             {
                 if (lblTitle.Text != ContactPage.HeaderTitle)
-                    Navigation.PushAsync(new ContactPage());
+                {
+                    PageViewLocator.ReadyToPush = true;
+                    //if (PageViewLocator.ContactPage == null)
+                        //PageViewLocator.ContactPage = new ContactPage();
+                    PushWithClear(new ContactPage());                       
+                }
             };
 
             btnLocation.Clicked += (s, e) =>
             {
                 if (lblTitle.Text != LocationPage.HeaderTitle)
-                    Navigation.PushAsync(new LocationPage());
-            };
-
-            btnMenu.Clicked += (s, e) =>
-            {
-                if (Device.OS == TargetPlatform.Android)
                 {
-                    Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-                    {
-
-                        if (menuLayout.TranslationX == 0)
-                        {
-                            //menuLayout.Opacity = 1;
-                            return false;
-                        }
-                        else
-                        {
-                            menuLayout.TranslationX -= 20;
-                            return true;
-                        }
-                    });
-                }
-                else
-                {
-                    menuLayout.TranslateTo(0, 0);
+                    PageViewLocator.ReadyToPush = true;
+                    //if (PageViewLocator.LocationPage == null)
+                        //PageViewLocator.LocationPage = new LocationPage();
+                        PushWithClear(new LocationPage());                     
                 }
             };
+
+           	           
         }
 
-        private void RenderTemplateView()
+        public void PushWithClear(Page page)
         {
-            LoadingIndicator = CreateActivityIndicator();
-            menuLayout = CreateMenuLayout();
+            //GC.Collect();
+            //PageViewLocator.NavigationPage.Animated = false;
+            
+            if (this is MainPage)
+            {   
+                PageViewLocator.NavigationPage.PushAsync(page);
+            }
+            else
+            {   
+                PageViewLocator.PushingPage = page;
+                PageViewLocator.NavigationPage.PopToRootAsync();
+            }
+            //await PageViewLocator.NavigationPage.PushAsync(page);
+            //PageViewLocator.NavigationPage.Animated = true;
+        }        
 
+        private void RenderTemplateView()
+        {            
             var rootAbsoluteLAyout = new AbsoluteLayout(){VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var rootStack = new StackLayout() { Spacing = 0, BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
 
@@ -96,20 +106,21 @@ namespace HealthDemo.Pages
                 WidthRequest = backHeight,
                 ImageHeightRequest = backHeight,
                 ImageWidthRequest = backHeight,
-                Source = ImageSource.FromFile(Device.OnPlatform("arrow.png", "arrow.png", "Images/arrow.png")),
+                Source = ImageSource.FromFile(Device.OnPlatform("arrow.jpg", "arrow.jpg", "Images/arrow.jpg")),
                 Orientation = ImageOrientation.ImageToLeft,
             };
-            var banner = new Image 
-            { 
-                Aspect = Aspect.AspectFit, Source = Device.OnPlatform("logo.png", "logo.png", "Images/logo.png"),
-                HeightRequest = 80, HorizontalOptions = LayoutOptions.CenterAndExpand 
+            var banner = new Image
+            {
+                Aspect = Aspect.AspectFit,
+                Source = Device.OnPlatform("logo.jpg", "logo.jpg", "Images/logo.jpg"),
+                HeightRequest = 80,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
             };
             var menuHeight = Device.OnPlatform(55, 75, 55);
             var menuWidth = Device.OnPlatform(35, 50, 35);
             btnMenu = new ImageButton()
             {
                 Orientation = ImageOrientation.ImageToRight,
-                Source = ImageSource.FromFile(Device.OnPlatform("menu.png", "menu.png", "Images/menu.png")),
                 BackgroundColor = Color.White,
                 HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center,
@@ -118,10 +129,11 @@ namespace HealthDemo.Pages
                 ImageHeightRequest = menuHeight,
                 ImageWidthRequest = menuWidth
             };
-
-            headerStack.Children.Add(btnBack);
+            
+			headerStack.Children.Add(btnBack);
             headerStack.Children.Add(banner);
             headerStack.Children.Add(btnMenu);
+            
 
             //title
             var titleHeight = Device.OnPlatform(30, 40, 30);
@@ -166,8 +178,8 @@ namespace HealthDemo.Pages
             toolbarBackground = new Image() 
             {
                 Aspect = Aspect.Fill,
-                HeightRequest = 40, HorizontalOptions = LayoutOptions.FillAndExpand, 
-                Source = Device.OnPlatform("downhealth.png", "downhealth.png", "Images/downhealth.png"),
+                HeightRequest = 40, HorizontalOptions = LayoutOptions.FillAndExpand,
+                Source = Device.OnPlatform("downhealth.jpg", "downhealth.jpg", "Images/downhealth.jpg"),
             };
             var toolbarStack = new StackLayout() 
             { 
@@ -194,15 +206,51 @@ namespace HealthDemo.Pages
 
             
             rootAbsoluteLAyout.Children.Add(rootStack, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
-            rootAbsoluteLAyout.Children.Add(LoadingIndicator, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
-            rootAbsoluteLAyout.Children.Add(menuLayout, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
+            if (this.WithLoadIndecator)
+            {
+                LoadingIndicator = CreateActivityIndicator();
+				LoadingIndicator.SetBinding(ContentView.IsVisibleProperty, new Binding("IsLoading"));
+                rootAbsoluteLAyout.Children.Add(LoadingIndicator, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
+            }
+
+
+            if (WIthMenu)
+            {
+                menuLayout = CreateMenuLayout();
+                rootAbsoluteLAyout.Children.Add(menuLayout, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
+                btnMenu.Source = ImageSource.FromFile(Device.OnPlatform("menu.png", "menu.png", "Images/menu.png"));
+                btnMenu.Clicked += (s, e) =>
+                {
+                    if (Device.OS == TargetPlatform.Android)
+                    {
+                        Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+                        {
+
+                            if (menuLayout.TranslationX == 0)
+                            {
+                                //menuLayout.Opacity = 1;
+                                return false;
+                            }
+                            else
+                            {
+                                menuLayout.TranslationX -= 20;
+                                return true;
+                            }
+                        });
+                    }
+                    else
+                    {
+                        menuLayout.TranslateTo(0, 0);
+                    }
+                };
+            }
 
             this.Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 0);
             this.Content = rootAbsoluteLAyout;
             
         }
 
-        private Frame CreateActivityIndicator()
+        private ContentView CreateActivityIndicator()
         {
             ActivityIndicator activityIndicator = new ActivityIndicator
             {
@@ -226,21 +274,33 @@ namespace HealthDemo.Pages
                 Orientation = StackOrientation.Vertical,
                 Spacing = 10
             };
-            var frame = new Frame()
+            
+            var frame = new ContentView()
             {
-                HasShadow = false,
+                //HasShadow = false,
                 Padding = new Thickness(40, 20, 40, 20),
-                OutlineColor = Color.White,
+                //OutlineColor = Color.White,
                 BackgroundColor = Color.Black,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center
+                //VerticalOptions = LayoutOptions.Center,
+                //HorizontalOptions = LayoutOptions.Center
             };
+            
 
             stackLayout.Children.Add(activityIndicator);
             stackLayout.Children.Add(lblLoading);
             frame.Content = stackLayout;
+            var border = new StackLayout()
+            {
+                BackgroundColor = Color.White,
+                Orientation = StackOrientation.Vertical,
+                Padding = 1,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            border.Children.Add(frame);
 
-            var backgroundLayout = new Frame()
+
+            var backgroundLayout = new ContentView()
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -249,7 +309,7 @@ namespace HealthDemo.Pages
                 Padding = 0
             };
 
-            backgroundLayout.Content = frame;
+            backgroundLayout.Content = border;
 
             return backgroundLayout;
         }
@@ -283,27 +343,59 @@ namespace HealthDemo.Pages
                     {
                         case PageType.Main:
                             if (lblTitle.Text != MainPage.HeaderTitle)
+                            {
+                                PageViewLocator.ReadyToPush = false;
                                 Navigation.PopToRootAsync();
+                            }
                             break;
                         case PageType.SearchDoctor:
                             if (lblTitle.Text != SearchDoctorPage.HeaderTitle)
-                                Navigation.PushAsync(new SearchDoctorPage());
+                            {
+                                PageViewLocator.ReadyToPush = true;
+                                //if (PageViewLocator.SearchDoctorPage == null)
+                                    //PageViewLocator.SearchDoctorPage = new SearchDoctorPage();
+                                    this.PushWithClear(new SearchDoctorPage());                                
+                            }
                             break;
                         case PageType.HealthTipList:
                             if (lblTitle.Text != CategoryListPage.HeaderTitle)
-                                Navigation.PushAsync(new CategoryListPage());
+                            {
+                                PageViewLocator.ReadyToPush = true;
+                                //if (PageViewLocator.CategoryListPage == null)
+                                    //PageViewLocator.CategoryListPage = new CategoryListPage();
+
+                                this.PushWithClear(new CategoryListPage());                                
+                            }
                             break;
                         case PageType.Insurances:
                             if (lblTitle.Text != InsuranceListPage.HeaderTitle)
-                                Navigation.PushAsync(new InsuranceListPage());
+                            {
+                                PageViewLocator.ReadyToPush = true;
+                                //if (PageViewLocator.InsuranceListPage == null)
+                                    //PageViewLocator.InsuranceListPage = new InsuranceListPage();
+
+                                    this.PushWithClear(new InsuranceListPage());                                
+                            }
                             break;
                         case PageType.FAQ:
                             if (lblTitle.Text != FaqListPage.HeaderTitle)
-                                Navigation.PushAsync(new FaqListPage());
+                            {
+                                PageViewLocator.ReadyToPush = true;
+                                //if (PageViewLocator.FaqListPage == null)
+                                    //PageViewLocator.FaqListPage = new FaqListPage();
+
+                                this.PushWithClear(new FaqListPage());                                
+                            }
                             break;
                         case PageType.News:
                             if (lblTitle.Text != NewsListPage.HeaderTitle)
-                                Navigation.PushAsync(new NewsListPage());
+                            {
+                                PageViewLocator.ReadyToPush = true;
+                                //if (PageViewLocator.NewsListPage == null)
+                                    //PageViewLocator.NewsListPage = new NewsListPage();
+
+                                    this.PushWithClear(new NewsListPage());                                
+                            }
                             break;
                         default:
                             break;
@@ -352,19 +444,25 @@ namespace HealthDemo.Pages
             }
         }
 
-        public static List<MenuItem> MenuItems = new List<MenuItem>()
-            {   
-                new MenuItem(){Title = CategoryListPage.HeaderTitle, PageType = Pages.PageType.HealthTipList},
-                new MenuItem(){Title = SearchDoctorPage.HeaderTitle, PageType = Pages.PageType.SearchDoctor},
-                new MenuItem(){Title = InsuranceListPage.HeaderTitle, PageType = Pages.PageType.Insurances},
-                new MenuItem(){Title = FaqListPage.HeaderTitle, PageType = Pages.PageType.FAQ},
-                new MenuItem(){Title = NewsListPage.HeaderTitle, PageType = Pages.PageType.News},
-                new MenuItem(){Title = MainPage.HeaderTitle, PageType = Pages.PageType.Main}
-            };
+        public List<MenuItem> MenuItems = new List<MenuItem>()
+        {   
+            new MenuItem(){Title = CategoryListPage.HeaderTitle, PageType = Pages.PageType.HealthTipList},
+            new MenuItem(){Title = SearchDoctorPage.HeaderTitle, PageType = Pages.PageType.SearchDoctor},
+            new MenuItem(){Title = InsuranceListPage.HeaderTitle, PageType = Pages.PageType.Insurances},
+            new MenuItem(){Title = FaqListPage.HeaderTitle, PageType = Pages.PageType.FAQ},
+            new MenuItem(){Title = NewsListPage.HeaderTitle, PageType = Pages.PageType.News},
+            new MenuItem(){Title = MainPage.HeaderTitle, PageType = Pages.PageType.Main}
+        };
 
         protected virtual void RenderContentView(StackLayout parent) { }
         protected virtual void OnMasterViewRendered() { }
         protected virtual void OnBackPressed() { }
+       
+
+        public virtual void ClearObjects()
+        {
+
+        }
     }
 
     public class TransparentButton: Button

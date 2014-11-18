@@ -33,12 +33,12 @@ namespace HealthDemo.Pages
             btnSearch.Clicked += (s, e) =>
                 {
                     VM.DoSearch(() =>
-                        {
-                            //Device.BeginInvokeOnMainThread(() =>
-                            //    {
-                                    this.Navigation.PushAsync(new DoctorListPage());
-                                //});
-                        });
+                    {
+                        if (PageViewLocator.DoctorListPage == null)
+                            PageViewLocator.DoctorListPage = new DoctorListPage();
+                        this.Navigation.PushAsync(PageViewLocator.DoctorListPage);
+                         
+                    });
                 };
             VM.ShowAlert = this.DisplayAlert;
         }

@@ -12,10 +12,10 @@ namespace HealthDemo.Pages
     {
         private NewsViewModel VM { get; set; }
         public NewsDetailPage()
-            : base()
+            : base(false)
         {
             VM = ViewModelLocator.NewsVM;
-            BindingContext = VM;
+            //BindingContext = VM;
             lblTitle.Text = "News details";
         }
 
@@ -61,17 +61,25 @@ namespace HealthDemo.Pages
             };
             lblDescription.SetBinding(Label.TextProperty, new Binding("Description"));
 
-            //var stackLayoutDetails = new StackLayout() { BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, Padding = new Thickness(15, 15, 7, 15), Spacing = 10 };
-            //stackLayoutDetails.Children.Add(lblDescription);
-            var content = new Frame() { HasShadow = false, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 20) };
-            var frmae2 = new Frame() { HasShadow = false, OutlineColor = Color.Black, BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(15, 15, 7, 15) };
+            
+            var content = new ContentView() 
+            {   
+                HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 20) 
+            };
+            
+            var frmae2 = new ContentView() 
+            {   
+                BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(15, 15, 7, 15) 
+            };
             frmae2.Content = lblDescription;
-            content.Content = frmae2;
+            var border = new StackLayout() { BackgroundColor = Color.Black, Orientation = StackOrientation.Vertical, Padding = 1 };
+            border.Children.Add(frmae2);
+            content.Content = border;
 
             stlayout.Children.Add(header);
             stlayout.Children.Add(content);
             rootScrollView.Content = stlayout;
-            rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedNews"));
+            //rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedNews"));
             parent.Children.Add(rootScrollView);
         }
     }

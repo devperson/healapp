@@ -29,7 +29,10 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as News;
                     VM.SelectedNews = selected;
                     lvNews.SelectedItem = null;
-                    Navigation.PushAsync(new NewsDetailPage());
+                    if (PageViewLocator.NewsDetailPage == null)
+                        PageViewLocator.NewsDetailPage = new NewsDetailPage();
+                    PageViewLocator.NewsDetailPage.BindingContext = selected;
+                    Navigation.PushAsync(PageViewLocator.NewsDetailPage);
                 }
             };
             VM.ShowAlert = this.DisplayAlert;

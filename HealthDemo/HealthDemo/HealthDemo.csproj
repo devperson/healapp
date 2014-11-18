@@ -82,6 +82,8 @@
     <Compile Include="ViewModels\TipViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Pages\PageViewLocator.cs" />
+    <Compile Include="Dependency\NavigationPageEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ExifLib">

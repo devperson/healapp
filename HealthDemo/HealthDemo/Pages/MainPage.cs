@@ -15,24 +15,34 @@ namespace HealthDemo.Pages
         public MainPage() : base() 
         {
             btnDoctors.Clicked += (s, e) =>
-                {
-                    Navigation.PushAsync(new SearchDoctorPage());
-                };
+            {
+                //if (PageViewLocator.SearchDoctorPage == null)
+                    //PageViewLocator.SearchDoctorPage = new SearchDoctorPage();
+                Navigation.PushAsync(new SearchDoctorPage());
+            };
             btnTips.Clicked += (s, e) =>
-                {
-                    Navigation.PushAsync(new CategoryListPage());
-                };
+            {
+                //if (PageViewLocator.CategoryListPage == null)
+                    //PageViewLocator.CategoryListPage = new CategoryListPage();
+                Navigation.PushAsync(new CategoryListPage());
+            };
             btnInsurance.Clicked += (s, e) =>
             {
+                //if (PageViewLocator.InsuranceListPage == null)
+                    //PageViewLocator.InsuranceListPage = new InsuranceListPage();
                 Navigation.PushAsync(new InsuranceListPage());
             };
             btnNews.Clicked += (s, e) =>
             {
-                Navigation.PushAsync(new NewsListPage());
+                //if (PageViewLocator.NewsListPage == null)
+                    //PageViewLocator.NewsListPage = new NewsListPage();
+                    Navigation.PushAsync(new NewsListPage());
             };
             btnFaq.Clicked += (s, e) =>
             {
-                Navigation.PushAsync(new FaqListPage());
+                //if (PageViewLocator.FaqListPage == null)
+                    //PageViewLocator.FaqListPage = new FaqListPage();
+                Navigation.PushAsync(new FaqListPage());              
             };
 
         }
@@ -43,21 +53,21 @@ namespace HealthDemo.Pages
             var stackLayout = new StackLayout() { Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
 
             var itemContent = CreateItemStacklayout();
-            btnDoctors = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.png", "Doctor.png", "Images/Doctor.png")), "Find Doctors");
-            btnTips = CreateButton(ImageSource.FromFile(Device.OnPlatform("HealthTips.png", "HealthTips.png", "Images/HealthTips.png")), "Health Tips");
+            btnDoctors = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.jpg", "Doctor.jpg", "Images/Doctor.jpg")), "Find Doctors");
+            btnTips = CreateButton(ImageSource.FromFile(Device.OnPlatform("HealthTips.jpg", "HealthTips.jpg", "Images/HealthTips.jpg")), "Health Tips");
             itemContent.Children.Add(btnDoctors);
             itemContent.Children.Add(btnTips);
             stackLayout.Children.Add(itemContent);
 
             var itemContent2 = CreateItemStacklayout();
-            btnInsurance = CreateButton(ImageSource.FromFile(Device.OnPlatform("creditcardicon.png", "creditcardicon.png", "Images/creditcardicon.png")), "Insurance");
-            btnNews = CreateButton(ImageSource.FromFile(Device.OnPlatform("news.png", "news.png", "Images/news.png")), "News");
+            btnInsurance = CreateButton(ImageSource.FromFile(Device.OnPlatform("creditcardicon.png", "creditcardicon.jpg", "Images/creditcardicon.jpg")), "Insurance");
+            btnNews = CreateButton(ImageSource.FromFile(Device.OnPlatform("news.jpg", "news.jpg", "Images/news.jpg")), "News");
             itemContent2.Children.Add(btnInsurance);
             itemContent2.Children.Add(btnNews);
             stackLayout.Children.Add(itemContent2);
 
             var itemContent3 = CreateItemStacklayout();
-            btnFaq = CreateButton(ImageSource.FromFile(Device.OnPlatform("faq.png", "faq.png", "Images/faq.png")), "Faq");
+            btnFaq = CreateButton(ImageSource.FromFile(Device.OnPlatform("faq.jpg", "faq.jpg", "Images/faq.jpg")), "Faq");
             itemContent3.Children.Add(btnFaq);
             stackLayout.Children.Add(itemContent3);
 
@@ -102,6 +112,11 @@ namespace HealthDemo.Pages
         {
             base.OnAppearing();
             lvMenu.SelectedItem = GetCurrentPageAsMenu();
+
+            if (PageViewLocator.ReadyToPush)
+            {
+                PageViewLocator.NavigationPage.PushAsync(PageViewLocator.PushingPage);
+            }
         }
     }
 }

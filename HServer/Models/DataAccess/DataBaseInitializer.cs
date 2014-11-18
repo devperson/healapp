@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HServer.Models.DataAccess
 {    
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<DataBaseContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<DataBaseContext>
     {
         protected override void Seed(DataBaseContext context)
         {
@@ -47,7 +47,7 @@ namespace HServer.Models.DataAccess
             
             Doctor doc1 = new Doctor();
             doc1.Name = "Hamad Reza Dehdashtian";
-            doc1.ImageFileName = "img1.png";
+            doc1.ImageFileName = "img1.jpg";
             doc1.Position = pSP;
             doc1.Department = depCIR;
             doc1.Bio = "After completing his studies in Hungary, Dr. Hamad Reza worked in a large multi-disciplinary university hospital established in 1895 as a Specialist Radiologist and later as a Neuroradiologist, gaining a great deal of experience dealing with adult and Paediatric Radiology. He became a Member of The Hungarian Medical Chamber of Doctors in 2000 and has been a member of The General Medical Council (GMC) and Swedish National Board of Health and Welfare (Socialstyrelsen) since 2008. He joined the Clinical Imaging Institute at Al Ain Hospital as a Specialist Radiologist in May 2010. ";
@@ -62,7 +62,7 @@ namespace HServer.Models.DataAccess
             
             Doctor doc2 = new Doctor();
             doc2.Name = "Ahmed Ibrahim El Bery";
-            doc2.ImageFileName = "img2.png";
+            doc2.ImageFileName = "img2.jpg";
             doc2.Position = pSP;
             doc2.Department = depCIR;
             doc2.Bio = "After he completed his MBBch studies at Alexandria University in 1990, Dr. Ahmed joined the Radiology department in Cairo University, gaining an MSc degree in Radiology in 1998. After that, he completed his studies at The Royal College of Radiologists, London to get an FRCR degree in 2007 before joining Al Ain Hospital as a Specialist Radiologist in 2008.";            
@@ -75,7 +75,7 @@ namespace HServer.Models.DataAccess
             Department depMI = new Department() { Name = "Medical Institute" };            
             Doctor doc3 = new Doctor();
             doc3.Name = "Mohammed Ali Abdelsamad Hussein";
-            doc3.ImageFileName = "img3.png";
+            doc3.ImageFileName = "img3.jpg";
             doc3.Position = new Position() { Name = "Specialist Cardiologist" };
             doc3.Department = depMI;
             doc3.SubDepartment = new SubDepartment() { Name = "Cardiology"};
@@ -89,7 +89,7 @@ namespace HServer.Models.DataAccess
                         
             Doctor doc4 = new Doctor();
             doc4.Name = "Ghassan Atta";
-            doc4.ImageFileName = "img4.png";
+            doc4.ImageFileName = "img4.jpg";
             doc4.Position = new Position() { Name = "Specialist Neurologist" };
             doc4.Department = depMI;
             doc4.SubDepartment = new SubDepartment() { Name = "Neurology"}; 
@@ -104,7 +104,7 @@ namespace HServer.Models.DataAccess
             
             Doctor doc5 = new Doctor();
             doc5.Name = "John Behrendt";
-            doc5.ImageFileName = "img5.png";
+            doc5.ImageFileName = "img5.jpg";
             doc5.Position = new Position() { Name = "Consultant Gastroenerologist" };
             doc5.Department = depMI;
             doc5.SubDepartment = new SubDepartment() { Name = "Gastroenterology & Hepatology"}; 

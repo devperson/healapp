@@ -29,7 +29,11 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as Faq;
                     VM.SelectedFAQ = selected;
                     lvFaq.SelectedItem = null;
-                    Navigation.PushAsync(new FaqDetailPage());
+
+                    if (PageViewLocator.FaqDetailPage == null)
+                        PageViewLocator.FaqDetailPage = new FaqDetailPage();
+                    PageViewLocator.FaqDetailPage.BindingContext = selected;
+                    Navigation.PushAsync(PageViewLocator.FaqDetailPage);
                 }
             };
             VM.ShowAlert = this.DisplayAlert;

@@ -11,7 +11,7 @@ namespace HealthDemo.Pages
     {
         public static string HeaderTitle = "About us";
         public AboutPage()
-            : base()
+            : base(false, false)
         {
             lblTitle.Text = HeaderTitle;
         }

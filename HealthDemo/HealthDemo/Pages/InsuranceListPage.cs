@@ -29,7 +29,13 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as Insurance;
                     VM.SelectedInsurance = selected;
                     lvInsurances.SelectedItem = null;
-                    Navigation.PushAsync(new InsuranceDetailPage());
+
+                    if (PageViewLocator.InsuranceDetailPage == null)
+                        PageViewLocator.InsuranceDetailPage = new InsuranceDetailPage();
+                    PageViewLocator.InsuranceDetailPage.BindingContext = selected;
+                    Navigation.PushAsync(PageViewLocator.InsuranceDetailPage);     
+
+                    //Navigation.PushAsync(new InsuranceDetailPage());
                 }
             };
             VM.ShowAlert = this.DisplayAlert;

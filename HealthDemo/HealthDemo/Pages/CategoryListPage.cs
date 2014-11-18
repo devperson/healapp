@@ -23,10 +23,16 @@ namespace HealthDemo.Pages
 
             lvCategories.ItemSelected += (s, e) =>
             {
-                //var selected = e.SelectedItem as HealthCategory;
-                //VM.SelectedCategory = selected;
                 if (e.SelectedItem != null)
-                    Navigation.PushAsync(new HealthTipListPage());
+                {
+                    var selected = e.SelectedItem as HealthCategory;
+                    VM.SelectedCategory = selected;
+                    lvCategories.SelectedItem = null;
+
+                    if (PageViewLocator.HealthTipListPage == null)
+                        PageViewLocator.HealthTipListPage = new HealthTipListPage();
+                    this.Navigation.PushAsync(PageViewLocator.HealthTipListPage);                    
+                }
             };
             VM.ShowAlert = this.DisplayAlert;
             lblTitle.Text = HeaderTitle;
@@ -42,7 +48,7 @@ namespace HealthDemo.Pages
                 ItemTemplate = new DataTemplate(typeof(SimpleCell))
             };
             lvCategories.SetBinding(ListView.ItemsSourceProperty, new Binding("CategoryList"));
-            lvCategories.SetBinding(ListView.SelectedItemProperty, new Binding("SelectedCategory", BindingMode.TwoWay));
+            //lvCategories.SetBinding(ListView.SelectedItemProperty, new Binding("SelectedCategory", BindingMode.TwoWay));
             parent.Children.Add(lvCategories);
         }
 
