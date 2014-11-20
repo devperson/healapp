@@ -1,4 +1,5 @@
-﻿using HServer.Models;
+﻿using HServer.Mailers;
+using HServer.Models;
 using HServer.Models.ApiModels;
 using HServer.Models.DataAccess;
 using HServer.Models.Repository;
@@ -127,6 +128,63 @@ namespace HServer.Controllers
         public IEnumerable<Insurance> Get()
         {
             return context.GetAll();
+        }
+    }
+
+    public class ApiControllerEx : ApiController
+    {
+        static System.Timers.Timer t;
+        [NonAction]
+        protected void InvokeAfterSec(double sec, Action action)
+        {
+            t = new System.Timers.Timer();
+            t.Interval = sec;
+            t.Elapsed += (s, e) =>
+            {
+                var timer = s as System.Timers.Timer;
+                timer.Stop();
+                action();
+            };
+            t.Start();
+        }
+    }
+
+    public class AppointmentController : ApiControllerEx
+    {
+        private MailerHelper mailer;
+        public AppointmentController()
+        {
+            mailer = new MailerHelper();
+        }
+        
+        [HttpPost]
+        public bool RequestAppointment(Appointment apt)
+        {
+            InvokeAfterSec(2000, () =>
+                {
+                    mailer.SendNewAppoitment(apt);
+                });
+            
+            return true;
+        }
+    }
+
+    public class FileService : ApiControllerEx
+    {
+        private MailerHelper mailer;
+        public FileService()
+        {
+            mailer = new MailerHelper();
+        }
+
+        [HttpPost]
+        public bool CreateFile(FileModel file)
+        {
+            InvokeAfterSec(2000, () =>
+            {
+                mailer.SendNewFile(file);
+            });
+            return true;
         }
     }
 }

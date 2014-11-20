@@ -37,6 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SmartFormat">
+      <HintPath>..\packages\SmartFormat.NET.1.1.0.0\lib\net35-Client\SmartFormat.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -152,15 +155,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mailers\MailerHelper.cs" />
     <Compile Include="Models\ApiModels\DoctorModel.cs" />
     <Compile Include="Models\ApiModels\SearchDoctorParams.cs" />
     <Compile Include="Models\ApiModels\TipCategoryModel.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\DataAccess\DataBaseContext.cs" />
     <Compile Include="Models\DataAccess\DataBaseInitializer.cs" />
     <Compile Include="Models\DataAccess\ModelConfigs.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Faq.cs" />
+    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\News.cs" />
@@ -172,9 +178,11 @@
     <Compile Include="Models\Tip.cs" />
     <Compile Include="Models\TipCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\AssemblyResourceReader.cs" />
     <Compile Include="Utils\PredicateBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\HealthDemo\Resources\NewAppoint.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -318,7 +326,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49417/</IISUrl>
+          <IISUrl>http://pc:49417/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
