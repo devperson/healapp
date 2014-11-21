@@ -19,11 +19,14 @@ namespace HServer.Mailers
         {
             AppointmentHtmlBody = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
                 .ReadResourceAsString("Areas.HealthDemo.Resources.NewAppoint.html");
+            FileHtmlBody = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
+                .ReadResourceAsString("Areas.HealthDemo.Resources.NewFilePage.html");
         }
 
-		public static string Username { get { return ConfigurationManager.AppSettings["Username"]; } }
+		public static string Username { get { return ConfigurationManager.AppSettings["From"]; } }
         public static string To { get { return ConfigurationManager.AppSettings["SendTo"]; } }
         public string AppointmentHtmlBody { get; set; }
+        public string FileHtmlBody { get; set; }
 
 		public bool SendEmail(string to, string subject, string body, Attachment atachedfile = null)
 		{
@@ -62,7 +65,18 @@ namespace HServer.Mailers
 
         public bool SendNewFile(FileModel file)
         {
-            return true;
+            var subject = "New File";
+            var body = Smart.Format(FileHtmlBody, file);
+
+            Attachment attachment = null;
+            if(!string.IsNullOrEmpty(file.ImageExtension))
+            {
+                
+                var mediatype = file.ImageExtension.Contains("jp") ? "image/jpeg" : "image/png";
+                attachment = new Attachment(new MemoryStream(file.ImageBytes), "attach" + file.ImageExtension, mediatype);
+            }
+
+            return SendEmail(To, subject, body, attachment);
         }
 
 	}

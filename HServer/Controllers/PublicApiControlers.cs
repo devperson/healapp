@@ -169,12 +169,17 @@ namespace HServer.Controllers
         }
     }
 
-    public class FileService : ApiControllerEx
+    public class FileServiceController : ApiControllerEx
     {
         private MailerHelper mailer;
-        public FileService()
+        public FileServiceController()
         {
             mailer = new MailerHelper();
+        }
+
+        public IEnumerable<string> Get()
+        {
+            return new List<string>();
         }
 
         [HttpPost]
