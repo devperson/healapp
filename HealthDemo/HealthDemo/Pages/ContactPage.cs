@@ -84,10 +84,13 @@ namespace HealthDemo.Pages
                 Text = number
             };
             lblNumber.Clicked += (s, e) =>
-                {
-                    var telFeature = DependencyService.Get<ITel>();
-                    telFeature.Tel(lblNumber.Text);
-                };
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
+                var telFeature = DependencyService.Get<ITel>();
+                telFeature.Tel(lblNumber.Text);
+            };
 
 
 

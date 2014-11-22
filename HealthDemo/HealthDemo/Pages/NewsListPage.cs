@@ -12,22 +12,28 @@ namespace HealthDemo.Pages
 {
     public class NewsListPage:MasterPage
     {
-        private NewsViewModel VM { get; set; }
+        //private NewsViewModel VM { get; set; }
         public static string HeaderTitle = "News";
         private ListView lvNews;
         public NewsListPage()
             : base()
         {
-            VM = ViewModelLocator.NewsVM;
-            BindingContext = VM;
+            //VM = ViewModelLocator.NewsVM;
+            BindingContext = ViewModelLocator.NewsVM;
             lblTitle.Text = HeaderTitle;
 
             lvNews.ItemSelected += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                {
+                    lvNews.SelectedItem = null;
+                    return;
+                }
+
                 if (e.SelectedItem != null)
                 {
                     var selected = e.SelectedItem as News;
-                    VM.SelectedNews = selected;
+                    ViewModelLocator.NewsVM.SelectedNews = selected;
                     lvNews.SelectedItem = null;
                     if (PageViewLocator.NewsDetailPage == null)
                         PageViewLocator.NewsDetailPage = new NewsDetailPage();
@@ -35,7 +41,7 @@ namespace HealthDemo.Pages
                     Navigation.PushAsync(PageViewLocator.NewsDetailPage);
                 }
             };
-            VM.ShowAlert = this.DisplayAlert;
+            
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -54,8 +60,17 @@ namespace HealthDemo.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            ViewModelLocator.NewsVM.ShowAlert = this.DisplayAlert;
             lvMenu.SelectedItem = GetCurrentPageAsMenu();
-            VM.LoadNews();
+            ViewModelLocator.NewsVM.LoadNews();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ViewModelLocator.NewsVM.ShowAlert = null;
         }
     }
 }

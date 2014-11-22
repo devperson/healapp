@@ -10,7 +10,7 @@ namespace HealthDemo.Pages
 {
     public class TipDetailPage : MasterPage
     {
-        private TipViewModel VM { get; set; }
+        //private TipViewModel VM { get; set; }
         public TipDetailPage()
             : base(false)
         {           
@@ -20,7 +20,7 @@ namespace HealthDemo.Pages
 
         protected override void RenderContentView(StackLayout parent)
         {
-            VM = ViewModelLocator.TipVM;
+            //VM = ViewModelLocator.TipVM;
             //BindingContext = VM;
 
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };

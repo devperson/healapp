@@ -15,7 +15,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>HealthDemo</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.HealthDemo</string>
+	<string>com.xamarin.testing</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

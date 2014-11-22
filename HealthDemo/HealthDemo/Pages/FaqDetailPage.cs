@@ -10,7 +10,7 @@ namespace HealthDemo.Pages
 {
     public class FaqDetailPage : MasterPage
     {
-        private FaqViewModel VM { get; set; }
+        //private FaqViewModel VM { get; set; }
         public FaqDetailPage()
             : base(false)
         {                        
@@ -19,7 +19,7 @@ namespace HealthDemo.Pages
 
         protected override void RenderContentView(StackLayout parent)
         {
-            VM = ViewModelLocator.FaqVM;
+            //VM = ViewModelLocator.FaqVM;
 
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 0, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };

@@ -130,5 +130,11 @@ namespace HealthDemo
                 onCompleted(response);
             }
         }
+
+		public async void CreateAppointment(Appointment appoint, Action<ResponseBase> onCompleted)
+		{
+		}
+
+		public void CreateFile(FileModel file, Action<ResponseBase> onCompleted){}
     }
 }

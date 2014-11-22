@@ -7,33 +7,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace HealthDemo.Pages
 {
     public class DoctorListPage : MasterPage
     {
         private ListView lvResult;
-        private DoctorViewModel VM { get; set; }
+        //private DoctorViewModel VM { get; set; }
+        
+
         public DoctorListPage()
             : base()
         {
             lblTitle.Text = "Search Result";
-            VM = ViewModelLocator.DoctorVM;            
-            BindingContext = VM;
+            //VM = ViewModelLocator.DoctorVM;            
+            BindingContext = ViewModelLocator.DoctorVM;
 
             lvResult.ItemSelected += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                {
+                    lvResult.SelectedItem = null;
+                    return;
+                }
+
                 if (e.SelectedItem != null)
                 {
                     var selected = e.SelectedItem as Doctor;
-                    VM.SelectedDoctor = selected;
+                    ViewModelLocator.DoctorVM.SelectedDoctor = selected;
                     lvResult.SelectedItem = null;
 
                     if (PageViewLocator.ProfilePage == null)
                         PageViewLocator.ProfilePage = new ProfilePage();
                     PageViewLocator.ProfilePage.BindingContext = selected;
                     Navigation.PushAsync(PageViewLocator.ProfilePage);
-                }
+                }                
             };
         }
 

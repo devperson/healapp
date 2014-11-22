@@ -10,7 +10,7 @@ namespace HealthDemo.Pages
 {
     public class ProfilePage : MasterPage
     {
-        private DoctorViewModel VM { get; set; }
+        //private DoctorViewModel VM { get; set; }
         public ProfilePage()
             : base(false)
         {            
@@ -19,7 +19,7 @@ namespace HealthDemo.Pages
         }
         protected override void RenderContentView(StackLayout parent)
         {
-            VM = ViewModelLocator.DoctorVM;            
+            //VM = ViewModelLocator.DoctorVM;            
 
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 10, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -136,7 +136,7 @@ namespace HealthDemo.Pages
                 Text = "Qualifications:"
             };
 
-            foreach (var item in VM.SelectedDoctor.QualifiList)
+            foreach (var item in ViewModelLocator.DoctorVM.SelectedDoctor.QualifiList)
             {
                 var lblDetails = new Label()
                 {

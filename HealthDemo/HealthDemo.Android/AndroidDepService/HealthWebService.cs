@@ -82,13 +82,31 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+		public async void CreateAppointment(Appointment appoint, Action<ResponseBase> onCompleted)
+		{
+			var asyncResult = await ExecuteServiceMethod<ResponseBase> ("appointment/RequestAppointment", Method.POST, content => {
+				var response = new ResponseBase();
+				return response;
+			}, appoint);
+			onCompleted(asyncResult);
+		}
+
+		public async void CreateFile(FileModel file, Action<ResponseBase> onCompleted)
+		{
+			var asyncResult = await ExecuteServiceMethod<ResponseBase> ("fileservice/createfile", Method.POST, content => {
+				var response = new ResponseBase();
+				return response;
+			}, file);
+			onCompleted(asyncResult);
+		}
+
         public Task<T> ExecuteServiceMethod<T>(string resource, Method method, Func<string, T> deserialiser, object requestObject = null) where T : ResponseBase
         {
             var restRequest = new RestRequest(resource, method);
             if (requestObject != null)
             {
                 restRequest.RequestFormat = DataFormat.Json;
-                restRequest.AddBody(requestObject);
+				restRequest.AddBody(requestObject);
             }
 
             return Task.Run<T>(() =>
@@ -109,6 +127,7 @@ namespace HealthDemo
                     else
                     {
                         errorResponse.ExceptionMessage = Constants.NoInternetMessage;
+					    response.Success = false;
                     }
                     if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.ExceptionMessage))
                     {

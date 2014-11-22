@@ -11,39 +11,46 @@ namespace HealthDemo.Pages
     public class MainPage : MasterPage
     {
         public static string HeaderTitle = "Main Page";
-        ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq;
+        ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq, btnEcommerce;
         public MainPage() : base() 
         {
             btnDoctors.Clicked += (s, e) =>
             {
-                //if (PageViewLocator.SearchDoctorPage == null)
-                    //PageViewLocator.SearchDoctorPage = new SearchDoctorPage();
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
                 Navigation.PushAsync(new SearchDoctorPage());
             };
             btnTips.Clicked += (s, e) =>
             {
-                //if (PageViewLocator.CategoryListPage == null)
-                    //PageViewLocator.CategoryListPage = new CategoryListPage();
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
                 Navigation.PushAsync(new CategoryListPage());
             };
             btnInsurance.Clicked += (s, e) =>
             {
-                //if (PageViewLocator.InsuranceListPage == null)
-                    //PageViewLocator.InsuranceListPage = new InsuranceListPage();
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
                 Navigation.PushAsync(new InsuranceListPage());
             };
             btnNews.Clicked += (s, e) =>
             {
-                //if (PageViewLocator.NewsListPage == null)
-                    //PageViewLocator.NewsListPage = new NewsListPage();
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
                     Navigation.PushAsync(new NewsListPage());
             };
             btnFaq.Clicked += (s, e) =>
             {
-                //if (PageViewLocator.FaqListPage == null)
-                    //PageViewLocator.FaqListPage = new FaqListPage();
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
                 Navigation.PushAsync(new FaqListPage());              
             };
+            btnEcommerce.Clicked += (s, e) =>
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+                Navigation.PushAsync(new ServicesPage());              
+            };
+            
 
         }
 
@@ -60,7 +67,7 @@ namespace HealthDemo.Pages
             stackLayout.Children.Add(itemContent);
 
             var itemContent2 = CreateItemStacklayout();
-            btnInsurance = CreateButton(ImageSource.FromFile(Device.OnPlatform("creditcardicon.png", "creditcardicon.jpg", "Images/creditcardicon.jpg")), "Insurance");
+            btnInsurance = CreateButton(ImageSource.FromFile(Device.OnPlatform("creditcardicon.jpg", "creditcardicon.jpg", "Images/creditcardicon.jpg")), "Insurance");
             btnNews = CreateButton(ImageSource.FromFile(Device.OnPlatform("news.jpg", "news.jpg", "Images/news.jpg")), "News");
             itemContent2.Children.Add(btnInsurance);
             itemContent2.Children.Add(btnNews);
@@ -68,7 +75,9 @@ namespace HealthDemo.Pages
 
             var itemContent3 = CreateItemStacklayout();
             btnFaq = CreateButton(ImageSource.FromFile(Device.OnPlatform("faq.jpg", "faq.jpg", "Images/faq.jpg")), "Faq");
+            btnEcommerce = CreateButton(ImageSource.FromFile(Device.OnPlatform("shopcart.png", "shopcart.png", "Images/shopcart.png")), "e-Services");
             itemContent3.Children.Add(btnFaq);
+            itemContent3.Children.Add(btnEcommerce);
             stackLayout.Children.Add(itemContent3);
 
             scrollview.Content = stackLayout;
@@ -80,7 +89,7 @@ namespace HealthDemo.Pages
             lblTitle.Text = HeaderTitle;
         }
 
-        private static StackLayout CreateItemStacklayout()
+        public static StackLayout CreateItemStacklayout()
         {
             var itemContent = new StackLayout()
             {
@@ -93,7 +102,7 @@ namespace HealthDemo.Pages
             return itemContent;
         }
 
-        private ImageButton CreateButton(ImageSource imgSource, string text)
+        public static ImageButton CreateButton(ImageSource imgSource, string text)
         {
             
             return new ImageButton()

@@ -8,6 +8,9 @@ using MonoTouch.UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Labs.iOS;
 using Xamarin;
+using XLabs.Ioc;
+using Xamarin.Forms.Labs.Mvvm;
+using Xamarin.Forms.Labs;
 
 namespace HealthDemo.iOS
 {
@@ -29,6 +32,7 @@ namespace HealthDemo.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			SetIoc ();
             Forms.Init();
 			FormsMaps.Init();
 
@@ -40,5 +44,31 @@ namespace HealthDemo.iOS
 
             return true;
         }
+
+		/// <summary>
+		/// Sets the IoC.
+		/// </summary>
+		private void SetIoc()
+		{
+			var resolverContainer = new SimpleContainer();
+
+			var app = new XFormsAppiOS();
+			app.Init(this);
+
+//			var documents = app.AppDataDirectory;
+//			var pathToDatabase = Path.Combine(documents, "xforms.db");
+
+			resolverContainer.Register<IDevice> (t => AppleDevice.CurrentDevice)
+				.Register<IDisplay> (t => t.Resolve<IDevice> ().Display)
+			//.Register<IJsonSerializer, XLabs.Serialization.ServiceStack.JsonSerializer>()
+			//.Register<IJsonSerializer, Services.Serialization.SystemJsonSerializer>()
+				.Register<IXFormsApp> (app)
+				.Register<IDependencyContainer> (t => resolverContainer);
+//				.Register<ISimpleCache>(
+//					t => new SQLiteSimpleCache(new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS(),
+//						new SQLite.Net.SQLiteConnectionString(pathToDatabase, true), t.Resolve<IJsonSerializer>()));
+
+			Resolver.SetResolver(resolverContainer.GetResolver());
+		}
     }
 }

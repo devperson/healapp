@@ -1,4 +1,5 @@
 ﻿using HealthDemo.Cells;
+using HealthDemo.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,9 @@ namespace HealthDemo.Pages
 {
     public class MasterPage : ContentPage
     {
+        protected DoubleClickDetecter DoubleClickDetecter = new DoubleClickDetecter();
         protected ImageButton btnBack, btnMenu;
-        protected TransparentButton btnInfo, btnContact, btnLocation;
+        protected TransparentButton btnInfo, btnContact, btnLocation, btnEServices;
         protected Label lblTitle;
         protected StackLayout contentStack, menuLayout;
         protected AbsoluteLayout titleLayout, toolbarLayout;
@@ -30,53 +32,68 @@ namespace HealthDemo.Pages
             RenderTemplateView();            			
 
             btnBack.Clicked += (s, e) =>
-            {   
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+                OnBackPressed();
                 PageViewLocator.ReadyToPush = false;
                 if (lblTitle.Text != MainPage.HeaderTitle)                    
-					Navigation.PopAsync();               
+					Navigation.PopAsync();                
             };
 
             btnInfo.Clicked += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
                 if (lblTitle.Text != AboutPage.HeaderTitle)
                 {
-                    PageViewLocator.ReadyToPush = true;
-                    //if (PageViewLocator.AboutPage == null)
-                        //PageViewLocator.AboutPage = new AboutPage();
+                    PageViewLocator.ReadyToPush = true;                    
                     PushWithClear(new AboutPage());                    
-				}
+				}                
             };
 
             btnContact.Clicked += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
                 if (lblTitle.Text != ContactPage.HeaderTitle)
                 {
-                    PageViewLocator.ReadyToPush = true;
-                    //if (PageViewLocator.ContactPage == null)
-                        //PageViewLocator.ContactPage = new ContactPage();
+                    PageViewLocator.ReadyToPush = true;                    
                     PushWithClear(new ContactPage());                       
-                }
+                }                
             };
 
             btnLocation.Clicked += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
                 if (lblTitle.Text != LocationPage.HeaderTitle)
                 {
                     PageViewLocator.ReadyToPush = true;
-                    //if (PageViewLocator.LocationPage == null)
-                        //PageViewLocator.LocationPage = new LocationPage();
-                        PushWithClear(new LocationPage());                     
-                }
+                    PushWithClear(new LocationPage());
+                }                
+            };
+
+            btnEServices.Clicked += (s, e) =>
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
+                if (lblTitle.Text != ServicesPage.HeaderTitle)
+                {
+                    PageViewLocator.ReadyToPush = true;
+                    PushWithClear(new ServicesPage());
+                }                
             };
 
            	           
         }
 
         public void PushWithClear(Page page)
-        {
-            //GC.Collect();
-            //PageViewLocator.NavigationPage.Animated = false;
-            
+        {            
             if (this is MainPage)
             {   
                 PageViewLocator.NavigationPage.PushAsync(page);
@@ -85,9 +102,7 @@ namespace HealthDemo.Pages
             {   
                 PageViewLocator.PushingPage = page;
                 PageViewLocator.NavigationPage.PopToRootAsync();
-            }
-            //await PageViewLocator.NavigationPage.PushAsync(page);
-            //PageViewLocator.NavigationPage.Animated = true;
+            }            
         }        
 
         private void RenderTemplateView()
@@ -190,9 +205,11 @@ namespace HealthDemo.Pages
             btnInfo = new TransparentButton() { Text = "INFO"};
             btnContact = new TransparentButton() { Text = "Contact" };
             btnLocation = new TransparentButton() { Text = "Location", WidthRequest = 80 };
+            btnEServices = new TransparentButton() { Text = "e-Services", WidthRequest = 100 };
             toolbarStack.Children.Add(btnInfo);
             toolbarStack.Children.Add(btnContact);
             toolbarStack.Children.Add(btnLocation);
+            toolbarStack.Children.Add(btnEServices);
 
             toolbarLayout.Children.Add(toolbarBackground, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             toolbarLayout.Children.Add(toolbarStack, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
@@ -221,6 +238,9 @@ namespace HealthDemo.Pages
                 btnMenu.Source = ImageSource.FromFile(Device.OnPlatform("menu.png", "menu.png", "Images/menu.png"));
                 btnMenu.Clicked += (s, e) =>
                 {
+                    if (this.DoubleClickDetecter.IsDoubleClick())
+                        return;
+
                     if (Device.OS == TargetPlatform.Android)
                     {
                         Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
@@ -241,7 +261,7 @@ namespace HealthDemo.Pages
                     else
                     {
                         menuLayout.TranslateTo(0, 0);
-                    }
+                    }                    
                 };
             }
 
@@ -337,71 +357,74 @@ namespace HealthDemo.Pages
 
             lvMenu.ItemsSource = MenuItems;
             lvMenu.ItemSelected += (s, e) =>
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;                
+
+                var selected = e.SelectedItem as MenuItem;
+                switch (selected.PageType)
                 {
-                    var selected = e.SelectedItem as MenuItem;
-                    switch (selected.PageType)
-                    {
-                        case PageType.Main:
-                            if (lblTitle.Text != MainPage.HeaderTitle)
-                            {
-                                PageViewLocator.ReadyToPush = false;
-                                Navigation.PopToRootAsync();
-                            }
-                            break;
-                        case PageType.SearchDoctor:
-                            if (lblTitle.Text != SearchDoctorPage.HeaderTitle)
-                            {
-                                PageViewLocator.ReadyToPush = true;
-                                //if (PageViewLocator.SearchDoctorPage == null)
-                                    //PageViewLocator.SearchDoctorPage = new SearchDoctorPage();
-                                    this.PushWithClear(new SearchDoctorPage());                                
-                            }
-                            break;
-                        case PageType.HealthTipList:
-                            if (lblTitle.Text != CategoryListPage.HeaderTitle)
-                            {
-                                PageViewLocator.ReadyToPush = true;
-                                //if (PageViewLocator.CategoryListPage == null)
-                                    //PageViewLocator.CategoryListPage = new CategoryListPage();
+                    case PageType.Main:
+                        if (lblTitle.Text != MainPage.HeaderTitle)
+                        {
+                            PageViewLocator.ReadyToPush = false;
+                            Navigation.PopToRootAsync();
+                        }
+                        break;
+                    case PageType.SearchDoctor:
+                        if (lblTitle.Text != SearchDoctorPage.HeaderTitle)
+                        {
+                            PageViewLocator.ReadyToPush = true;
+                            //if (PageViewLocator.SearchDoctorPage == null)
+                                //PageViewLocator.SearchDoctorPage = new SearchDoctorPage();
+                                this.PushWithClear(new SearchDoctorPage());                                
+                        }
+                        break;
+                    case PageType.HealthTipList:
+                        if (lblTitle.Text != CategoryListPage.HeaderTitle)
+                        {
+                            PageViewLocator.ReadyToPush = true;
+                            //if (PageViewLocator.CategoryListPage == null)
+                                //PageViewLocator.CategoryListPage = new CategoryListPage();
 
-                                this.PushWithClear(new CategoryListPage());                                
-                            }
-                            break;
-                        case PageType.Insurances:
-                            if (lblTitle.Text != InsuranceListPage.HeaderTitle)
-                            {
-                                PageViewLocator.ReadyToPush = true;
-                                //if (PageViewLocator.InsuranceListPage == null)
-                                    //PageViewLocator.InsuranceListPage = new InsuranceListPage();
+                            this.PushWithClear(new CategoryListPage());                                
+                        }
+                        break;
+                    case PageType.Insurances:
+                        if (lblTitle.Text != InsuranceListPage.HeaderTitle)
+                        {
+                            PageViewLocator.ReadyToPush = true;
+                            //if (PageViewLocator.InsuranceListPage == null)
+                                //PageViewLocator.InsuranceListPage = new InsuranceListPage();
 
-                                    this.PushWithClear(new InsuranceListPage());                                
-                            }
-                            break;
-                        case PageType.FAQ:
-                            if (lblTitle.Text != FaqListPage.HeaderTitle)
-                            {
-                                PageViewLocator.ReadyToPush = true;
-                                //if (PageViewLocator.FaqListPage == null)
-                                    //PageViewLocator.FaqListPage = new FaqListPage();
+                                this.PushWithClear(new InsuranceListPage());                                
+                        }
+                        break;
+                    case PageType.FAQ:
+                        if (lblTitle.Text != FaqListPage.HeaderTitle)
+                        {
+                            PageViewLocator.ReadyToPush = true;
+                            //if (PageViewLocator.FaqListPage == null)
+                                //PageViewLocator.FaqListPage = new FaqListPage();
 
-                                this.PushWithClear(new FaqListPage());                                
-                            }
-                            break;
-                        case PageType.News:
-                            if (lblTitle.Text != NewsListPage.HeaderTitle)
-                            {
-                                PageViewLocator.ReadyToPush = true;
-                                //if (PageViewLocator.NewsListPage == null)
-                                    //PageViewLocator.NewsListPage = new NewsListPage();
+                            this.PushWithClear(new FaqListPage());                                
+                        }
+                        break;
+                    case PageType.News:
+                        if (lblTitle.Text != NewsListPage.HeaderTitle)
+                        {
+                            PageViewLocator.ReadyToPush = true;
+                            //if (PageViewLocator.NewsListPage == null)
+                                //PageViewLocator.NewsListPage = new NewsListPage();
 
-                                    this.PushWithClear(new NewsListPage());                                
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                    HideMenu();
-                };
+                                this.PushWithClear(new NewsListPage());                                
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                HideMenu();                
+            };
 
             var menuContent = new StackLayout() { Spacing = 0, Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             menuContent.Children.Add(lblMenuTitle);
@@ -409,9 +432,12 @@ namespace HealthDemo.Pages
 
             var hideButton = new Button() { VerticalOptions = LayoutOptions.FillAndExpand, WidthRequest = 79, BackgroundColor = Color.Transparent };
             hideButton.Clicked += (s, e) =>
-                {
-                    HideMenu();
-                };
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
+                HideMenu();
+            };
             rootStack.Children.Add(hideButton);
             rootStack.Children.Add(menuContent);
             return rootStack;

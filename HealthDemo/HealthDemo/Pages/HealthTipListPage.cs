@@ -12,20 +12,26 @@ namespace HealthDemo.Pages
 {
     public class HealthTipListPage : MasterPage
     {
-        private TipViewModel VM { get; set; }
+        //private TipViewModel VM { get; set; }
         private ListView lvTips;
         public HealthTipListPage() : base() 
         {   
-            VM = ViewModelLocator.TipVM;
-            BindingContext = VM;
-            lblTitle.Text = "Health Tip " + VM.SelectedCategoryTitle;
+            //VM = ViewModelLocator.TipVM;
+            BindingContext = ViewModelLocator.TipVM;
+            lblTitle.Text = "Health Tip - " + ViewModelLocator.TipVM.SelectedCategoryTitle;
 
             lvTips.ItemSelected += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                {
+                    lvTips.SelectedItem = null;
+                    return;
+                }
+
                 if (e.SelectedItem != null)
                 {   
                     var selected = e.SelectedItem as HealthTip;
-                    VM.SelectedTip = selected;
+                    ViewModelLocator.TipVM.SelectedTip = selected;
                     lvTips.SelectedItem = null;
 
                     if (PageViewLocator.TipDetailPage == null)
@@ -36,7 +42,7 @@ namespace HealthDemo.Pages
                     //Navigation.PushAsync(new TipDetailPage());
                 }
             };
-            VM.ShowAlert = this.DisplayAlert;
+            
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -56,7 +62,15 @@ namespace HealthDemo.Pages
         {
             base.OnAppearing();
 
-            VM.LoadTips();
+            ViewModelLocator.TipVM.LoadTips();
+            ViewModelLocator.TipVM.ShowAlert = this.DisplayAlert;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ViewModelLocator.TipVM.ShowAlert = null;
         }
 
         protected override void OnBackPressed()

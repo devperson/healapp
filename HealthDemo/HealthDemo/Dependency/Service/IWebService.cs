@@ -17,5 +17,7 @@ namespace HealthDemo.Service
         void GetSpeicalties(Action<PositionResponse> onCompleted);
         void GetInsurances(Action<InsuranceResponse> onCompleted);
         void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase;
+        void CreateAppointment(Appointment appoint, Action<ResponseBase> onCompleted);
+        void CreateFile(FileModel file, Action<ResponseBase> onCompleted);
     }
 }

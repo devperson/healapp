@@ -12,21 +12,27 @@ namespace HealthDemo.Pages
 {
     public class CategoryListPage : MasterPage
     {
-        private TipViewModel VM { get; set; }
+        //private TipViewModel VM { get; set; }
         private ListView lvCategories;
         public static string HeaderTitle = "Categories";
         public CategoryListPage()
             : base()
         {
-            VM = ViewModelLocator.TipVM;
-            BindingContext = VM;
+            //VM = ViewModelLocator.TipVM;
+            BindingContext = ViewModelLocator.TipVM;
 
             lvCategories.ItemSelected += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                {
+                    lvCategories.SelectedItem = null;
+                    return;
+                }
+
                 if (e.SelectedItem != null)
                 {
                     var selected = e.SelectedItem as HealthCategory;
-                    VM.SelectedCategory = selected;
+                    ViewModelLocator.TipVM.SelectedCategory = selected;
                     lvCategories.SelectedItem = null;
 
                     if (PageViewLocator.HealthTipListPage == null)
@@ -34,7 +40,7 @@ namespace HealthDemo.Pages
                     this.Navigation.PushAsync(PageViewLocator.HealthTipListPage);                    
                 }
             };
-            VM.ShowAlert = this.DisplayAlert;
+           
             lblTitle.Text = HeaderTitle;
         }
 
@@ -56,7 +62,15 @@ namespace HealthDemo.Pages
         {
             base.OnAppearing();
             lvMenu.SelectedItem = GetCurrentPageAsMenu();
-            VM.LoadCategories();
+            ViewModelLocator.TipVM.LoadCategories();
+            ViewModelLocator.TipVM.ShowAlert = this.DisplayAlert;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ViewModelLocator.TipVM.ShowAlert = null;
         }
     }
 }

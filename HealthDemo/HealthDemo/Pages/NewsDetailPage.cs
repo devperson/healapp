@@ -10,11 +10,11 @@ namespace HealthDemo.Pages
 {
     public class NewsDetailPage:MasterPage
     {
-        private NewsViewModel VM { get; set; }
+        //private NewsViewModel VM { get; set; }
         public NewsDetailPage()
             : base(false)
         {
-            VM = ViewModelLocator.NewsVM;
+            //VM = ViewModelLocator.NewsVM;
             //BindingContext = VM;
             lblTitle.Text = "News details";
         }

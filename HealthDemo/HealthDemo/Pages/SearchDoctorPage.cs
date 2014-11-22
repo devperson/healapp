@@ -14,33 +14,38 @@ namespace HealthDemo.Pages
         private Button btnSearch;
         private Picker btnCombo;
         public static string HeaderTitle = "Find a Doctor";
-        private DoctorViewModel VM { get; set; }
+        //private DoctorViewModel VM { get; set; }
         public SearchDoctorPage() : base() 
         {
-            VM = ViewModelLocator.DoctorVM;
-            BindingContext = VM;
+            //VM = ViewModelLocator.DoctorVM;
+            BindingContext = ViewModelLocator.DoctorVM;
             
 
             btnCombo.SelectedIndexChanged += (sender, args) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
                 if (btnCombo.SelectedIndex != -1)
                 {
                     var title = btnCombo.Items[btnCombo.SelectedIndex];
-                    VM.SelectedSpeicalties = VM.SpeicaltyList.FirstOrDefault(s => s.Title == title);
+                    ViewModelLocator.DoctorVM.SelectedSpeicalties = ViewModelLocator.DoctorVM.SpeicaltyList.FirstOrDefault(s => s.Title == title);
                 }
             };
 
             btnSearch.Clicked += (s, e) =>
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+
+                ViewModelLocator.DoctorVM.DoSearch(() =>
                 {
-                    VM.DoSearch(() =>
-                    {
-                        if (PageViewLocator.DoctorListPage == null)
-                            PageViewLocator.DoctorListPage = new DoctorListPage();
-                        this.Navigation.PushAsync(PageViewLocator.DoctorListPage);
+                    if (PageViewLocator.DoctorListPage == null)
+                        PageViewLocator.DoctorListPage = new DoctorListPage();
+                    this.Navigation.PushAsync(PageViewLocator.DoctorListPage);
                          
-                    });
-                };
-            VM.ShowAlert = this.DisplayAlert;
+                });
+            };           
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -62,7 +67,7 @@ namespace HealthDemo.Pages
 
             var specLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
             specLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = "Speicalties" });
-            specLayout.Children.Add(CreateComboBox());
+            specLayout.Children.Add(this.CreateComboBox(ref btnCombo));
 
             btnSearch = new Button()
             {
@@ -86,41 +91,34 @@ namespace HealthDemo.Pages
             lblTitle.Text = HeaderTitle;
         }
 
-        private  AbsoluteLayout CreateComboBox()
-        {
-            var comboLayout = new AbsoluteLayout() { HeightRequest = 35, HorizontalOptions = LayoutOptions.FillAndExpand };
-            var comboBackground = new Image()
-            {
-                Aspect = Aspect.Fill,
-                Source = Device.OnPlatform("comboback.png", "comboback.png", "Images/comboback.png"),
-                HeightRequest = 35,
-                HorizontalOptions = LayoutOptions.FillAndExpand
-            };
-            btnCombo = new CustomPicker() { HeightRequest = 35, HorizontalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Transparent, Title = string.Empty };
-
-            comboLayout.Children.Add(comboBackground, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
-            comboLayout.Children.Add(btnCombo, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
-            return comboLayout;
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
             lvMenu.SelectedItem = GetCurrentPageAsMenu();
-            VM.LoadSpeicalties(() =>
+            ViewModelLocator.DoctorVM.LoadSpeicalties(() =>
+            {
+                if (btnCombo.Items == null || (btnCombo.Items != null && btnCombo.Items.Count == 0))
                 {
-                    if (btnCombo.Items == null || (btnCombo.Items != null && btnCombo.Items.Count == 0))
+                    foreach (var item in ViewModelLocator.DoctorVM.SpeicaltyList)
                     {
-                        foreach (var item in VM.SpeicaltyList)
-                        {
-                            btnCombo.Items.Add(item.Title);
-                        }
+                        btnCombo.Items.Add(item.Title);
                     }
-                    btnCombo.SelectedIndex = VM.SelectedSpeicalties != null ? VM.SpeicaltyList.IndexOf(VM.SelectedSpeicalties) : 0;
-                });
+                }
+                btnCombo.SelectedIndex = ViewModelLocator.DoctorVM.SelectedSpeicalties != null ? ViewModelLocator.DoctorVM.SpeicaltyList.IndexOf(ViewModelLocator.DoctorVM.SelectedSpeicalties) : 0;
+            });
+            ViewModelLocator.DoctorVM.ShowAlert = this.DisplayAlert;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ViewModelLocator.DoctorVM.ShowAlert = null;
         }
     }
 
     public class CustomTextBox : Entry { }
     public class CustomPicker : Picker { }
+
+   
 }

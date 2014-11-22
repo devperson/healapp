@@ -12,22 +12,28 @@ namespace HealthDemo.Pages
 {
     public class InsuranceListPage : MasterPage
     {
-        private InsuranceViewModel VM { get; set; }
+        //private InsuranceViewModel VM { get; set; }
         public static string HeaderTitle = "Insurances";
         private ListView lvInsurances;
         public InsuranceListPage()
             : base()
         {
-            VM = ViewModelLocator.InsuranceVM;
-            BindingContext = VM;
+            //VM = ViewModelLocator.InsuranceVM;
+            BindingContext = ViewModelLocator.InsuranceVM;
             lblTitle.Text = HeaderTitle;
 
             lvInsurances.ItemSelected += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                {
+                    lvInsurances.SelectedItem = null;
+                    return;
+                }
+
                 if (e.SelectedItem != null)
                 {
                     var selected = e.SelectedItem as Insurance;
-                    VM.SelectedInsurance = selected;
+                    ViewModelLocator.InsuranceVM.SelectedInsurance = selected;
                     lvInsurances.SelectedItem = null;
 
                     if (PageViewLocator.InsuranceDetailPage == null)
@@ -38,7 +44,7 @@ namespace HealthDemo.Pages
                     //Navigation.PushAsync(new InsuranceDetailPage());
                 }
             };
-            VM.ShowAlert = this.DisplayAlert;
+            
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -58,12 +64,15 @@ namespace HealthDemo.Pages
         {
             base.OnAppearing();
             lvMenu.SelectedItem = GetCurrentPageAsMenu();
-            VM.LoadInsurances();
+            ViewModelLocator.InsuranceVM.LoadInsurances();
+            ViewModelLocator.InsuranceVM.ShowAlert = this.DisplayAlert;
         }
 
-        //protected override void OnBackPressed()
-        //{
-        //    VM.SelectedCategory = null;
-        //}
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ViewModelLocator.InsuranceVM.ShowAlert = null;
+        }
     }
 }

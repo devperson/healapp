@@ -12,22 +12,28 @@ namespace HealthDemo.Pages
 {
     public class FaqListPage : MasterPage
     {
-        private FaqViewModel VM { get; set; }
+        //private FaqViewModel VM { get; set; }
         public static string HeaderTitle = "FAQ";
         private ListView lvFaq;
         public FaqListPage()
             : base()
         {
-            VM = ViewModelLocator.FaqVM;
-            BindingContext = VM;
+            //VM = ViewModelLocator.FaqVM;
+            BindingContext = ViewModelLocator.FaqVM;
             lblTitle.Text = HeaderTitle;
 
             lvFaq.ItemSelected += (s, e) =>
             {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                {
+                    lvFaq.SelectedItem = null;
+                    return;
+                }
+
                 if (e.SelectedItem != null)
                 {
                     var selected = e.SelectedItem as Faq;
-                    VM.SelectedFAQ = selected;
+                    ViewModelLocator.FaqVM.SelectedFAQ = selected;
                     lvFaq.SelectedItem = null;
 
                     if (PageViewLocator.FaqDetailPage == null)
@@ -35,8 +41,7 @@ namespace HealthDemo.Pages
                     PageViewLocator.FaqDetailPage.BindingContext = selected;
                     Navigation.PushAsync(PageViewLocator.FaqDetailPage);
                 }
-            };
-            VM.ShowAlert = this.DisplayAlert;
+            };            
         }
 
         protected override void RenderContentView(StackLayout parent)
@@ -56,7 +61,15 @@ namespace HealthDemo.Pages
         {
             base.OnAppearing();
             lvMenu.SelectedItem = GetCurrentPageAsMenu();
-            VM.LoadFaq();
+            ViewModelLocator.FaqVM.LoadFaq();
+            ViewModelLocator.FaqVM.ShowAlert = this.DisplayAlert;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ViewModelLocator.FaqVM.ShowAlert = null;
         }
     }
 }

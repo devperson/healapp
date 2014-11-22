@@ -56,9 +56,6 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="RestSharp.MonoDroid">
-      <HintPath>..\..\Components\restsharp-104.4.0.1\lib\android\RestSharp.MonoDroid.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -105,6 +102,9 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.1.2.3.6257\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp.MonoDroid">
+      <HintPath>..\..\Components\restsharp-104.4.0.1\lib\android\RestSharp.MonoDroid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidDepService\AndroidTel.cs" />
@@ -133,6 +133,10 @@
     <AndroidResource Include="Resources\Drawable\HealthTips.jpg" />
     <AndroidResource Include="Resources\Drawable\logo.jpg" />
     <AndroidResource Include="Resources\Drawable\news.jpg" />
+    <AndroidResource Include="Resources\Drawable\shopcart.png" />
+    <AndroidResource Include="Resources\Drawable\appoint.png" />
+    <AndroidResource Include="Resources\Drawable\document_add.png" />
+    <AndroidResource Include="Resources\Drawable\appointlist.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />

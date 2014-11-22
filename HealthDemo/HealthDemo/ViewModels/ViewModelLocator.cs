@@ -61,5 +61,27 @@ namespace HealthDemo.ViewModels
             }
         }
 
+        private static AppointmentViewModel _appointVM;
+        public static AppointmentViewModel AppointmentVM
+        {
+            get
+            {
+                if (_appointVM == null)
+                    _appointVM = new AppointmentViewModel();
+                return _appointVM;
+            }
+        }
+
+        private static FileViewModel _fileVM;
+        public static FileViewModel FileVM
+        {
+            get
+            {
+                if (_fileVM == null)
+                    _fileVM = new FileViewModel();
+                return _fileVM;
+            }
+        }
+
     }
 }
