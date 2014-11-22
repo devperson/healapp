@@ -36,10 +36,8 @@ namespace HealthDemo.Pages
 
             btnSubmit.Clicked += (s, e) =>
             {
-                btnSubmit.IsEnabled = false;
                 ViewModelLocator.AppointmentVM.SendAppointment(async (success) =>
                 {
-                    btnSubmit.IsEnabled = true;
                     if (success)
                     {
                         await this.DisplayAlert("Request has been sent!", "Thank you for submitting your request, you will be contracted shortly", "OK");

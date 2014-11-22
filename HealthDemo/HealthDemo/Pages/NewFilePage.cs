@@ -30,7 +30,9 @@ namespace HealthDemo.Pages
 
             btnSubmit.Clicked += (s, e) =>
             {
-                Navigation.PushAsync(new TermsPage());
+                if (ViewModelLocator.FileVM.CheckValidation())
+                    Navigation.PushAsync(new TermsPage());
+                else DisplayAlert("Error", "Please fill the form", "OK");
             };
         }
 

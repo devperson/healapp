@@ -64,5 +64,12 @@ namespace HealthDemo.ViewModels
 
             }
         }
+
+        public bool CheckValidation()
+        {
+            return (!string.IsNullOrEmpty(NewFile.Name) ||
+                !string.IsNullOrEmpty(NewFile.EmirateID) ||
+                !string.IsNullOrEmpty(NewFile.Thiqa));
+        }
     }
 }

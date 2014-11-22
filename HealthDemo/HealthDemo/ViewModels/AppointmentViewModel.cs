@@ -12,16 +12,25 @@ namespace HealthDemo.ViewModels
         public Appointment NewAppointment { get; set; }
         public void SendAppointment(Action<bool> oncomplete)
         {
-            IsLoading = true;
-            WebService.CreateAppointment(NewAppointment, result =>
-                {
-                    IsLoading = false;
-                    if (!result.Success)
+            if (!string.IsNullOrEmpty(NewAppointment.Name) ||
+                !string.IsNullOrEmpty(NewAppointment.Clinic) ||
+                !string.IsNullOrEmpty(NewAppointment.Email) ||
+                !string.IsNullOrEmpty(NewAppointment.MRN) ||
+                !string.IsNullOrEmpty(NewAppointment.Phone) ||
+                !string.IsNullOrEmpty(NewAppointment.Refference))
+            {
+                IsLoading = true;
+                WebService.CreateAppointment(NewAppointment, result =>
                     {
-                       ShowError(result.ErrorMessage);   
-                    }
-                    oncomplete(result.Success);
-                });
+                        IsLoading = false;
+                        if (!result.Success)
+                        {
+                            ShowError(result.ErrorMessage);
+                        }
+                        oncomplete(result.Success);
+                    });
+            }
+            else ShowAlert("Error", "Please fill the form", "OK");
         }
     }
 }
