@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.xamarin.healthdemo">
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="17" />
-	<application>
+	<application android:theme="@android:style/Theme.Holo">
 		<!--
 		For the MAP to work, you *must* create your own API key. See instructions here:
 			http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/maps/

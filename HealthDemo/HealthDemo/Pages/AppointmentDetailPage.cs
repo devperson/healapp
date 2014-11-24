@@ -73,7 +73,7 @@ namespace HealthDemo.Pages
                 },
                 ColumnDefinitions = 
                 {
-                    new ColumnDefinition { Width = new GridLength(120, GridUnitType.Absolute)},//GridLength.Auto },
+                    new ColumnDefinition { Width = GridLength.Auto },
                     new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)}
                 }
             };
@@ -92,11 +92,15 @@ namespace HealthDemo.Pages
             this.lblReferal = contentGrid.AddLabel("Referral Refference", 5);
             this.lblReferal.YAlign = TextAlignment.Center;
             this.lblReferal.HeightRequest = 45;
+            this.lblReferal.WidthRequest = 75;
+            this.lblReferal.XAlign = TextAlignment.End;
             this.refEntry = contentGrid.AddTextField("Refference", 5);
 
             this.idLbl = contentGrid.AddLabel("ID", 5);
             this.idLbl.YAlign = TextAlignment.Center;
             this.idLbl.HeightRequest = 45;
+            this.idLbl.WidthRequest = 75;
+            this.idLbl.XAlign = TextAlignment.End;
             this.idLbl.IsVisible = false;
             this.idEntry = contentGrid.AddTextField("ID", 5);
             this.idEntry.IsVisible = false;
@@ -121,7 +125,10 @@ namespace HealthDemo.Pages
 
             scrollview.Content = stlayout;
             if (Device.OS == TargetPlatform.Android)
+            {
+                btnSubmit.Font = Font.SystemFontOfSize(16);
                 scrollview.IsClippedToBounds = true;
+            }
             parent.Children.Add(scrollview);
 
             

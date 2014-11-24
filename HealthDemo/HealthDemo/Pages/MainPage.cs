@@ -82,7 +82,16 @@ namespace HealthDemo.Pages
 
             scrollview.Content = stackLayout;
             if (Device.OS == TargetPlatform.Android)
+            {
+                var f = Font.SystemFontOfSize(14);
+                btnDoctors.Font = f;
+                btnTips.Font = f;
+                btnInsurance.Font = f;
+                btnNews.Font = f;
+                btnFaq.Font = f;
+                btnEcommerce.Font = f;
                 scrollview.IsClippedToBounds = true;
+            }
             parent.Children.Add(scrollview);
 
             btnBack.Source = null;

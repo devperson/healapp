@@ -75,7 +75,9 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 TextColor = Color.Black,
                 Text = "Search"
-            }; 
+            };
+            if (Device.OS == TargetPlatform.Android)
+                btnSearch.Font = Font.SystemFontOfSize(16);
             var searchStack = new StackLayout() 
             { 
                 Orientation = StackOrientation.Horizontal, HeightRequest = 40, 
