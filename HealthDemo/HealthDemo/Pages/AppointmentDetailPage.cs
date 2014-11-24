@@ -59,7 +59,7 @@ namespace HealthDemo.Pages
                 Padding = new Thickness(5, 10, 15, 25),
                 ColumnSpacing = 7,
                 RowSpacing = 15,
-                VerticalOptions = LayoutOptions.FillAndExpand,                
+                VerticalOptions = LayoutOptions.Start,                
                 RowDefinitions = 
                 {
                     new RowDefinition { Height = GridLength.Auto },
@@ -114,6 +114,7 @@ namespace HealthDemo.Pages
             {
                 BackgroundColor = Color.FromHex("FF54A6D3"),
                 HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Start,
                 WidthRequest = 200,
                 HeightRequest = 40,
                 TextColor = Color.Black,
