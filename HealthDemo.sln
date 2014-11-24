@@ -184,7 +184,7 @@ Global
 		{F6B4ECEB-4DF2-44DB-BFEC-AD7AF5286A9E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = HealthDemo\HealthDemo.iOS\HealthDemo.iOS.csproj
+		StartupItem = HealthDemo\HealthDemo.Android\HealthDemo.Android.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

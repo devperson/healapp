@@ -12,7 +12,7 @@ namespace HealthDemo.Pages
     {
         public static string HeaderTitle = "Contacts";
         public ContactPage()
-            : base(false, false)
+            : base(false)
         {
             lblTitle.Text = HeaderTitle;
         }

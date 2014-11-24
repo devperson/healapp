@@ -11,7 +11,7 @@ namespace HealthDemo.Pages
     {
         public static AbsoluteLayout CreateComboBox(this Page p, ref Picker btnComboFor)
         {
-            var comboLayout = new AbsoluteLayout() { HeightRequest = 35, HorizontalOptions = LayoutOptions.FillAndExpand };
+            var comboLayout = new AbsoluteLayout() { HeightRequest = 35, HorizontalOptions = LayoutOptions.FillAndExpand};
             var comboBackground = new Image()
             {
                 Aspect = Aspect.Fill,

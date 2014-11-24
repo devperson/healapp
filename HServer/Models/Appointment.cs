@@ -13,6 +13,7 @@ namespace HServer.Models
         public string Phone { get; set; }
         public bool ThiqaYes { get; set; }
         public string Refference { get; set; }
+        public string ID { get; set; }
         public string Clinic { get; set; }
         public string Email { get; set; }
         public string ThiqaFormatted

@@ -12,7 +12,7 @@ namespace HealthDemo.Pages
     public class LocationPage : MasterPage
     {
         public static string HeaderTitle = "Find us";
-        public LocationPage() : base(false, false) { }
+        public LocationPage() : base(false, Device.OnPlatform(false, true, true)) { }
 
         protected override void RenderContentView(Xamarin.Forms.StackLayout parent)
         {

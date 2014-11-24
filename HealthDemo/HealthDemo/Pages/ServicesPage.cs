@@ -13,31 +13,28 @@ namespace HealthDemo.Pages
         ImageButton btnOpenFile, btnRequest, btnViewAppointment;
         public static string HeaderTitle = "e-Service";
         public ServicesPage()
-            : base(false, false)
-        {
-            lblTitle.Text = HeaderTitle;
+			: base(false)
+		{
+			lblTitle.Text = HeaderTitle;
 
-            btnOpenFile.Clicked += (s, e) =>
-            {
-                if (this.DoubleClickDetecter.IsDoubleClick())
-                    return;
+			btnOpenFile.Clicked += (s, e) => {
+				if (this.DoubleClickDetecter.IsDoubleClick ())
+					return;
 
-                Navigation.PushAsync(new NewFilePage());
-            };
-            btnRequest.Clicked += (s, e) =>
-            {
-                if (this.DoubleClickDetecter.IsDoubleClick())
-                    return;
+				Navigation.PushAsync (new NewFilePage ());
+			};
+			btnRequest.Clicked += (s, e) => {
+				if (this.DoubleClickDetecter.IsDoubleClick ())
+					return;
 
-                Navigation.PushAsync(new AppointmentDetailPage());
-            };
-            btnViewAppointment.Clicked += (s, e) =>
-            {
-                if (this.DoubleClickDetecter.IsDoubleClick())
-                    return;
+				Navigation.PushAsync (new AppointmentDetailPage ());
+			};
+			btnViewAppointment.Clicked += (s, e) => {
+				if (this.DoubleClickDetecter.IsDoubleClick ())
+					return;
 
-            };
-        }
+			};
+		}
 
         protected override void RenderContentView(StackLayout parent)
         {

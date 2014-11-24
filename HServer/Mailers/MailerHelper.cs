@@ -19,6 +19,8 @@ namespace HServer.Mailers
         {
             AppointmentHtmlBody = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
                 .ReadResourceAsString("Areas.HealthDemo.Resources.NewAppoint.html");
+            AppointmentHtmlBody2 = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
+                .ReadResourceAsString("Areas.HealthDemo.Resources.NewAppoint2.html");
             FileHtmlBody = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
                 .ReadResourceAsString("Areas.HealthDemo.Resources.NewFilePage.html");
         }
@@ -26,6 +28,7 @@ namespace HServer.Mailers
 		public static string Username { get { return ConfigurationManager.AppSettings["From"]; } }
         public static string To { get { return ConfigurationManager.AppSettings["SendTo"]; } }
         public string AppointmentHtmlBody { get; set; }
+        public string AppointmentHtmlBody2 { get; set; }
         public string FileHtmlBody { get; set; }
 
 		public bool SendEmail(string to, string subject, string body, Attachment atachedfile = null)
@@ -59,7 +62,7 @@ namespace HServer.Mailers
 		public bool SendNewAppoitment(Appointment appointment)
 		{
 			var subject = "New Appointment";
-			var body = Smart.Format(AppointmentHtmlBody, appointment);
+            var body = Smart.Format(appointment.ThiqaYes ? AppointmentHtmlBody2 : AppointmentHtmlBody, appointment);
 			return SendEmail(To, subject, body);
 		}
 

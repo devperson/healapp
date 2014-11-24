@@ -15,6 +15,8 @@ namespace HealthDemo.Pages
         private Picker btnComboClinical;
         private Button btnSubmit { get; set; }
         private Grid contentGrid;
+        private Label lblReferal, idLbl;
+        private Entry refEntry, idEntry;
 
         public AppointmentDetailPage()
             : base()
@@ -25,6 +27,7 @@ namespace HealthDemo.Pages
             this.BindingContext = ViewModelLocator.AppointmentVM;
             this.contentGrid.BindingContext = ViewModelLocator.AppointmentVM.NewAppointment;
 
+           
             btnComboClinical.SelectedIndexChanged += (sender, args) =>
             {
                 if (btnComboClinical.SelectedIndex != -1)
@@ -50,14 +53,13 @@ namespace HealthDemo.Pages
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
-            var stlayout = new StackLayout() { Spacing = 0, Padding = new Thickness(0, 0, 0, 15), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
-
+            var stlayout = new StackLayout() { Spacing = 0, Padding = new Thickness(0, 0, 0, 15), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };            
             contentGrid = new Grid
             {
-                Padding = new Thickness(5, 10, 15, 5),
+                Padding = new Thickness(5, 10, 15, 25),
                 ColumnSpacing = 7,
                 RowSpacing = 15,
-                VerticalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,                
                 RowDefinitions = 
                 {
                     new RowDefinition { Height = GridLength.Auto },
@@ -67,7 +69,7 @@ namespace HealthDemo.Pages
                     new RowDefinition { Height = GridLength.Auto },
                     new RowDefinition { Height = GridLength.Auto },
                     new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto }                    
                 },
                 ColumnDefinitions = 
                 {
@@ -86,10 +88,19 @@ namespace HealthDemo.Pages
             contentGrid.AddTextField("Phone", 3, Keyboard.Telephone);
             contentGrid.AddLabel("Thiqa", 4);
             contentGrid.AddSwitchField("ThiqaYes", 4);
-            var lblReferal = contentGrid.AddLabel("Referral Refference", 5);
-            lblReferal.YAlign = TextAlignment.Center;
-            lblReferal.HeightRequest = 45;
-            contentGrid.AddTextField("Refference", 5);
+
+            this.lblReferal = contentGrid.AddLabel("Referral Refference", 5);
+            this.lblReferal.YAlign = TextAlignment.Center;
+            this.lblReferal.HeightRequest = 45;
+            this.refEntry = contentGrid.AddTextField("Refference", 5);
+
+            this.idLbl = contentGrid.AddLabel("ID", 5);
+            this.idLbl.YAlign = TextAlignment.Center;
+            this.idLbl.HeightRequest = 45;
+            this.idLbl.IsVisible = false;
+            this.idEntry = contentGrid.AddTextField("ID", 5);
+            this.idEntry.IsVisible = false;
+
             contentGrid.AddLabel("Clinical", 6);
             AddComboField(6);
             contentGrid.AddLabel("Email", 7);
@@ -112,6 +123,8 @@ namespace HealthDemo.Pages
             if (Device.OS == TargetPlatform.Android)
                 scrollview.IsClippedToBounds = true;
             parent.Children.Add(scrollview);
+
+            
         }
 
         protected override void OnAppearing()
@@ -119,6 +132,8 @@ namespace HealthDemo.Pages
             base.OnAppearing();
 
             ViewModelLocator.AppointmentVM.ShowAlert = this.DisplayAlert;
+
+            ViewModelLocator.AppointmentVM.NewAppointment.PropertyChanged += NewAppointment_PropertyChanged;            
         }
 
         protected override void OnDisappearing()
@@ -126,6 +141,29 @@ namespace HealthDemo.Pages
             base.OnDisappearing();
 
             ViewModelLocator.AppointmentVM.ShowAlert = null;
+            ViewModelLocator.AppointmentVM.NewAppointment.PropertyChanged -= NewAppointment_PropertyChanged;        
+        }
+
+        private void NewAppointment_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ThiqaYes")
+            {
+                var model = sender as Appointment;
+                if(model.ThiqaYes)
+                {
+                    lblReferal.IsVisible = false;
+                    refEntry.IsVisible = false;
+                    idLbl.IsVisible = true;
+                    idEntry.IsVisible = true;
+                }
+                else
+                {
+                    lblReferal.IsVisible = true;
+                    refEntry.IsVisible = true;
+                    idLbl.IsVisible = false;
+                    idEntry.IsVisible = false;
+                }
+            }
         }
 
         public void AddComboField(int row)
