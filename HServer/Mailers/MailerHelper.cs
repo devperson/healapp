@@ -9,6 +9,7 @@ using HServer.Utils;
 using SmartFormat;
 using HServer.Models;
 using System.IO;
+using System.Web.Http;
 
 
 namespace HServer.Mailers
@@ -73,13 +74,28 @@ namespace HServer.Mailers
 
             Attachment attachment = null;
             if(!string.IsNullOrEmpty(file.ImageExtension))
-            {
-                
+            {                
                 var mediatype = file.ImageExtension.Contains("jp") ? "image/jpeg" : "image/png";
-                attachment = new Attachment(new MemoryStream(file.ImageBytes), "attach" + file.ImageExtension, mediatype);
+                attachment = new Attachment(new MemoryStream(this.ParseUrlData(file.ImageAsString)), "attach" + file.ImageExtension, mediatype);
             }
 
             return SendEmail(To, subject, body, attachment);
+        }
+
+        private byte[] ParseUrlData(string urldata)
+        {
+            var parts = urldata.Split(';');
+            if (parts.Length != 2)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            var data = parts[0].Split(':');
+            if (data.Length != 2)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            
+            data = parts[1].Split(',');
+            if (data.Length != 2)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            var bytes = Convert.FromBase64String(data[1]);
+            return bytes;
         }
 
 	}
