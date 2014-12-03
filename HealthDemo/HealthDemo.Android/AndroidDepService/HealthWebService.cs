@@ -135,7 +135,7 @@ namespace HealthDemo
                         response.ErrorMessage = errorResponse.ExceptionMessage;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     response.Success = false;
                     response.ErrorMessage = "Server is down please try later.";

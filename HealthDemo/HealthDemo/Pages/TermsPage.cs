@@ -20,12 +20,15 @@ namespace HealthDemo.Pages
             this.BindingContext = ViewModelLocator.FileVM;
             btnOk.Clicked += (s, e) =>
             {
-                ViewModelLocator.FileVM.SendFile(async success =>
+                ViewModelLocator.FileVM.SendFile(success =>
                 {
                     if(success)
                     {
-                        await this.DisplayAlert("File has been sent!", "Thank you for submitting the File, you will be contacted shortly", "OK");
-                        Navigation.PopToRootAsync();
+                        Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                await this.DisplayAlert("File has been sent!", "Thank you for submitting the File, you will be contacted shortly", "OK");
+                                Navigation.PopToRootAsync();
+                            });
                     }
                 });
             };
@@ -63,18 +66,34 @@ namespace HealthDemo.Pages
 			parent.Children.Add(rootLayout);
         }
 
-        private string LoadTermsText()
-        {
-            var assembly = typeof(TermsPage).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream("HealthDemo.Terms.txt");
-            string text = string.Empty;
-            using (var reader = new System.IO.StreamReader(stream))
-            {
-                text = reader.ReadToEnd();
-            }
+		private string LoadTermsText()
+		{
+			var assembly = typeof(TermsPage).GetTypeInfo().Assembly;
+			Stream stream = assembly.GetManifestResourceStream("HealthDemo.Terms.txt");
+			string text = string.Empty;
+			using (var reader = new System.IO.StreamReader(stream))
+			{
+				text = reader.ReadToEnd();
+			}
 
-            return text;
+			return text;
 
-        }
-    }
+		}
+
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			ViewModelLocator.FileVM.ShowAlert = this.DisplayAlert;
+		}
+
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+
+			ViewModelLocator.FileVM.ShowAlert = null;
+		}
+	}
 }
+   

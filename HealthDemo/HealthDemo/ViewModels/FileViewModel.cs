@@ -20,22 +20,30 @@ namespace HealthDemo.ViewModels
         public void SendFile(Action<bool> oncompleted)
         {
             IsLoading = true;
+            Task.Run(() => SendMail(oncompleted));
+        }
+
+        private void SendMail(Action<bool> oncompleted)
+        {
             if (ImgFile != null)
             {
                 byte[] buffer = new byte[ImgFile.Source.Length];
                 ImgFile.Source.Read(buffer, 0, (int)ImgFile.Source.Length);
-
-                NewFile.ImageBytes = buffer;
+                NewFile.ImageAsString = this.WrapImageData(buffer, NewFile.ImageExtension);
+                //NewFile.ImageBytes = buffer;
                 ImgFile = null;
             }
 
             WebService.CreateFile(NewFile, result =>
             {
                 IsLoading = false;
-                
+
                 if (!result.Success)
                 {
-                    ShowError(result.ErrorMessage);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        ShowError(result.ErrorMessage);
+                    });
                 }
                 else NewFile = null;
                 oncompleted(result.Success);
@@ -71,5 +79,14 @@ namespace HealthDemo.ViewModels
                 !string.IsNullOrEmpty(NewFile.EmirateID) ||
                 !string.IsNullOrEmpty(NewFile.Thiqa));
         }
+
+        private string WrapImageData(byte[] imageBytes, string extenssion)
+        {
+            var mimeTypeString = extenssion == ".jpg" ? "image/jpeg" : "image/png";
+            var byteString = Convert.ToBase64String(imageBytes);
+            var data = string.Format("name:{0};name,{1}", mimeTypeString, byteString);
+            return data;
+        }
+
     }
 }
