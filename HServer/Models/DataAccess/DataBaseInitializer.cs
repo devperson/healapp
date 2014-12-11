@@ -223,6 +223,65 @@ The PMU cooperates with the other Medical Units in the Medical Institute in the 
             context.SaveChanges();
             //#####################################################################
             #endregion
+
+            #region ADDING CME
+            context.Cmes.Add(new Cme()
+            {
+                Title = "sadfdsag",
+                Date = DateTime.Now,
+                Description = "dsfgdfsg fhfsgsdff sadfdsa fgfsh fg hsd safsd fsda fsda fd gdf",
+                Speaker = "sdfasdf",
+                Venue = "sadfsda gdfs gdfgfdsg ds",
+                CreditHours = "1h"
+            });
+
+            context.Cmes.Add(new Cme()
+            {
+                Title = "sadfdsag",
+                Date = DateTime.Now.AddDays(1),
+                Description = "dsfgdfsg fhfsgsdff sadfdsa fgfsh fg hsd safsd fsda fsda fd gdf",
+                Speaker = "sdfasdf",
+                Venue = "sadfsda gdfs gdfgfdsg ds",
+                CreditHours = "1h"
+            });
+
+            context.SaveChanges();
+            //#####################################################################
+            #endregion
+
+            #region ADDING Events
+            context.Events.Add(new Event()
+            {
+                Title = "Event1",
+                Date = DateTime.Now,
+                Description = "adsg fd gdf gdsfg sdf gsdf gsdfg dsf",
+                Venue = "hndfsd gdsf gdsf gfds gfds gsdf gds"
+            });
+
+            context.Events.Add(new Event()
+            {
+                Title = "Event2",
+                Date = DateTime.Now,
+                Description = "adsg fd gdf gdsfg sdf gsdf gsdfg dsf",
+                Venue = "hndfsd gdsf gdsf gfds gfds gsdf gds"
+            });
+
+            context.Events.Add(new Event()
+            {
+                Title = "Event3",
+                Date = DateTime.Now,
+                Description = "adsg fd gdf gdsfg sdf gsdf gsdfg dsf",
+                Venue = "hndfsd gdsf gdsf gfds gfds gsdf gds"
+            });
+
+            context.Events.Add(new Event()
+            {
+                Title = "Event4",
+                Date = DateTime.Now,
+                Description = "adsg fd gdf gdsfg sdf gsdf gsdfg dsf",
+                Venue = "hndfsd gdsf gdsf gfds gfds gsdf gds"
+            });
+            #endregion
         }
     }
 }

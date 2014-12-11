@@ -133,6 +133,11 @@ namespace HServer.Controllers
 
     public class ApiControllerEx : ApiController
     {
+        protected MailerHelper mailer;
+        public ApiControllerEx()
+        {
+            mailer = new MailerHelper();
+        }
         static System.Timers.Timer t;
         [NonAction]
         protected void InvokeAfterSec(double sec, Action action)
@@ -152,10 +157,7 @@ namespace HServer.Controllers
     public class AppointmentController : ApiControllerEx
     {
         private MailerHelper mailer;
-        public AppointmentController()
-        {
-            mailer = new MailerHelper();
-        }
+        public AppointmentController() : base() { }
         
         [HttpPost]
         public bool RequestAppointment(Appointment apt)
@@ -171,11 +173,8 @@ namespace HServer.Controllers
 
     public class FileServiceController : ApiControllerEx
     {
-        private MailerHelper mailer;
-        public FileServiceController()
-        {
-            mailer = new MailerHelper();
-        }
+
+        public FileServiceController() : base() { }
 
         public IEnumerable<string> Get()
         {
@@ -191,5 +190,41 @@ namespace HServer.Controllers
             });
             return true;
         }
+    }
+
+    public class CmeController : ApiControllerEx
+    {
+        public CmeController() : base() { }
+        CmeRepository context = new CmeRepository();
+        public IEnumerable<Cme> Get()
+        {
+            return context.GetCME();
+        }
+
+        [HttpPost]
+        public void RegisterCme(CMEReg regData)
+        {
+            InvokeAfterSec(2000, () =>
+            {
+                mailer.SendCMERegistration(regData);
+            });
+        }
+    }
+
+    public class EventController : ApiController
+    {
+        EventRepository context = new EventRepository();
+        public IEnumerable<Event> Get()
+        {
+            return context.GetAll();
+        }
+
+        public IEnumerable<Event> GetByCME(int cmeId)
+        {
+            CmeRepository contextCme = new CmeRepository();
+            var cme = contextCme.FindOne(s => s.Id == cmeId);
+            return context.GetAll().Where(e => e.Date.Day == cme.Date.Day && e.Date.Month == cme.Date.Month && e.Date.Year == cme.Date.Year);
+        }
+        
     }
 }

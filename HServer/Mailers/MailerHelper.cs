@@ -24,6 +24,8 @@ namespace HServer.Mailers
                 .ReadResourceAsString("Areas.HealthDemo.Resources.NewAppoint2.html");
             FileHtmlBody = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
                 .ReadResourceAsString("Areas.HealthDemo.Resources.NewFilePage.html");
+            CMERegHtmlBody = new AssemblyResourceReader(HttpContext.Current.ApplicationInstance.GetType().BaseType.Assembly)
+                .ReadResourceAsString("Areas.HealthDemo.Resources.CMEReg.html");
         }
 
 		public static string Username { get { return ConfigurationManager.AppSettings["From"]; } }
@@ -31,6 +33,7 @@ namespace HServer.Mailers
         public string AppointmentHtmlBody { get; set; }
         public string AppointmentHtmlBody2 { get; set; }
         public string FileHtmlBody { get; set; }
+        public string CMERegHtmlBody { get; set; }
 
 		public bool SendEmail(string to, string subject, string body, Attachment atachedfile = null)
 		{
@@ -80,6 +83,13 @@ namespace HServer.Mailers
             }
 
             return SendEmail(To, subject, body, attachment);
+        }
+
+        public bool SendCMERegistration(CMEReg regData)
+        {
+            var subject = "New CME Registration";
+            var body = Smart.Format(CMERegHtmlBody, regData);
+            return SendEmail(To, subject, body);
         }
 
         private byte[] ParseUrlData(string urldata)

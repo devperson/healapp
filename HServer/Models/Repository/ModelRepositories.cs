@@ -74,4 +74,35 @@ namespace HServer.Models.Repository
         {
         }
     }
+
+    public class CmeRepository : Repository<Cme>
+    {
+        public CmeRepository(DbContext context)
+            : base(context)
+        {
+        }
+        public CmeRepository()
+            : this(new DataBaseContext())
+        {
+        }
+
+
+        public IEnumerable<Cme> GetCME()
+        {
+            var result = _context.Set<Cme>().Where(s => _context.Set<Event>().Any(e => e.Date.Day == s.Date.Day && e.Date.Month == s.Date.Month && e.Date.Year == s.Date.Year));
+            return result;
+        }
+    }
+
+    public class EventRepository : Repository<Event>
+    {
+        public EventRepository(DbContext context)
+            : base(context)
+        {
+        }
+        public EventRepository()
+            : this(new DataBaseContext())
+        {
+        }
+    }
 }

@@ -37,5 +37,7 @@ namespace HServer.Models.DataAccess
         public DbSet<News> News { get; set; }
         public DbSet<Faq> Faqs { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
+        public DbSet<Cme> Cmes { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }
