@@ -98,9 +98,6 @@
     <Compile Include="..\HealthDemo.Android\AndroidDepService\HealthWebService.cs">
       <Link>iOSDepService\HealthWebService.cs</Link>
     </Compile>
-    <Compile Include="..\HealthDemo.Android\AndroidDepService\MockWebService.cs">
-      <Link>iOSDepService\MockWebService.cs</Link>
-    </Compile>
     <Compile Include="iOSRenderer\NavigationRenderer.cs" />
     <None Include="Entitlements.plist" />
   </ItemGroup>

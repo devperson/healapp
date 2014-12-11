@@ -41,8 +41,11 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Dependency\ITel.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Cme.cs" />
+    <Compile Include="Models\CMEReg.cs" />
     <Compile Include="Models\DocPosition.cs" />
     <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Faq.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\HealthCategory.cs" />
@@ -50,7 +53,9 @@
     <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\ResponseModel\CategoryResponse.cs" />
+    <Compile Include="Models\ResponseModel\CmeResponce.cs" />
     <Compile Include="Models\ResponseModel\DoctorResponse.cs" />
+    <Compile Include="Models\ResponseModel\EventResponce.cs" />
     <Compile Include="Models\ResponseModel\FaqResponse.cs" />
     <Compile Include="Models\ResponseModel\HealthTipResponse.cs" />
     <Compile Include="Models\ResponseModel\InsuranceResponse.cs" />
@@ -60,8 +65,12 @@
     <Compile Include="Pages\AboutPage.cs" />
     <Compile Include="Pages\AppointmentDetailPage.cs" />
     <Compile Include="Pages\CategoryListPage.cs" />
+    <Compile Include="Pages\CMEDetailsPage.cs" />
+    <Compile Include="Pages\CmeListPage.cs" />
     <Compile Include="Pages\ContactPage.cs" />
     <Compile Include="Pages\DoctorListPage.cs" />
+    <Compile Include="Pages\EventDetailPage.cs" />
+    <Compile Include="Pages\EventListPage.cs" />
     <Compile Include="Pages\FaqDetailPage.cs" />
     <Compile Include="Pages\FaqListPage.cs" />
     <Compile Include="Pages\HealthTipListPage.cs" />
@@ -74,6 +83,7 @@
     <Compile Include="Pages\NewsDetailPage.cs" />
     <Compile Include="Pages\NewsListPage.cs" />
     <Compile Include="Pages\ProfilePage.cs" />
+    <Compile Include="Pages\RegisterCmePage.cs" />
     <Compile Include="Pages\SearchDoctorPage.cs" />
     <Compile Include="Pages\ServicesPage.cs" />
     <Compile Include="Pages\TermsPage.cs" />
@@ -84,7 +94,9 @@
     <Compile Include="Utils\DoubleClickDetecter.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="ViewModels\AppointmentViewModel.cs" />
+    <Compile Include="ViewModels\CmeViewModel.cs" />
     <Compile Include="ViewModels\DoctorViewModel.cs" />
+    <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\FaqViewModel.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModel.cs" />

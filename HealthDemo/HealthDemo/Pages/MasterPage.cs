@@ -240,7 +240,7 @@ namespace HealthDemo.Pages
                 {
                     if (this.DoubleClickDetecter.IsDoubleClick())
                         return;
-
+                    //there is bug in android - Translate doesn't work
                     if (Device.OS == TargetPlatform.Android)
                     {
                         Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>

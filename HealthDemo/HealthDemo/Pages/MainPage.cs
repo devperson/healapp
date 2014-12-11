@@ -11,7 +11,7 @@ namespace HealthDemo.Pages
     public class MainPage : MasterPage
     {
         public static string HeaderTitle = "Main Page";
-        ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq, btnEcommerce;
+        ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq, btnEcommerce,btnCME,btnEvent;
         public MainPage() : base() 
         {
             btnDoctors.Clicked += (s, e) =>
@@ -50,6 +50,20 @@ namespace HealthDemo.Pages
                     return;
                 Navigation.PushAsync(new ServicesPage());              
             };
+
+            btnEvent.Clicked += (s, e) =>
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+                Navigation.PushAsync(new CalendarListPage());
+            };
+
+            btnCME.Clicked += (s, e) =>
+            {
+                if (this.DoubleClickDetecter.IsDoubleClick())
+                    return;
+                Navigation.PushAsync(new CalendarListPage(true));
+            };
             
 
         }
@@ -79,6 +93,13 @@ namespace HealthDemo.Pages
             itemContent3.Children.Add(btnFaq);
             itemContent3.Children.Add(btnEcommerce);
             stackLayout.Children.Add(itemContent3);
+
+            var itemContent4 = CreateItemStacklayout();
+            btnCME = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.jpg", "Doctor.jpg", "Images/Doctor.jpg")), "CME");
+			btnEvent = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.jpg", "Doctor.jpg", "Images/Doctor.jpg")), "Events");
+            itemContent4.Children.Add(btnCME);
+            itemContent4.Children.Add(btnEvent);
+            stackLayout.Children.Add(itemContent4);
 
             scrollview.Content = stackLayout;
             if (Device.OS == TargetPlatform.Android)

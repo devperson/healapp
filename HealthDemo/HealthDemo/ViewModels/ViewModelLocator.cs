@@ -83,5 +83,28 @@ namespace HealthDemo.ViewModels
             }
         }
 
+
+        private static CmeViewModel _cmeVM;
+        public static CmeViewModel CmeVM
+        {
+            get
+            {
+                if (_cmeVM == null)
+                    _cmeVM = new CmeViewModel();
+                return _cmeVM;
+            }
+        }
+
+        private static EventViewModel _eventVM;
+        public static EventViewModel EventVM
+        {
+            get
+            {
+                if (_eventVM == null)
+                    _eventVM = new EventViewModel();
+                return _eventVM;
+            }
+        }
+
     }
 }

@@ -100,6 +100,16 @@ namespace HealthDemo
 			onCompleted(asyncResult);
 		}
 
+        public async void PostObject<T>(string requestUrl, T obj, Action<ResponseBase> onCompleted)
+        {
+            var asyncResult = await ExecuteServiceMethod<ResponseBase>(requestUrl, Method.POST, content =>
+            {
+                var response = new ResponseBase();
+                return response;
+            }, obj);
+            onCompleted(asyncResult);
+        }
+
         public Task<T> ExecuteServiceMethod<T>(string resource, Method method, Func<string, T> deserialiser, object requestObject = null) where T : ResponseBase
         {
             var restRequest = new RestRequest(resource, method);

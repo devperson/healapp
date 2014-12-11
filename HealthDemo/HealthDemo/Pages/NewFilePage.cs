@@ -13,7 +13,6 @@ namespace HealthDemo.Pages
     {
         private Grid contentGrid;
         private Button btnUpload, btnSubmit;
-        //private FileViewModel VM { get; set; }
         public NewFilePage()
             : base()
         {            
@@ -120,11 +119,6 @@ namespace HealthDemo.Pages
             }
             parent.Children.Add(scrollview);
         }
-
-        protected override void OnBackPressed()
-        {
-            //VM.NewFile = null;
-            //VM.ImgFile = null;
-        }
+        
     }
 }

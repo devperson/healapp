@@ -40,6 +40,20 @@ namespace HealthDemo.Pages
             return lbl;
         }
 
+        public static Label AddLabelWithBinding(this Grid contentGrid, string binding, int row, int col = 0)
+        {
+            var lbl = new Label
+            {   
+                TextColor = Color.Black,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
+            lbl.SetBinding(Label.TextProperty, new Binding(binding));
+            contentGrid.Children.Add(lbl, col, row);
+
+            return lbl;
+        }
+
         public static Entry AddTextField(this Grid contentGrid, string binding, int row, Keyboard key = null)
         {
             var entry = new CustomTextBox
