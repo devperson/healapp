@@ -202,12 +202,13 @@ namespace HServer.Controllers
         }
 
         [HttpPost]
-        public void RegisterCme(CMEReg regData)
+        public bool RegisterCme(CMEReg regData)
         {
             InvokeAfterSec(2000, () =>
             {
                 mailer.SendCMERegistration(regData);
             });
+            return true;
         }
     }
 
