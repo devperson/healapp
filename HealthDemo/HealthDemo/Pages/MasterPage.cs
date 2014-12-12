@@ -509,6 +509,14 @@ namespace HealthDemo.Pages
         public PageType PageType { get; set; }
     }
 
+    public static class ImagesourceExtension
+    {
+        public static ImageSource FromFilePlatform(this ImageSource s, string filename)
+        {
+            return ImageSource.FromFile(Device.OnPlatform(filename, filename, "Images/" + filename));
+        }
+    }
+
     public enum PageType
     {
         Main,

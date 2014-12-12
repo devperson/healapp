@@ -28,7 +28,7 @@ namespace HealthDemo.Pages
 
             btnReset.Clicked += (sender, args) =>
             {
-
+                ViewModelLocator.CmeVM.ResetReg();
             };
 
         }

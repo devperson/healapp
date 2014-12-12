@@ -62,8 +62,15 @@ namespace HealthDemo.ViewModels
 
         public void ResetReg()
         {
-            NewCMERegistration = new CMEReg();
-            RaisePropertyChanged("NewCMERegistration");
+            NewCMERegistration.Name = string.Empty;
+            NewCMERegistration.ContactNumber = string.Empty;
+            NewCMERegistration.Employer = string.Empty;
+            NewCMERegistration.Email = string.Empty;
+
+            NewCMERegistration.RaisePropertyChanged("Name");
+            NewCMERegistration.RaisePropertyChanged("ContactNumber");
+            NewCMERegistration.RaisePropertyChanged("Employer");
+            NewCMERegistration.RaisePropertyChanged("Email");
         }
     }
 }

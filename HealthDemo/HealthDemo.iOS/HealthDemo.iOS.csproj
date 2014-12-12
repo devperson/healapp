@@ -102,6 +102,7 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\events.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="RestSharp.MonoTouch">
@@ -185,5 +186,8 @@
       <Project>{862AFDC0-3F1A-4488-986A-D4B167613A5B}</Project>
       <Name>HealthDemo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calendar.png" />
   </ItemGroup>
 </Project>

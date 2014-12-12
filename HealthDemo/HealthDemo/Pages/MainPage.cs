@@ -95,8 +95,8 @@ namespace HealthDemo.Pages
             stackLayout.Children.Add(itemContent3);
 
             var itemContent4 = CreateItemStacklayout();
-            btnCME = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.jpg", "Doctor.jpg", "Images/Doctor.jpg")), "CME");
-			btnEvent = CreateButton(ImageSource.FromFile(Device.OnPlatform("Doctor.jpg", "Doctor.jpg", "Images/Doctor.jpg")), "Events");
+            btnCME = CreateButton(ImageSource.FromFile(Device.OnPlatform("calendar.png", "calendar.png", "Images/calendar.png")), "CME");
+            btnEvent = CreateButton(ImageSource.FromFile(Device.OnPlatform("events.jpg", "events.jpg", "Images/events.jpg")), "Events");
             itemContent4.Children.Add(btnCME);
             itemContent4.Children.Add(btnEvent);
             stackLayout.Children.Add(itemContent4);
@@ -111,6 +111,8 @@ namespace HealthDemo.Pages
                 btnNews.Font = f;
                 btnFaq.Font = f;
                 btnEcommerce.Font = f;
+                btnEvent.Font = f;
+                btnCME.Font = f;
                 scrollview.IsClippedToBounds = true;
             }
             parent.Children.Add(scrollview);
@@ -134,7 +136,6 @@ namespace HealthDemo.Pages
 
         public static ImageButton CreateButton(ImageSource imgSource, string text)
         {
-            
             return new ImageButton()
             {
                 Source = imgSource,
