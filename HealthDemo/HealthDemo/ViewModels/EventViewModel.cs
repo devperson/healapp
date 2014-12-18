@@ -18,17 +18,15 @@ namespace HealthDemo.ViewModels
         public Event SelectedEvent { get; set; }
         public List<Event> EventsList { get; set; }
         private bool IsPrevCME { get; set; }
-        public void LoadEvents(int cmeID = 0)
-        {
-            if (!IsPrevCME && cmeID == 0 && EventsList.Count > 0)
-                return;
+        public void LoadEvents()
+        {   
             IsLoading = true;
-            var query = cmeID == 0 ? "event" : "event/GetByCME?cmeId=" + cmeID.ToString();
-            WebService.GetList<EventResponse, Event>(query, result =>
+            //var query = cmeID == 0 ? "event" : "event/GetByCME?cmeId=" + cmeID.ToString();
+            WebService.GetList<EventResponse, Event>("event", result =>
             {
                 if (result.Success)
                 {
-                    IsPrevCME = cmeID != 0;
+                    //IsPrevCME = cmeID != 0;
                     EventsList = result.Result;
                     RaisePropertyChanged("EventsList");
                 }

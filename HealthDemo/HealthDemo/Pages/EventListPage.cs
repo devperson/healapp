@@ -14,11 +14,10 @@ namespace HealthDemo.Pages
     {
         public static string HeaderTitle = "Events";
         private ListView lvEvent;
-        public bool IsCME { get; set; }
-        public EventListPage(bool isCME = false)
+        public EventListPage()
             : base()
         {
-            IsCME = isCME;
+            
             //VM = ViewModelLocator.NewsVM;
             BindingContext = ViewModelLocator.EventVM;
             lblTitle.Text = HeaderTitle;
@@ -36,14 +35,7 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as Event;
                     ViewModelLocator.EventVM.SelectedEvent = selected;
                     lvEvent.SelectedItem = null;
-                    if (IsCME)
-                    {
-                        Navigation.PushAsync(new CMEDetailsPage());
-                    }
-                    else
-                    {
-                        Navigation.PushAsync(new EventDetailPage());
-                    }
+                    Navigation.PushAsync(new EventDetailPage());
                     //if (PageViewLocator.NewsDetailPage == null)
                     //    PageViewLocator.NewsDetailPage = new NewsDetailPage();
                     //PageViewLocator.NewsDetailPage.BindingContext = selected;
@@ -52,9 +44,7 @@ namespace HealthDemo.Pages
             };
 
             ViewModelLocator.EventVM.ShowAlert = this.DisplayAlert;
-            if (IsCME)
-                ViewModelLocator.EventVM.LoadEvents(ViewModelLocator.CmeVM.SelectedCme.Id);
-            else ViewModelLocator.EventVM.LoadEvents();
+            ViewModelLocator.EventVM.LoadEvents();
             
         }
 

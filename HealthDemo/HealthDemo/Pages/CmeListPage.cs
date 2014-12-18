@@ -15,7 +15,7 @@ namespace HealthDemo.Pages
         public static string HeaderTitle = "Calendar";
         private ListView lvCme;
 
-        public CalendarListPage(bool isCME = false)
+        public CalendarListPage()
             : base()
         {
             BindingContext = ViewModelLocator.CmeVM;
@@ -34,7 +34,7 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as Cme;
                     ViewModelLocator.CmeVM.SelectedCme = selected;
                     lvCme.SelectedItem = null;
-                    Navigation.PushAsync(new EventListPage(isCME));
+                    Navigation.PushAsync(new CMEDetailsPage());
                 }
             };
         }

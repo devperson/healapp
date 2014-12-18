@@ -55,14 +55,14 @@ namespace HealthDemo.Pages
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
-                Navigation.PushAsync(new CalendarListPage());
+                Navigation.PushAsync(new EventListPage());
             };
 
             btnCME.Clicked += (s, e) =>
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
-                Navigation.PushAsync(new CalendarListPage(true));
+                Navigation.PushAsync(new CalendarListPage());
             };
             
 
