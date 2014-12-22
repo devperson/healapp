@@ -31,7 +31,7 @@ namespace HServer.Models.Repository
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().AsExpandable().Where<T>(predicate);
+            return _context.Set<T>().Where<T>(predicate);
         }
        
         public T FindOne(Expression<Func<T, bool>> predicate)

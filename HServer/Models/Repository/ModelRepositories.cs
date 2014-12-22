@@ -160,7 +160,7 @@ namespace HServer.Models.Repository
 
                         var emirateValue = fields[4].Replace("\"", "");
                         if (!string.IsNullOrEmpty(emirateValue))
-                            model.EmiratesID = long.Parse(emirateValue);
+                            model.EmiratesID = emirateValue;
 
                         model.MRN = fields[3].Replace("\"", "");
                         model.Resource = fields[5].Replace("\"", "");
