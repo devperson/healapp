@@ -124,7 +124,7 @@ namespace HealthDemo
                 T response = Activator.CreateInstance<T>();
                 var errorResponse = new ErrorResponseModel();
                 try
-                {
+					{
                     var restResponse = Client.Execute(restRequest);
                     this.CheckServer(restResponse.Content);
                     if (!string.IsNullOrEmpty(restResponse.Content))

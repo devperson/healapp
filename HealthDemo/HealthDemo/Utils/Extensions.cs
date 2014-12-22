@@ -78,5 +78,17 @@ namespace HealthDemo.Pages
             switchControl.SetBinding(Switch.IsToggledProperty, binding, BindingMode.TwoWay);
             contentGrid.Children.Add(switchControl, 1, row);
         }
+
+        public static Button CreateButton(this Page p, string title)
+        {
+            return new Button()
+            {
+                BackgroundColor = Color.FromHex("FF54A6D3"),
+                WidthRequest = 120,
+                HeightRequest = 40,
+                TextColor = Color.Black,
+                Text = title
+            };
+        }
     }
 }

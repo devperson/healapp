@@ -17,29 +17,32 @@ namespace HealthDemo.Pages
 		{
 			lblTitle.Text = HeaderTitle;
 
-			btnOpenFile.Clicked += (s, e) => {
+			btnOpenFile.Clicked += (s, e) => 
+            {
 				if (this.DoubleClickDetecter.IsDoubleClick ())
 					return;
 
 				Navigation.PushAsync (new NewFilePage ());
 			};
-			btnRequest.Clicked += (s, e) => {
+			btnRequest.Clicked += (s, e) => 
+            {
 				if (this.DoubleClickDetecter.IsDoubleClick ())
 					return;
 
 				Navigation.PushAsync (new AppointmentDetailPage ());
 			};
-			btnViewAppointment.Clicked += (s, e) => {
+			btnViewAppointment.Clicked += (s, e) => 
+            {
 				if (this.DoubleClickDetecter.IsDoubleClick ())
 					return;
-
+                Navigation.PushAsync(new SearchAppointmentPage());
 			};
 		}
 
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
-            var stackLayout = new StackLayout() { Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
+            var stckLayout = new StackLayout() {Spacing = 0, Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
 
             var itemContent = MainPage.CreateItemStacklayout();
 
@@ -49,13 +52,13 @@ namespace HealthDemo.Pages
             itemContent.Children.Add(btnOpenFile);
 
             var itemContent2 = MainPage.CreateItemStacklayout();
-            btnViewAppointment = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("appointlist.png", "appointlist.png", "Images/appointlist.png")), "Find Doctors");
+            itemContent2.Padding = 0;
+            btnViewAppointment = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("appointlist.png", "appointlist.png", "Images/appointlist.png")), "View Appoin.");
             itemContent2.Children.Add(btnViewAppointment);
+            stckLayout.Children.Add(itemContent);
+            stckLayout.Children.Add(itemContent2);
 
-            stackLayout.Children.Add(itemContent);
-            //stackLayout.Children.Add(itemContent2);
-
-            scrollview.Content = stackLayout;
+            scrollview.Content = stckLayout;
             if (Device.OS == TargetPlatform.Android)
             {
                 var f = Font.SystemFontOfSize(14);

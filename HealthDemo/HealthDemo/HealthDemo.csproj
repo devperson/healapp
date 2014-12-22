@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Cells\AppointResultCell.cs" />
     <Compile Include="Cells\DoctorCell.cs" />
     <Compile Include="Cells\NewsCell.cs" />
     <Compile Include="Cells\SimpleCell.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="Models\DocPosition.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\ExistingAppointment.cs" />
     <Compile Include="Models\Faq.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\HealthCategory.cs" />
@@ -62,8 +64,10 @@
     <Compile Include="Models\ResponseModel\NewsResponse.cs" />
     <Compile Include="Models\ResponseModel\PositionResponse.cs" />
     <Compile Include="Models\ResponseModel\ResponseBase.cs" />
+    <Compile Include="Models\ResponseModel\SearchAppointResponce.cs" />
     <Compile Include="Pages\AboutPage.cs" />
     <Compile Include="Pages\AppointmentDetailPage.cs" />
+    <Compile Include="Pages\AppointResultPage.cs" />
     <Compile Include="Pages\CategoryListPage.cs" />
     <Compile Include="Pages\CMEDetailsPage.cs" />
     <Compile Include="Pages\CmeListPage.cs" />
@@ -84,6 +88,7 @@
     <Compile Include="Pages\NewsListPage.cs" />
     <Compile Include="Pages\ProfilePage.cs" />
     <Compile Include="Pages\RegisterCmePage.cs" />
+    <Compile Include="Pages\SearchAppointmentPage.cs" />
     <Compile Include="Pages\SearchDoctorPage.cs" />
     <Compile Include="Pages\ServicesPage.cs" />
     <Compile Include="Pages\TermsPage.cs" />

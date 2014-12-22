@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using HealthDemo.Utils;
 
 namespace HealthDemo.Pages
 {
@@ -48,8 +49,8 @@ namespace HealthDemo.Pages
             stlayout.Children.Add(CreateItem("Email", "NewCMERegistration.Email", ViewModelLocator.CmeVM.NewCMERegistration, Keyboard.Email));
 
             var stackButtons = new StackLayout() { Spacing = 15, Padding = new Thickness(0, 15, 0, 0), HorizontalOptions = LayoutOptions.CenterAndExpand, Orientation = StackOrientation.Horizontal };
-            btnRegister = CreateButton("Register");
-            btnReset = CreateButton("Reset");
+            btnRegister = this.CreateButton("Register");
+            btnReset = this.CreateButton("Reset");
             stackButtons.Children.Add(btnRegister);
             stackButtons.Children.Add(btnReset);
             stlayout.Children.Add(stackButtons);
@@ -63,17 +64,7 @@ namespace HealthDemo.Pages
             parent.Children.Add(scrollview);
         }
 
-        private Button CreateButton(string title)
-        {
-            return new Button()
-            {
-                BackgroundColor = Color.FromHex("FF54A6D3"),
-                WidthRequest = 120,
-                HeightRequest = 40,
-                TextColor = Color.Black,
-                Text = title
-            };
-        }
+        
 
         private StackLayout CreateItem(string title, string binding, object context,Keyboard key = null, bool isLabel = false)
         {

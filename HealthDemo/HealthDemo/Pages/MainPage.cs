@@ -128,7 +128,6 @@ namespace HealthDemo.Pages
                 Padding = new Thickness(0, 20, 0, 0),
                 Orientation = StackOrientation.Horizontal,
                 Spacing = Device.OnPlatform(0, 25, 10),
-                VerticalOptions = LayoutOptions.StartAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             };
             return itemContent;
