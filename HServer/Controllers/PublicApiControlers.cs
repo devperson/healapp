@@ -156,8 +156,7 @@ namespace HServer.Controllers
     }
 
     public class AppointmentController : ApiControllerEx
-    {
-        private MailerHelper mailer;
+    {   
         public AppointmentController() : base() { }
         
         [HttpPost]
@@ -174,7 +173,6 @@ namespace HServer.Controllers
 
     public class FileServiceController : ApiControllerEx
     {
-
         public FileServiceController() : base() { }
 
         public IEnumerable<string> Get()
