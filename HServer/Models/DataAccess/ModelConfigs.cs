@@ -99,4 +99,12 @@ namespace HServer.Models.DataAccess
             HasKey(x => x.Id);
         }
     }
+
+    public class ExistingAppointConfig : EntityTypeConfiguration<ExistingAppointment>
+    {
+        public ExistingAppointConfig()
+        {
+            HasKey(x => x.Id);
+        }
+    }
 }

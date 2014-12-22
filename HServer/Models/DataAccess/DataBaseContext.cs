@@ -27,7 +27,8 @@ namespace HServer.Models.DataAccess
 
             modelBuilder.Configurations.Add(new DoctorModelConfig());
             modelBuilder.Configurations.Add(new TipCategoryModelConfig());                        
-            modelBuilder.Configurations.Add(new TipModelConfig());            
+            modelBuilder.Configurations.Add(new TipModelConfig());
+            modelBuilder.Configurations.Add(new ExistingAppointConfig());
         }
 
         public DbSet<Tip> Tips { get; set; }
@@ -39,5 +40,6 @@ namespace HServer.Models.DataAccess
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<Cme> Cmes { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<ExistingAppointment> ExistAppointments { get; set; }
     }
 }

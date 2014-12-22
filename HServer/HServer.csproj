@@ -210,6 +210,7 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\ExistingAppointment.cs" />
     <Compile Include="Models\Faq.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\Insurance.cs" />
@@ -231,6 +232,7 @@
     <EmbeddedResource Include="Areas\HealthDemo\Resources\NewFilePage.html" />
     <EmbeddedResource Include="Areas\HealthDemo\Resources\NewAppoint2.html" />
     <EmbeddedResource Include="Areas\HealthDemo\Resources\CMEReg.html" />
+    <Content Include="App_Data\aah_uni_confirmedappt_20141215_131755.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -350,9 +352,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -372,7 +372,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>1730</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49417/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
