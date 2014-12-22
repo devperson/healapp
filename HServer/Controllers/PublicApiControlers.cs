@@ -241,9 +241,10 @@ namespace HServer.Controllers
         [HttpGet]
         public IEnumerable<ExistingAppointment> Search(string mrn = "", long emirate = 0)
         {
+            var emID = emirate.ToString();
             return context.Find(d =>
                 (!string.IsNullOrEmpty(mrn) ? d.MRN.ToLower().StartsWith(mrn.Trim().ToLower()) : true) &&
-                (emirate > 0 ? d.EmiratesID.ToString().StartsWith(emirate.ToString()) : true));
+                (emirate > 0 ? System.Data.Objects.SqlClient.SqlFunctions.StringConvert((double)d.EmiratesID).TrimStart().StartsWith(emID) : true));
         }
 
 
