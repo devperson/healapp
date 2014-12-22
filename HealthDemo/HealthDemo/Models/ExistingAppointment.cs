@@ -13,7 +13,7 @@ namespace HealthDemo.Models
         public DateTime AppointmentDate { get; set; }
         public DateTime AppointmentTime { get; set; }
         public string MRN { get; set; }
-        public long EmiratesID { get; set; }
+        public string EmiratesID { get; set; }
         public string Resource { get; set; }
         public string ApptLocation { get; set; }
         public string Language { get; set; }
