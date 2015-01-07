@@ -10,13 +10,29 @@ namespace HServer.Models
         public Position()
         {
             this.Doctors = new List<Doctor>();
+            this.Localizations = new List<PositionLocalization>();
         }
 
+        public int Id { get; set; }        
+        //public string Name { get; set; }        
+        public List<Doctor> Doctors { get; set; }
+        public List<PositionLocalization> Localizations { get; set; }
+    }
+
+    public class PositionLocalization
+    {
         public int Id { get; set; }
-        //public int DepartmentId { get; set; }
+        public int LocalizationId { get; set; }
+        public int PositionId { get; set; }
         public string Name { get; set; }
 
-        //public Department Department { get; set; }
-        public List<Doctor> Doctors { get; set; }
+        public LocalizationLanguage Localization { get; set; }
+        public Position Position { get; set; }
+    }
+
+    public class PositionModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

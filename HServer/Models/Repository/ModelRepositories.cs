@@ -18,11 +18,11 @@ namespace HServer.Models.Repository
         public TipRepository(DbContext context)
             : base(context)
         {
-        }
+        }        
 
         public IEnumerable<Tip> GetByCategoryId(int id)
         {
-            return this.Find(t => t.CategoryId == id);
+            return this.Find(t => t.CategoryId == id).Include("Localizations.Localization");
         }
     }
 
@@ -35,12 +35,7 @@ namespace HServer.Models.Repository
         public TipCategoryRepository(DbContext context)
             : base(context)
         {
-        }
-
-        public IEnumerable<TipCategory> GetIgerly()
-        {
-            return this._context.Set<TipCategory>().Include("Tips").AsEnumerable();
-        }
+        }        
     }
 
     public class DoctorRepository : Repository<Doctor>
@@ -56,22 +51,23 @@ namespace HServer.Models.Repository
 
         public IEnumerable<Doctor> GetIgerly()
         {
-            return this._context.Set<Doctor>()
-                .Include("Position")
-                .Include("Department")
-                .Include("SubDepartment")
-                .Include("Languages")
-                .Include("Qualifications").AsEnumerable();
+            return this._context.Set<Doctor>()                
+                .Include("Localizations.Localization")                
+                .Include("Position.Localizations.Localization")
+                .Include("Department.Localizations.Localization")
+                .Include("SubDepartment.Localizations.Localization")
+                .Include("Languages.Localizations.Localization")
+                .Include("Qualifications.Localizations.Localization").AsEnumerable();
         }
     }
 
-    public class DepartmentRepository : Repository<Position>
+    public class PositionRepository : Repository<Position>
     {
-        public DepartmentRepository(DbContext context)
+        public PositionRepository(DbContext context)
             : base(context)
         {
         }
-        public DepartmentRepository()
+        public PositionRepository()
             : this(new DataBaseContext())
         {
         }
@@ -91,7 +87,7 @@ namespace HServer.Models.Repository
 
         public IEnumerable<Cme> GetCME()
         {
-            var result = _context.Set<Cme>().Where(s => _context.Set<Event>().Any(e => e.Date.Day == s.Date.Day && e.Date.Month == s.Date.Month && e.Date.Year == s.Date.Year));
+            var result = _context.Set<Cme>().Include("Localizations.Localization").Where(s => _context.Set<Event>().Any(e => e.Date.Day == s.Date.Day && e.Date.Month == s.Date.Month && e.Date.Year == s.Date.Year));
             return result;
         }
     }

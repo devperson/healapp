@@ -23,7 +23,7 @@ namespace HealthDemo.Pages
         {
             //VM = ViewModelLocator.AppointmentVM;
             ViewModelLocator.AppointmentVM.NewAppointment = new Appointment();
-            lblTitle.Text = "Appointment";
+            lblTitle.Text = AppResources.Appointment_Title;
             this.BindingContext = ViewModelLocator.AppointmentVM;
             this.contentGrid.BindingContext = ViewModelLocator.AppointmentVM.NewAppointment;
 
@@ -43,7 +43,7 @@ namespace HealthDemo.Pages
                 {
                     if (success)
                     {
-                        await this.DisplayAlert("Request has been sent!", "Thank you for submitting your request, you will be contracted shortly", "OK");
+                        await this.DisplayAlert(AppResources.Appointment_SUBMIT_DLG_Title, AppResources.Appointment_SUBMIT_DLG_Msg, "OK");
                         Navigation.PopToRootAsync();
                     }
                 });
@@ -77,26 +77,26 @@ namespace HealthDemo.Pages
                     new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)}
                 }
             };
-            
-            contentGrid.AddLabel("Note:", 0);
+
+            contentGrid.AddLabel(AppResources.Appointment_FORM_Head, 0);
             contentGrid.AddLabel(string.Empty, 0, 1);
-            contentGrid.AddLabel("Name", 1);
+            contentGrid.AddLabel(AppResources.Appointment_FORM_Name, 1);
             contentGrid.AddTextField("Name", 1);
-            contentGrid.AddLabel("MRN", 2);
+            contentGrid.AddLabel(AppResources.Appointment_FORM_MRN, 2);
             contentGrid.AddTextField("MRN", 2);
-            contentGrid.AddLabel("Phone", 3);
+            contentGrid.AddLabel(AppResources.Appointment_FORM_Phone, 3);
             contentGrid.AddTextField("Phone", 3, Keyboard.Telephone);
-            contentGrid.AddLabel("Thiqa", 4);
+            contentGrid.AddLabel(AppResources.Appointment_FORM_Thiqa, 4);
             contentGrid.AddSwitchField("ThiqaYes", 4);
 
-            this.lblReferal = contentGrid.AddLabel("Referral Refference", 5);
+            this.lblReferal = contentGrid.AddLabel(AppResources.Appointment_FORM_Referral, 5);
             this.lblReferal.YAlign = TextAlignment.Center;
             this.lblReferal.HeightRequest = 45;
             this.lblReferal.WidthRequest = 75;
             this.lblReferal.XAlign = TextAlignment.End;
             this.refEntry = contentGrid.AddTextField("Refference", 5);
 
-            this.idLbl = contentGrid.AddLabel("ID", 5);
+            this.idLbl = contentGrid.AddLabel(AppResources.Appointment_FORM_ID, 5);
             this.idLbl.YAlign = TextAlignment.Center;
             this.idLbl.HeightRequest = 45;
             this.idLbl.WidthRequest = 75;
@@ -105,9 +105,9 @@ namespace HealthDemo.Pages
             this.idEntry = contentGrid.AddTextField("ID", 5);
             this.idEntry.IsVisible = false;
 
-            contentGrid.AddLabel("Clinical", 6);
+            contentGrid.AddLabel(AppResources.Appointment_FORM_Clinical, 6);
             AddComboField(6);
-            contentGrid.AddLabel("Email", 7);
+            contentGrid.AddLabel(AppResources.Appointment_FORM_Email, 7);
             contentGrid.AddTextField("Email", 7, Keyboard.Email);
 
             btnSubmit = new Button()
@@ -118,7 +118,7 @@ namespace HealthDemo.Pages
                 WidthRequest = 200,
                 HeightRequest = 40,
                 TextColor = Color.Black,
-                Text = "Submit"
+                Text = AppResources.Appointment_FORM_Submit
             };
 
             stlayout.Children.Add(contentGrid);
@@ -179,9 +179,8 @@ namespace HealthDemo.Pages
             var comboLayouyt = this.CreateComboBox(ref btnComboClinical);
             for (int i = 1; i < 7; i++)
 			{
-                btnComboClinical.Items.Add("Clinical " + i.ToString());
-			}
-            //btnComboClinical.SelectedIndex = 0;
+                btnComboClinical.Items.Add(AppResources.Appointment_FORM_Clinical + " " + i.ToString());
+			}            
             contentGrid.Children.Add(comboLayouyt, 1, row);
 		}
 

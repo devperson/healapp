@@ -9,13 +9,11 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class ProfilePage : MasterPage
-    {
-        //private DoctorViewModel VM { get; set; }
+    {        
         public ProfilePage()
             : base(false)
-        {            
-            //this.BindingContext = VM.SelectedDoctor;
-            lblTitle.Text = "Doctor profile";
+        {                        
+            lblTitle.Text = AppResources.Profile_Title;
         }
         protected override void RenderContentView(StackLayout parent)
         {
@@ -74,9 +72,9 @@ namespace HealthDemo.Pages
             headerLayout.Children.Add(imgDoctor);
 
             var stackLayoutDetails = new StackLayout() { BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, Padding = new Thickness(15, 15, 7, 15), Spacing = 10 };
-            stackLayoutDetails.Children.Add(CreateDetailsItem("Bio:", "Bio"));
+            stackLayoutDetails.Children.Add(CreateDetailsItem(AppResources.Profile_Bio, "Bio"));
             stackLayoutDetails.Children.Add(this.CreateQualificationsItem());
-            stackLayoutDetails.Children.Add(CreateDetailsItem("Language:", "Language"));
+            stackLayoutDetails.Children.Add(CreateDetailsItem(AppResources.Profile_Language, "Language"));
             var frame1 = new ContentView() 
             { 
                 //HasShadow = false, 
@@ -133,7 +131,7 @@ namespace HealthDemo.Pages
             {
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(15, FontAttributes.Bold),
-                Text = "Qualifications:"
+                Text = AppResources.Profile_Qual
             };
 
             foreach (var item in ViewModelLocator.DoctorVM.SelectedDoctor.QualifiList)

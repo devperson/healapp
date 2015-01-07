@@ -57,7 +57,7 @@ namespace HealthDemo.ViewModels
                     oncomplete(result.Success);
                 });
             }
-            else ShowAlert("Error", "Please fill the form", "OK");
+            else ShowAlert(AppResources.DLG_Error, AppResources.Cme_REGISTER_DLG_Msg, "OK");
         }
 
         public void ResetReg()

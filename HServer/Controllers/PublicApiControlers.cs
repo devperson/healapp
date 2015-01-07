@@ -16,14 +16,23 @@ namespace HServer.Controllers
     public class TipCategoriesController : ApiController
     {
         TipCategoryRepository context = new TipCategoryRepository();
-        public IEnumerable<TipCategory> Get()
+        public IEnumerable<TipCategoryModel> Get(string local)
         {
-            return context.GetAll();            
+            return context.GetWithLocal().Select(t => this.ToCategoryModel(t, local)).ToList();            
+        }
+
+        private TipCategoryModel ToCategoryModel(TipCategory c, string local)
+        {
+            return new TipCategoryModel
+            {
+                ID = c.Id,
+                Name = c.Localizations.First(l => l.Localization.Name == local).Name                
+            };
         }
     }
 
     public class TipsController : ApiController
-    {
+    {        
         TipRepository context = new TipRepository();
 
         // GET api/Tips
@@ -33,20 +42,32 @@ namespace HServer.Controllers
         }
 
         // GET api/Tips/GetByCatId?id=1
-        public IEnumerable<Tip> GetByCatId(int id)
+        public IEnumerable<TipModel> GetByCatId(int id, string local)
         {
-            return context.GetByCategoryId(id);
+            return context.GetByCategoryId(id).Select(t => this.ToModel(t, local)).ToList();
+        }
+
+        [NonAction]
+        public TipModel ToModel(Tip t, string local)
+        {
+            return new TipModel
+            {
+                ID = t.Id,
+                Name = t.Localizations.First(l => l.Localization.Name == local).Name,
+                Description = t.Localizations.First(l => l.Localization.Name == local).Description,
+                CategoryID = t.CategoryId
+            };
         }
     }
 
     public class DoctorsController : ApiController
-    {
+    {        
         DoctorRepository context = new DoctorRepository();
 
         // GET api/Doctors
-        public IEnumerable<DoctorModel> Get()
+        public IEnumerable<DoctorModel> Get(string local)
         {
-            var list = context.GetIgerly().Select(d => ToDoctorModel(d)).ToList();
+            var list = context.GetIgerly().Select(d => ToDoctorModel(d, local)).ToList();
 
             return list;
         }
@@ -56,26 +77,26 @@ namespace HServer.Controllers
         public IEnumerable<DoctorModel> SearchDoctors([FromBody]SearchDoctorParams _params)
         {
             Func<Doctor, bool> predicate = d =>
-                (!string.IsNullOrEmpty(_params.Title) ? d.Name.ToLower().StartsWith(_params.Title.Trim().ToLower()) : true) &&
+                (!string.IsNullOrEmpty(_params.Title) ? d.Localizations.First(l => l.Localization.Name == _params.Local).Name.ToLower().StartsWith(_params.Title.Trim().ToLower()) : true) &&
                 (_params.PositionId > 0 ? d.PositionId.Value == _params.PositionId : true);
-            
-            return context.GetIgerly().Where(predicate).Select(d => ToDoctorModel(d));
+
+            return context.GetIgerly().Where(predicate).Select(d => ToDoctorModel(d, _params.Local));
         }
         
         [NonAction]
-        public DoctorModel ToDoctorModel(Doctor d)
+        public DoctorModel ToDoctorModel(Doctor d, string local)
         {            
             return new DoctorModel
             {
                 Id = d.Id,
-                Title = d.Name,
-                Bio = d.Bio,
+                Title = d.Localizations.First(l => l.Localization.Name == local).Name,
+                Bio = d.Localizations.First(l => l.Localization.Name == local).Bio,
                 ImageUrl = this.ToAbsoluteUrl(string.Format("/Images/Doctors/{0}", d.ImageFileName)),
-                Department = d.Department.Name,
-                SubDepartment = d.SubDepartment != null ? d.SubDepartment.Name : "",
-                Position = d.Position.Name,
-                Qualifications = d.Qualifications.Select(q => q.Name).ToList(),
-                Languages = d.Languages.Select(l => l.Name).ToList()
+                Department = d.Department.Localizations.First(l => l.Localization.Name == local).Name,
+                SubDepartment = d.SubDepartment != null ? d.SubDepartment.Localizations.First(l => l.Localization.Name == local).Name : "",
+                Position = d.Position.Localizations.First(l => l.Localization.Name == local).Name,
+                Qualifications = d.Qualifications.Select(q => q.Localizations.First(l => l.Localization.Name == local).Name).ToList(),
+                Languages = d.Languages.Select(l => l.Localizations.First(lz => lz.Localization.Name == local).Name).ToList()
             };
         }
 
@@ -98,38 +119,78 @@ namespace HServer.Controllers
 
     public class PositionController : ApiController
     {
-        DepartmentRepository context = new DepartmentRepository();
-        public IEnumerable<Position> Get()
+        PositionRepository context = new PositionRepository();
+        public IEnumerable<PositionModel> Get(string local)
         {
-            return context.GetAll();
+            return context.GetWithLocal().Select(t => this.ToModel(t, local)).ToList(); ;
         }
+
+        private PositionModel ToModel(Position c, string local)
+        {
+            return new PositionModel
+            {
+                ID = c.Id,
+                Name = c.Localizations.First(l => l.Localization.Name == local).Name
+            };
+        }        
     }
 
     public class FaqController : ApiController
     {
         Repository<Faq> context = new Repository<Faq>(new DataBaseContext());
-        public IEnumerable<Faq> Get()
+        public IEnumerable<FaqModel> Get(string local)
         {
-            return context.GetAll();
+            return context.GetWithLocal().Select(t => this.ToModel(t, local)).ToList();     
         }
+
+        private FaqModel ToModel(Faq c, string local)
+        {
+            return new FaqModel
+            {
+                ID = c.Id,
+                Question = c.Localizations.First(l => l.Localization.Name == local).Question,
+                Answer = c.Localizations.First(l => l.Localization.Name == local).Answer
+            };
+        }        
     }
 
     public class NewsController : ApiController
     {
         Repository<News> context = new Repository<News>(new DataBaseContext());
-        public IEnumerable<News> Get()
+        public IEnumerable<NewsModel> Get(string local)
         {
-            return context.GetAll();
+            return context.GetWithLocal().Select(t => this.ToModel(t, local)).ToList();     
         }
+
+        private NewsModel ToModel(News c, string local)
+        {
+            return new NewsModel
+            {
+                ID = c.Id,
+                Date = c.Date,
+                Title = c.Localizations.First(l => l.Localization.Name == local).Title,
+                Description = c.Localizations.First(l => l.Localization.Name == local).Description
+            };
+        }       
     }
 
     public class InsuranceController : ApiController
     {
         Repository<Insurance> context = new Repository<Insurance>(new DataBaseContext());
-        public IEnumerable<Insurance> Get()
+        public IEnumerable<InsuranceModel> Get(string local)
         {
-            return context.GetAll();
+            return context.GetWithLocal().Select(t => this.ToModel(t, local)).ToList();     
         }
+
+        private InsuranceModel ToModel(Insurance c, string local)
+        {
+            return new InsuranceModel
+            {
+                ID = c.Id,
+                Title = c.Localizations.First(l => l.Localization.Name == local).Title,
+                Description = c.Localizations.First(l => l.Localization.Name == local).Description
+            };
+        }       
     }
 
     public class ApiControllerEx : ApiController
@@ -153,6 +214,7 @@ namespace HServer.Controllers
             };
             t.Start();
         }
+              
     }
 
     public class AppointmentController : ApiControllerEx
@@ -195,10 +257,24 @@ namespace HServer.Controllers
     {
         public CmeController() : base() { }
         CmeRepository context = new CmeRepository();
-        public IEnumerable<Cme> Get()
+        public IEnumerable<CmeModel> Get(string local)
         {
-            return context.GetCME();
+            return context.GetCME().Select(t => this.ToModel(t, local)).ToList(); 
         }
+
+        private CmeModel ToModel(Cme c, string local)
+        {
+            return new CmeModel
+            {
+                ID = c.Id,
+                Title = c.Localizations.First(l => l.Localization.Name == local).Title,
+                Description = c.Localizations.First(l => l.Localization.Name == local).Description,
+                Speaker = c.Localizations.First(l => l.Localization.Name == local).Speaker,
+                Venue = c.Localizations.First(l => l.Localization.Name == local).Venue,
+                CreditHours = c.Localizations.First(l => l.Localization.Name == local).CreditHours,
+                Date = c.Date
+            };
+        }     
 
         [HttpPost]
         public bool RegisterCme(CMEReg regData)
@@ -214,28 +290,35 @@ namespace HServer.Controllers
     public class EventController : ApiController
     {
         EventRepository context = new EventRepository();
-        public IEnumerable<Event> Get()
+        public IEnumerable<EventModel> Get(string local)
         {
-            return context.GetAll();
+            return context.GetWithLocal().Select(t => this.ToModel(t, local)).ToList();     
         }
 
-        public IEnumerable<Event> GetByCME(int cmeId)
+        public IEnumerable<EventModel> GetByCME(int cmeId, string local)
         {
             CmeRepository contextCme = new CmeRepository();
             var cme = contextCme.FindOne(s => s.Id == cmeId);
-            return context.GetAll().Where(e => e.Date.Day == cme.Date.Day && e.Date.Month == cme.Date.Month && e.Date.Year == cme.Date.Year);
+            return context.GetWithLocal().Where(e => e.Date.Day == cme.Date.Day && e.Date.Month == cme.Date.Month && e.Date.Year == cme.Date.Year).Select(t => this.ToModel(t, local)).ToList();
         }
+
+        private EventModel ToModel(Event c, string local)
+        {
+            return new EventModel
+            {
+                ID = c.Id,       
+                Date = c.Date,
+                Title = c.Localizations.First(l => l.Localization.Name == local).Title,
+                Description = c.Localizations.First(l => l.Localization.Name == local).Description,
+                Venue = c.Localizations.First(l => l.Localization.Name == local).Venue
+            };
+        }       
     }
 
     public class ExistAppointController : ApiController
     {
         ExistingAppointmentRepository context = new ExistingAppointmentRepository();
-        //public IEnumerable<ExistingAppointment> Get()
-        //{
-        //    context.ImportData();
-
-        //    return context.GetAll();
-        //}
+       
         [HttpGet]
         public IEnumerable<ExistingAppointment> Search(string mrn = "", long emirate = 0)
         {

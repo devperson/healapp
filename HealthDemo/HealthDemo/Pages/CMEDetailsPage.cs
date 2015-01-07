@@ -16,7 +16,7 @@ namespace HealthDemo.Pages
             : base(false)
         {
             BindingContext = ViewModelLocator.CmeVM.SelectedCme;
-            lblTitle.Text = "CME";
+            lblTitle.Text = AppResources.CME_Head;
             btnRegister.Clicked += (s, e) =>
             {
                 Navigation.PushAsync(new RegisterCmePage());
@@ -51,17 +51,17 @@ namespace HealthDemo.Pages
                 }
             };
 
-            contentGrid.AddLabel("Title:", 0);
+            contentGrid.AddLabel(AppResources.CME_Title, 0);
             contentGrid.AddLabelWithBinding("Title", 0, 1);
-            contentGrid.AddLabel("Speaker:", 1);
+            contentGrid.AddLabel(AppResources.CME_Speaker, 1);
             contentGrid.AddLabelWithBinding("Speaker", 1, 1);
-            contentGrid.AddLabel("Venue:", 2);
+            contentGrid.AddLabel(AppResources.CME_Venue, 2);
             contentGrid.AddLabelWithBinding("Venue", 2, 1);
-            contentGrid.AddLabel("Description:", 3);
+            contentGrid.AddLabel(AppResources.CME_Description, 3);
             contentGrid.AddLabelWithBinding("Description", 3, 1);
-            contentGrid.AddLabel("Credit Hour:", 4);
+            contentGrid.AddLabel(AppResources.CME_CreditHour, 4);
             contentGrid.AddLabelWithBinding("CreditHour", 4, 1);
-            contentGrid.AddLabel("Time and Date:", 5);
+            contentGrid.AddLabel(AppResources.CME_DT, 5);
             contentGrid.AddLabelWithBinding("DateFormated", 5, 1);
 
             btnRegister = new Button()
@@ -72,7 +72,7 @@ namespace HealthDemo.Pages
                 WidthRequest = 200,
                 HeightRequest = 40,
                 TextColor = Color.Black,
-                Text = "Register"
+                Text = AppResources.CME_Register
             };
 
             stlayout.Children.Add(contentGrid);

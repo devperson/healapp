@@ -11,18 +11,19 @@ namespace HealthDemo.Pages
 {
     public class LocationPage : MasterPage
     {
-        public static string HeaderTitle = "Find us";
+        public static string HeaderTitle;
         public LocationPage() : base(false, Device.OnPlatform(false, true, true)) { }
 
         protected override void RenderContentView(Xamarin.Forms.StackLayout parent)
         {
+            HeaderTitle = AppResources.Location_Title;
             lblTitle.Text = HeaderTitle;
             var position = new Position(24.230388, 55.733529);
             var pin = new Pin
             {
                 Type = PinType.Place,
                 Position = position,
-                Label = "Al-Ain Hospital"
+                Label = AppResources.Location_Pin
             };
 
             var map = new Map(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.2)))

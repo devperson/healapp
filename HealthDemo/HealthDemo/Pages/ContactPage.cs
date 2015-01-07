@@ -10,10 +10,11 @@ namespace HealthDemo.Pages
 {
     public class ContactPage : MasterPage
     {
-        public static string HeaderTitle = "Contacts";
+        public static string HeaderTitle;
         public ContactPage()
             : base(false)
         {
+            HeaderTitle = AppResources.Contact_Title;
             lblTitle.Text = HeaderTitle;
         }
 
@@ -33,7 +34,7 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Font = Font.SystemFontOfSize(16),
                 TextColor = Color.Black,
-                Text = "Al Ain Hospital, a highly specialized acute care and emergency hospital with 402 beds and more than 35 medical departments and divisions, is one of two major hospitals in the AI Ain region of the Emirate of Abu Dhabi belonging to the health system of the Abu Dhabi Health Services Company SEHA (www.seha.ae)",
+                Text = AppResources.Contact_Content,
                 XAlign = TextAlignment.Center
             };
 
@@ -48,13 +49,13 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.Center,
                 Font = Font.SystemFontOfSize(16),
                 TextColor = Color.Black,
-                Text = "Important Phone Numbers"
+                Text = AppResources.Contact_Outline
             };
             numbersLayout.Children.Add(lbltitle);
-            numbersLayout.Children.Add(CreateTelItem("AAH Call center:", "03-7022000"));
-            numbersLayout.Children.Add(CreateTelItem("AAH Ambulance:", "03-7022555"));
-            numbersLayout.Children.Add(CreateTelItem("Thiqa Office:", "03-7023669"));
-            numbersLayout.Children.Add(CreateTelItem("Police Office:", "03-7022446"));
+            numbersLayout.Children.Add(CreateTelItem(AppResources.Contact_CallCenter, "03-7022000"));
+            numbersLayout.Children.Add(CreateTelItem(AppResources.Contact_Ambulance, "03-7022555"));
+            numbersLayout.Children.Add(CreateTelItem(AppResources.Contact_Thiqa, "03-7023669"));
+            numbersLayout.Children.Add(CreateTelItem(AppResources.Contact_Police, "03-7022446"));
 
             stackLayout.Children.Add(label);
             stackLayout.Children.Add(numbersLayout);
@@ -97,16 +98,6 @@ namespace HealthDemo.Pages
             telLayout.Children.Add(lblcenter);
             telLayout.Children.Add(lblNumber);
             return telLayout;
-        }
-
-        //protected override void OnMasterViewRendered()
-        //{
-        //    if (Device.OS == TargetPlatform.iOS)
-        //    {
-        //        //there seems some bug in xamarin because title croped to ten px
-        //        titleLayout.HeightRequest += 5;
-        //        titleImage.HeightRequest += 5;
-        //    }
-        //}
+        }        
     }
 }

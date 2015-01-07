@@ -14,11 +14,11 @@ namespace HealthDemo.Pages
     {
         //private TipViewModel VM { get; set; }
         private ListView lvCategories;
-        public static string HeaderTitle = "Categories";
+        public static string HeaderTitle;
         public CategoryListPage()
             : base()
         {
-            //VM = ViewModelLocator.TipVM;
+            HeaderTitle = AppResources.Category_Title;
             BindingContext = ViewModelLocator.TipVM;
 
             lvCategories.ItemSelected += (s, e) =>

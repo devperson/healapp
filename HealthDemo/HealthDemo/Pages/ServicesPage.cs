@@ -11,10 +11,11 @@ namespace HealthDemo.Pages
     public class ServicesPage : MasterPage
     {
         ImageButton btnOpenFile, btnRequest, btnViewAppointment;
-        public static string HeaderTitle = "e-Service";
+        public static string HeaderTitle;
         public ServicesPage()
 			: base(false)
 		{
+            HeaderTitle = AppResources.MasterPage_FOOTER_Service;
 			lblTitle.Text = HeaderTitle;
 
 			btnOpenFile.Clicked += (s, e) => 
@@ -46,14 +47,14 @@ namespace HealthDemo.Pages
 
             var itemContent = MainPage.CreateItemStacklayout();
 
-            btnRequest = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("appoint.png", "appoint.png", "Images/appoint.png")), "Appointment");
-            btnOpenFile = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("document_add.png", "document_add.png", "Images/document_add.png")), "New File");
+            btnRequest = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("appoint.png", "appoint.png", "Images/appoint.png")), AppResources.Appointment_Title);
+            btnOpenFile = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("document_add.png", "document_add.png", "Images/document_add.png")), AppResources.NewFile_Title);
             itemContent.Children.Add(btnRequest);
             itemContent.Children.Add(btnOpenFile);
 
             var itemContent2 = MainPage.CreateItemStacklayout();
             itemContent2.Padding = 0;
-            btnViewAppointment = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("appointlist.png", "appointlist.png", "Images/appointlist.png")), "View Appoin.");
+            btnViewAppointment = MainPage.CreateButton(ImageSource.FromFile(Device.OnPlatform("appointlist.png", "appointlist.png", "Images/appointlist.png")), AppResources.View_Appointment);
             itemContent2.Children.Add(btnViewAppointment);
             stckLayout.Children.Add(itemContent);
             stckLayout.Children.Add(itemContent2);

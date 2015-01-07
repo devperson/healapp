@@ -9,13 +9,11 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class InsuranceDetailPage : MasterPage
-    {
-        //private InsuranceViewModel VM { get; set; }
+    {        
         public InsuranceDetailPage()
             : base(false)
-        {            
-            //BindingContext = VM;
-            lblTitle.Text = "Insurance details";
+        {                        
+            lblTitle.Text = AppResources.Insurance_Title;
         }
 
         protected override void RenderContentView(StackLayout parent)

@@ -20,7 +20,7 @@ namespace HealthDemo.Pages
             this.BindingContext = ViewModelLocator.FileVM;
             this.contentGrid.BindingContext = ViewModelLocator.FileVM.NewFile;
 
-            lblTitle.Text = "New File";
+            lblTitle.Text = AppResources.NewFile_Title;
 
             btnUpload.Clicked += async (s, e) =>
             {
@@ -31,7 +31,7 @@ namespace HealthDemo.Pages
             {
                 if (ViewModelLocator.FileVM.CheckValidation())
                     Navigation.PushAsync(new TermsPage());
-                else DisplayAlert("Error", "Please fill the form", "OK");
+                else DisplayAlert(AppResources.DLG_Error, AppResources.NewFile_SUBMIT_DLG_Msg, "OK");
             };
         }
 
@@ -64,15 +64,15 @@ namespace HealthDemo.Pages
                 }
             };
 
-            contentGrid.AddLabel("Note:", 0);
+            contentGrid.AddLabel(AppResources.NewFile_Head, 0);
             contentGrid.AddLabel(string.Empty, 0, 1);
-            contentGrid.AddLabel("Name", 1);
+            contentGrid.AddLabel(AppResources.NewFile_Name, 1);
             contentGrid.AddTextField("Name", 1);
-            contentGrid.AddLabel("Emirates ID", 2);
+            contentGrid.AddLabel(AppResources.NewFile_Emirate, 2);
             contentGrid.AddTextField("EmirateID", 2, Keyboard.Numeric);
-            contentGrid.AddLabel("Thiqa", 3);
+            contentGrid.AddLabel(AppResources.NewFile_Thiqa, 3);
             contentGrid.AddTextField("Thiqa", 3);
-            contentGrid.AddLabel("Attach", 4);
+            contentGrid.AddLabel(AppResources.NewFile_Attach, 4);
 
             var txtUpload = new CustomTextBox
             {
@@ -88,7 +88,7 @@ namespace HealthDemo.Pages
                 WidthRequest = 75,
                 HeightRequest = Device.OnPlatform(30, 35, 35),
                 TextColor = Color.Black,
-                Text = "Upload"
+                Text = AppResources.NewFile_Upload
             };
 
             var uploadStack = new StackLayout() { Spacing = 2, Orientation = StackOrientation.Horizontal, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand};
@@ -104,7 +104,7 @@ namespace HealthDemo.Pages
                 WidthRequest = 200,
                 HeightRequest = 40,
                 TextColor = Color.Black,
-                Text = "Submit"
+                Text = AppResources.NewFile_Submit
             };
 
             stlayout.Children.Add(contentGrid);

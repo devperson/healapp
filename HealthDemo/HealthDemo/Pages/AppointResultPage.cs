@@ -29,9 +29,9 @@ namespace HealthDemo.Pages
             };
 
             headerLayout.Children.Add(CreateLabel("№", 30));
-            headerLayout.Children.Add(CreateLabel("Clinic", 140));
-            headerLayout.Children.Add(CreateLabel("Date", 75));
-            headerLayout.Children.Add(CreateLabel("Time", 75));
+            headerLayout.Children.Add(CreateLabel(AppResources.Appointment_FORM_Clinical, 140));
+            headerLayout.Children.Add(CreateLabel(AppResources.AppointmentResult_Date, 75));
+            headerLayout.Children.Add(CreateLabel(AppResources.AppointmentResult_Time, 75));
 
             lvResult = new ListView()
             {

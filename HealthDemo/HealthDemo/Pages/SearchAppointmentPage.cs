@@ -24,7 +24,7 @@ namespace HealthDemo.Pages
                     {
                         Navigation.PushAsync(new AppointResultPage());
                     }
-                    else DisplayAlert("Error", "Please fill the form. All fields are required", "OK");
+                    else DisplayAlert(AppResources.DLG_Error, AppResources.SearchAppointment_DLG_Msg, "OK");
                 };
             btnReset.Clicked += (s, e) =>
                 {
@@ -54,14 +54,14 @@ namespace HealthDemo.Pages
                 }
             };
 
-            contentGrid.AddLabel("Emirates ID:", 0);
+            contentGrid.AddLabel(AppResources.SearchAppointment_Emirate, 0);
             contentGrid.AddTextField("Emirate", 0, Keyboard.Numeric);
-            contentGrid.AddLabel("MRN:", 1);
+            contentGrid.AddLabel(AppResources.SearchAppointment_MRN, 1);
             contentGrid.AddTextField("Mrn", 1);
 
             var stackButtons = new StackLayout() { Spacing = 15, Padding = new Thickness(0, 15, 0, 0), HorizontalOptions = LayoutOptions.CenterAndExpand, Orientation = StackOrientation.Horizontal };
-            btnSearch = this.CreateButton("Search");
-            btnReset = this.CreateButton("Reset");
+            btnSearch = this.CreateButton(AppResources.SearchAppointment_Search);
+            btnReset = this.CreateButton(AppResources.SearchAppointment_Reset);
             stackButtons.Children.Add(btnSearch);
             stackButtons.Children.Add(btnReset);
             

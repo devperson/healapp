@@ -11,15 +11,14 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class FaqListPage : MasterPage
-    {
-        //private FaqViewModel VM { get; set; }
-        public static string HeaderTitle = "FAQ";
+    {        
+        public static string HeaderTitle;
         private ListView lvFaq;
         public FaqListPage()
             : base()
-        {
-            //VM = ViewModelLocator.FaqVM;
+        {            
             BindingContext = ViewModelLocator.FaqVM;
+            HeaderTitle = AppResources.FaqList_Title;
             lblTitle.Text = HeaderTitle;
 
             lvFaq.ItemSelected += (s, e) =>

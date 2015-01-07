@@ -24,12 +24,18 @@ namespace HServer.Models.Repository
         }
 
         #region Methods
+
+        public IEnumerable<T> GetWithLocal()
+        {
+            return this._context.Set<T>().Include("Localizations.Localization").AsEnumerable();                
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _context.Set<T>().AsEnumerable();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> Find(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where<T>(predicate);
         }

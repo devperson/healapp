@@ -51,7 +51,10 @@ namespace HealthDemo.ViewModels
             get 
             {
                 if (_service == null)
+                {
                     _service = DependencyService.Get<IWebService>();
+                    _service.SetLocal(App.SelectedLocal);
+                }
                 return _service; 
             }
         }
@@ -59,7 +62,7 @@ namespace HealthDemo.ViewModels
         public Func<string, string, string, Task> ShowAlert;
         public async void ShowError(string errorMessage)
         {
-            await ShowAlert("Error", errorMessage, "OK");
+            await ShowAlert(AppResources.DLG_Error, errorMessage, "OK");
         }
 
         

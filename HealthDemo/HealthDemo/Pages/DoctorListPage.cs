@@ -20,7 +20,7 @@ namespace HealthDemo.Pages
         public DoctorListPage()
             : base()
         {
-            lblTitle.Text = "Search Result";
+            lblTitle.Text = AppResources.Doctors_Title;
             //VM = ViewModelLocator.DoctorVM;            
             BindingContext = ViewModelLocator.DoctorVM;
 

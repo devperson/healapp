@@ -23,12 +23,14 @@ namespace HealthDemo.Pages
         public ContentView LoadingIndicator; //Frame
         protected ListView lvMenu;
         private bool WithLoadIndecator = true, WIthMenu;
+        public List<MenuItem> MenuItems;
         
         public MasterPage(bool withLoadIndicator=true, bool withMenu = true)
         {
             WithLoadIndecator = withLoadIndicator;
             WIthMenu = withMenu;
             NavigationPage.SetHasNavigationBar(this, false);
+            this.MenuItems = this.GetMenuItems();
             RenderTemplateView();            			
 
             btnBack.Clicked += (s, e) =>
@@ -202,10 +204,10 @@ namespace HealthDemo.Pages
                 VerticalOptions = LayoutOptions.FillAndExpand, 
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
-            btnInfo = new TransparentButton() { Text = "INFO"};
-            btnContact = new TransparentButton() { Text = "Contact" };
-            btnLocation = new TransparentButton() { Text = "Location", WidthRequest = 80 };
-            btnEServices = new TransparentButton() { Text = "e-Services", WidthRequest = 100 };
+            btnInfo = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Info };
+            btnContact = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Contact };
+            btnLocation = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Location, WidthRequest = 80 };
+            btnEServices = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Service, WidthRequest = 100 };
             toolbarStack.Children.Add(btnInfo);
             toolbarStack.Children.Add(btnContact);
             toolbarStack.Children.Add(btnLocation);
@@ -286,7 +288,7 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Start,
                 Font = Font.SystemFontOfSize(15),
-                Text = "Loading . . ."
+                Text = AppResources.MasterPage_Loading
             };
 
             var stackLayout = new StackLayout()
@@ -349,13 +351,13 @@ namespace HealthDemo.Pages
                 YAlign = TextAlignment.Center,
                 BackgroundColor = Color.FromHex("FF4EA3D2"),
                 Font = Font.SystemFontOfSize(15),
-                Text = "  Menu"
+                Text = " " + AppResources.MasterPage_Menu
             };
             lvMenu = new ListView() { BackgroundColor = Color.White, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             lvMenu.ItemTemplate = new DataTemplate(typeof(SimpleCell2));
             lvMenu.RowHeight = Device.OnPlatform(60, 70, 60);
 
-            lvMenu.ItemsSource = MenuItems;
+            lvMenu.ItemsSource = this.GetMenuItems();
             lvMenu.ItemSelected += (s, e) =>
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
@@ -375,18 +377,13 @@ namespace HealthDemo.Pages
                         if (lblTitle.Text != SearchDoctorPage.HeaderTitle)
                         {
                             PageViewLocator.ReadyToPush = true;
-                            //if (PageViewLocator.SearchDoctorPage == null)
-                                //PageViewLocator.SearchDoctorPage = new SearchDoctorPage();
-                                this.PushWithClear(new SearchDoctorPage());                                
+                            this.PushWithClear(new SearchDoctorPage());
                         }
                         break;
                     case PageType.HealthTipList:
                         if (lblTitle.Text != CategoryListPage.HeaderTitle)
                         {
-                            PageViewLocator.ReadyToPush = true;
-                            //if (PageViewLocator.CategoryListPage == null)
-                                //PageViewLocator.CategoryListPage = new CategoryListPage();
-
+                            PageViewLocator.ReadyToPush = true;                            
                             this.PushWithClear(new CategoryListPage());                                
                         }
                         break;
@@ -394,19 +391,13 @@ namespace HealthDemo.Pages
                         if (lblTitle.Text != InsuranceListPage.HeaderTitle)
                         {
                             PageViewLocator.ReadyToPush = true;
-                            //if (PageViewLocator.InsuranceListPage == null)
-                                //PageViewLocator.InsuranceListPage = new InsuranceListPage();
-
-                                this.PushWithClear(new InsuranceListPage());                                
+                            this.PushWithClear(new InsuranceListPage());
                         }
                         break;
                     case PageType.FAQ:
                         if (lblTitle.Text != FaqListPage.HeaderTitle)
                         {
-                            PageViewLocator.ReadyToPush = true;
-                            //if (PageViewLocator.FaqListPage == null)
-                                //PageViewLocator.FaqListPage = new FaqListPage();
-
+                            PageViewLocator.ReadyToPush = true;                            
                             this.PushWithClear(new FaqListPage());                                
                         }
                         break;
@@ -414,10 +405,7 @@ namespace HealthDemo.Pages
                         if (lblTitle.Text != NewsListPage.HeaderTitle)
                         {
                             PageViewLocator.ReadyToPush = true;
-                            //if (PageViewLocator.NewsListPage == null)
-                                //PageViewLocator.NewsListPage = new NewsListPage();
-
-                                this.PushWithClear(new NewsListPage());                                
+                            this.PushWithClear(new NewsListPage());
                         }
                         break;
                     default:
@@ -470,15 +458,18 @@ namespace HealthDemo.Pages
             }
         }
 
-        public List<MenuItem> MenuItems = new List<MenuItem>()
-        {   
-            new MenuItem(){Title = CategoryListPage.HeaderTitle, PageType = Pages.PageType.HealthTipList},
-            new MenuItem(){Title = SearchDoctorPage.HeaderTitle, PageType = Pages.PageType.SearchDoctor},
-            new MenuItem(){Title = InsuranceListPage.HeaderTitle, PageType = Pages.PageType.Insurances},
-            new MenuItem(){Title = FaqListPage.HeaderTitle, PageType = Pages.PageType.FAQ},
-            new MenuItem(){Title = NewsListPage.HeaderTitle, PageType = Pages.PageType.News},
-            new MenuItem(){Title = MainPage.HeaderTitle, PageType = Pages.PageType.Main}
-        };
+        private List<MenuItem> GetMenuItems()
+        {
+            return new List<MenuItem>() 
+            {   
+                new MenuItem(){Title = AppResources.Category_Title, PageType = Pages.PageType.HealthTipList},
+                new MenuItem(){Title = AppResources.SearchDoctor_Title, PageType = Pages.PageType.SearchDoctor},
+                new MenuItem(){Title = AppResources.InsuranceList_Title, PageType = Pages.PageType.Insurances},
+                new MenuItem(){Title = AppResources.FaqList_Title, PageType = Pages.PageType.FAQ},
+                new MenuItem(){Title = AppResources.NewsList_Title, PageType = Pages.PageType.News},
+                new MenuItem(){Title = AppResources.MainPage_Title, PageType = Pages.PageType.Main}
+            };
+        }        
 
         protected virtual void RenderContentView(StackLayout parent) { }
         protected virtual void OnMasterViewRendered() { }

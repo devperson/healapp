@@ -9,14 +9,11 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class NewsDetailPage:MasterPage
-    {
-        //private NewsViewModel VM { get; set; }
+    {        
         public NewsDetailPage()
             : base(false)
-        {
-            //VM = ViewModelLocator.NewsVM;
-            //BindingContext = VM;
-            lblTitle.Text = "News details";
+        {           
+            lblTitle.Text = AppResources.News_Title;
         }
 
 
@@ -41,7 +38,7 @@ namespace HealthDemo.Pages
             {
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(14),
-                Text = "Date:"
+                Text = AppResources.News_Date
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal };
             stackDate.Children.Add(labelForDate);

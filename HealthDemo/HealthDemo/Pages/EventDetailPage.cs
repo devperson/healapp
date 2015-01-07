@@ -15,7 +15,7 @@ namespace HealthDemo.Pages
         {
             //VM = ViewModelLocator.NewsVM;
             BindingContext = ViewModelLocator.EventVM.SelectedEvent;
-            lblTitle.Text = "Event details";
+            lblTitle.Text = AppResources.EventDetail_Title;
         }
 
 
@@ -40,7 +40,7 @@ namespace HealthDemo.Pages
             {
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(14),
-                Text = "Date:"
+                Text = AppResources.EventDetail_Date
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal };
             stackDate.Children.Add(labelForDate);

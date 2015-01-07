@@ -11,14 +11,12 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class HealthTipListPage : MasterPage
-    {
-        //private TipViewModel VM { get; set; }
+    {        
         private ListView lvTips;
         public HealthTipListPage() : base() 
-        {   
-            //VM = ViewModelLocator.TipVM;
+        {               
             BindingContext = ViewModelLocator.TipVM;
-            lblTitle.Text = "Health Tip - " + ViewModelLocator.TipVM.SelectedCategoryTitle;
+            lblTitle.Text = AppResources.Tips_Title + " - " + ViewModelLocator.TipVM.SelectedCategoryTitle;
 
             lvTips.ItemSelected += (s, e) =>
             {

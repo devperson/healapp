@@ -13,11 +13,10 @@ namespace HealthDemo.Pages
     {
         private Button btnSearch;
         private Picker btnCombo;
-        public static string HeaderTitle = "Find a Doctor";
-        //private DoctorViewModel VM { get; set; }
+        public static string HeaderTitle;        
         public SearchDoctorPage() : base() 
         {
-            //VM = ViewModelLocator.DoctorVM;
+            HeaderTitle = AppResources.SearchDoctor_Title;
             BindingContext = ViewModelLocator.DoctorVM;
             
 
@@ -60,13 +59,13 @@ namespace HealthDemo.Pages
             };
 
             var doctorLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
-            doctorLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = "Find Doctor"});
+            doctorLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = AppResources.SearchDoctor_Find});
             var txt = new CustomTextBox() { HorizontalOptions = LayoutOptions.FillAndExpand, TextColor = Color.Black };
             txt.SetBinding(CustomTextBox.TextProperty, "SearchText", BindingMode.TwoWay);
             doctorLayout.Children.Add(txt);
 
             var specLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
-            specLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = "Speicalties" });
+            specLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = AppResources.SearchDoctor_Spec });
             specLayout.Children.Add(this.CreateComboBox(ref btnCombo));
 
             btnSearch = new Button()
@@ -74,7 +73,7 @@ namespace HealthDemo.Pages
                 BackgroundColor = Color.FromHex("FF54A6D3"),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 TextColor = Color.Black,
-                Text = "Search"
+                Text = AppResources.SearchDoctor_Search
             };
             if (Device.OS == TargetPlatform.Android)
                 btnSearch.Font = Font.SystemFontOfSize(16);

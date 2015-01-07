@@ -21,7 +21,7 @@ namespace HealthDemo.Pages
                 {
                     if (success)
                     {
-                        await this.DisplayAlert("Request has been sent!", "Thank you for submitting your request, you will be contracted shortly", "OK");
+                        await this.DisplayAlert(AppResources.Appointment_SUBMIT_DLG_Title, AppResources.Appointment_SUBMIT_DLG_Msg, "OK");
                         Navigation.PopToRootAsync();
                     }
                 });
@@ -42,15 +42,15 @@ namespace HealthDemo.Pages
             var stlayout = new StackLayout() { Spacing = 5, Padding = new Thickness(30, 15, 30, 15), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 
 
-            stlayout.Children.Add(CreateItem("Title", "SelectedCme.Title", ViewModelLocator.CmeVM.SelectedCme, isLabel: true));
-            stlayout.Children.Add(CreateItem("Name", "NewCMERegistration.Name",ViewModelLocator.CmeVM.NewCMERegistration));
-            stlayout.Children.Add(CreateItem("Employer","NewCMERegistration.Employer",ViewModelLocator.CmeVM.NewCMERegistration));
-            stlayout.Children.Add(CreateItem("Contact Number", "NewCMERegistration.ContactNumber",ViewModelLocator.CmeVM.NewCMERegistration,Keyboard.Numeric));
-            stlayout.Children.Add(CreateItem("Email", "NewCMERegistration.Email", ViewModelLocator.CmeVM.NewCMERegistration, Keyboard.Email));
+            stlayout.Children.Add(CreateItem(AppResources.RegCme_Title, "SelectedCme.Title", ViewModelLocator.CmeVM.SelectedCme, isLabel: true));
+            stlayout.Children.Add(CreateItem(AppResources.RegCme_Name, "NewCMERegistration.Name",ViewModelLocator.CmeVM.NewCMERegistration));
+            stlayout.Children.Add(CreateItem(AppResources.RegCme_Employer,"NewCMERegistration.Employer",ViewModelLocator.CmeVM.NewCMERegistration));
+            stlayout.Children.Add(CreateItem(AppResources.RegCme_Contact, "NewCMERegistration.ContactNumber",ViewModelLocator.CmeVM.NewCMERegistration,Keyboard.Numeric));
+            stlayout.Children.Add(CreateItem(AppResources.RegCme_Email, "NewCMERegistration.Email", ViewModelLocator.CmeVM.NewCMERegistration, Keyboard.Email));
 
             var stackButtons = new StackLayout() { Spacing = 15, Padding = new Thickness(0, 15, 0, 0), HorizontalOptions = LayoutOptions.CenterAndExpand, Orientation = StackOrientation.Horizontal };
-            btnRegister = this.CreateButton("Register");
-            btnReset = this.CreateButton("Reset");
+            btnRegister = this.CreateButton(AppResources.RegCme_Register);
+            btnReset = this.CreateButton(AppResources.RegCme_Reset);
             stackButtons.Children.Add(btnRegister);
             stackButtons.Children.Add(btnReset);
             stlayout.Children.Add(stackButtons);

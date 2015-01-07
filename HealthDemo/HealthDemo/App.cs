@@ -1,4 +1,5 @@
-﻿using HealthDemo.Pages;
+﻿using HealthDemo.Dependency;
+using HealthDemo.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,12 @@ namespace HealthDemo
 {
     public class App
     {
+        public static string SelectedLocal = "En"; //Ar
         public static Page GetMainPage()
         {
-            PageViewLocator.NavigationPage = new NavigationPageEx(new MainPage());
-            //PageViewLocator.NavigationPage.Popped += (s, e) =>
-            //{
-            //    ((MasterPage)e.Page).Content = null;
-            //};			
-
-
+            if (SelectedLocal.ToLower() != "en")
+                DependencyService.Get<ILocalize>().SetLocale(SelectedLocal);            
+            PageViewLocator.NavigationPage = new NavigationPageEx(new MainPage());            
             return PageViewLocator.NavigationPage;
         }
     }

@@ -20,5 +20,6 @@ namespace HealthDemo.Service
         void CreateAppointment(Appointment appoint, Action<ResponseBase> onCompleted);
         void CreateFile(FileModel file, Action<ResponseBase> onCompleted);
         void PostObject<T>(string requestUrl, T obj, Action<ResponseBase> onCompleted);
+        void SetLocal(string localName);
     }
 }

@@ -12,12 +12,13 @@ namespace HealthDemo.Pages
 {
     public class CalendarListPage : MasterPage
     {
-        public static string HeaderTitle = "Calendar";
+        public static string HeaderTitle;
         private ListView lvCme;
 
         public CalendarListPage()
             : base()
         {
+            HeaderTitle = AppResources.Calendar_Title;
             BindingContext = ViewModelLocator.CmeVM;
             lblTitle.Text = HeaderTitle;
 

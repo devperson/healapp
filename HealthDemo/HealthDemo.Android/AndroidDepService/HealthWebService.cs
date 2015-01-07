@@ -17,7 +17,7 @@ namespace HealthDemo
     public class HealthWebService : IWebService
     {
         private RestClient client;
-
+        private string _local;
         protected RestClient Client
         {
             get
@@ -27,13 +27,18 @@ namespace HealthDemo
         }
 
         public HealthWebService()
-		{
+		{            
 			client = new RestClient(Constants.ApiUrl);
 			client.AddDefaultHeader("Accept", "application/json");
 		}
 
+        private string AddLocalVar(string apiName)
+        {
+            return string.Format("{0}?local={1}", apiName, _local);
+        }
         public async void SearchDoctors(SearchDoctorRequest request, Action<DoctorResponse> onCompleted)
         {
+            request.Local = this._local;
             var asyncResult = await ExecuteServiceMethod<DoctorResponse>("doctors/SearchDoctors", Method.POST,content =>
             {
                 var response = new DoctorResponse() { Result = JsonConvert.DeserializeObject<List<Doctor>>(content) };
@@ -44,7 +49,7 @@ namespace HealthDemo
 
         public async void GetCategories(Action<CategoryResponse> onCompleted)
         {
-            var asyncResult = await ExecuteServiceMethod<CategoryResponse>("TipCategories", Method.GET, content =>
+            var asyncResult = await ExecuteServiceMethod<CategoryResponse>(AddLocalVar("TipCategories"), Method.GET, content =>
             {
                 var response = new CategoryResponse() { Result = JsonConvert.DeserializeObject<List<HealthCategory>>(content) };
                 return response;
@@ -54,17 +59,17 @@ namespace HealthDemo
 
         public async void GetHealthTipsByCategory(int categoryID, Action<HealthTipResponse> onCompleted)
         {
-            var asyncResult = await ExecuteServiceMethod<HealthTipResponse>(string.Format("Tips/GetByCatId/?id={0}", categoryID), Method.GET, content =>
-                {
-                    var response = new HealthTipResponse() { Result = JsonConvert.DeserializeObject<List<HealthTip>>(content) };
-                    return response;
-                });
+            var asyncResult = await ExecuteServiceMethod<HealthTipResponse>(string.Format("Tips/GetByCatId/?id={0}&local={1}", categoryID, _local), Method.GET, content =>
+            {
+                var response = new HealthTipResponse() { Result = JsonConvert.DeserializeObject<List<HealthTip>>(content) };
+                return response;
+            });
             onCompleted(asyncResult);
         }
 
         public async void GetSpeicalties(Action<PositionResponse> onCompleted)
         {
-            var asyncResult = await ExecuteServiceMethod<PositionResponse>("position", Method.GET, content =>
+            var asyncResult = await ExecuteServiceMethod<PositionResponse>(AddLocalVar("position"), Method.GET, content =>
                 {
                     var response = new PositionResponse() { Result = JsonConvert.DeserializeObject<List<DocPosition>>(content) };
                     return response;
@@ -74,7 +79,7 @@ namespace HealthDemo
 
         public async void GetInsurances(Action<InsuranceResponse> onCompleted)
         {
-            var asyncResult = await ExecuteServiceMethod<InsuranceResponse>("insurance", Method.GET, content =>
+            var asyncResult = await ExecuteServiceMethod<InsuranceResponse>(AddLocalVar("insurance"), Method.GET, content =>
             {
                 var response = new InsuranceResponse() { Result = JsonConvert.DeserializeObject<List<Insurance>>(content) };
                 return response;
@@ -135,7 +140,7 @@ namespace HealthDemo
                         else response.Success = true;
                     }
                     else
-                    {
+                    {                        
                         errorResponse.ExceptionMessage = Constants.NoInternetMessage;
 					    response.Success = false;
                     }
@@ -163,12 +168,9 @@ namespace HealthDemo
         }
 
 
-
-
-
         public async void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase
         {
-            var asyncResult = await ExecuteServiceMethod<T>(uri, Method.GET, content =>
+            var asyncResult = await ExecuteServiceMethod<T>(AddLocalVar(uri), Method.GET, content =>
             {
                 var response = Activator.CreateInstance<T>();
                 var list = JsonConvert.DeserializeObject<List<modelT>>(content);
@@ -176,6 +178,11 @@ namespace HealthDemo
                 return response;
             });
             onCompleted(asyncResult);
+        }
+
+        public void SetLocal(string localName)
+        {
+            this._local = localName;
         }
     }
 }

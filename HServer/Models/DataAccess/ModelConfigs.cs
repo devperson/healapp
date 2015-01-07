@@ -14,12 +14,30 @@ namespace HServer.Models.DataAccess
             this.HasRequired(x => x.Category).WithMany(c => c.Tips).HasForeignKey(x => x.CategoryId);            
         }
     }
+    public class TipLocalizationModelConfig : EntityTypeConfiguration<TipLocalization>
+    {
+        public TipLocalizationModelConfig()
+        {
+            HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalTips).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.Tip).WithMany(c => c.Localizations).HasForeignKey(x => x.TipId);      
+        }
+    }
 
     public class TipCategoryModelConfig : EntityTypeConfiguration<TipCategory>
     {
         public TipCategoryModelConfig()
         {
             HasKey(x => x.Id);            
+        }
+    }
+    public class TipCategoryLocalModelConfig : EntityTypeConfiguration<TipCategoryLocalization>
+    {
+        public TipCategoryLocalModelConfig()
+        {
+            HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalCategories).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.TipCategory).WithMany(c => c.Localizations).HasForeignKey(x => x.TipCategoryId);      
         }
     }
 
@@ -33,6 +51,15 @@ namespace HServer.Models.DataAccess
             this.HasOptional(x => x.Position).WithMany(c => c.Doctors).HasForeignKey(x => x.PositionId);
             this.HasMany(x => x.Qualifications).WithMany(c => c.Doctors);
             this.HasMany(x => x.Languages).WithMany(c => c.Doctors);
+        }
+    }
+    public class DoctorLocalizationModelConfig : EntityTypeConfiguration<DoctorLocalization>
+    {
+        public DoctorLocalizationModelConfig()
+        {
+            this.HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalDoctors).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.Doctor).WithMany(c => c.Localizations).HasForeignKey(x => x.DoctorId);            
         }
     }
 
@@ -83,12 +110,30 @@ namespace HServer.Models.DataAccess
             HasKey(x => x.Id);
         }
     }
+    public class FaqLocalModelConfig : EntityTypeConfiguration<FaqLocalization>
+    {
+        public FaqLocalModelConfig()
+        {
+            HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalFaqs).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.Faq).WithMany(c => c.Localizations).HasForeignKey(x => x.FaqId);    
+        }
+    }
 
     public class NewsModelConfig : EntityTypeConfiguration<News>
     {
         public NewsModelConfig()
         {
             HasKey(x => x.Id);
+        }
+    }
+    public class NewsLocalModelConfig : EntityTypeConfiguration<NewsLocalization>
+    {
+        public NewsLocalModelConfig()
+        {
+            HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalNews).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.News).WithMany(c => c.Localizations).HasForeignKey(x => x.NewsId);
         }
     }
 
@@ -99,6 +144,32 @@ namespace HServer.Models.DataAccess
             HasKey(x => x.Id);
         }
     }
+    public class InsuranceLocalModelConfig : EntityTypeConfiguration<InsuranceLocalization>
+    {
+        public InsuranceLocalModelConfig()
+        {
+            HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalInsurance).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.Insurance).WithMany(c => c.Localizations).HasForeignKey(x => x.InsuranceId);
+        }
+    }
+
+    public class CmeModelConfig : EntityTypeConfiguration<Cme>
+    {
+        public CmeModelConfig()
+        {
+            HasKey(x => x.Id);
+        }
+    }
+    public class CmelocalModelConfig : EntityTypeConfiguration<CmeLocalization>
+    {
+        public CmelocalModelConfig()
+        {
+            HasKey(x => x.Id);
+            this.HasOptional(x => x.Localization).WithMany(c => c.LocalCmes).HasForeignKey(x => x.LocalizationId);
+            this.HasOptional(x => x.Cme).WithMany(c => c.Localizations).HasForeignKey(x => x.CmeId);
+        }
+    }
 
     public class ExistingAppointConfig : EntityTypeConfiguration<ExistingAppointment>
     {
@@ -107,4 +178,5 @@ namespace HServer.Models.DataAccess
             HasKey(x => x.Id);
         }
     }
+   
 }

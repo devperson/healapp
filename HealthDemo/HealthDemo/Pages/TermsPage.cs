@@ -12,11 +12,9 @@ namespace HealthDemo.Pages
 {
     public class TermsPage : MasterPage
     {   
-        private Button btnOk;
-        //private FileViewModel VM { get; set; }
+        private Button btnOk;        
         public TermsPage():base()
-        {
-            //VM = ViewModelLocator.FileVM;
+        {            
             this.BindingContext = ViewModelLocator.FileVM;
             btnOk.Clicked += (s, e) =>
             {
@@ -26,7 +24,7 @@ namespace HealthDemo.Pages
                     {
                         Device.BeginInvokeOnMainThread(async () =>
                             {
-                                await this.DisplayAlert("File has been sent!", "Thank you for submitting the File, you will be contacted shortly", "OK");
+                                await this.DisplayAlert(AppResources.TermsPage_DLG_Title, AppResources.TermsPage_DLG_Msg, "OK");
                                 Navigation.PopToRootAsync();
                             });
                     }
@@ -45,13 +43,13 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.StartAndExpand
             };
-            lblTerms.Text = LoadTermsText();
+            lblTerms.Text = AppResources.TermsPage_TermsText;//LoadTermsText();
 
             btnOk = new Button()
             {
                 BackgroundColor = Color.FromHex("FF54A6D3"),
                 TextColor = Color.Black,
-                Text = "I agree",
+                Text = AppResources.TermsPage_Agree,
                 HorizontalOptions = LayoutOptions.Center,
                 WidthRequest = 200,
                 HeightRequest = 40,
@@ -66,19 +64,18 @@ namespace HealthDemo.Pages
 			parent.Children.Add(rootLayout);
         }
 
-		private string LoadTermsText()
-		{
-			var assembly = typeof(TermsPage).GetTypeInfo().Assembly;
-			Stream stream = assembly.GetManifestResourceStream("HealthDemo.Terms.txt");
-			string text = string.Empty;
-			using (var reader = new System.IO.StreamReader(stream))
-			{
-				text = reader.ReadToEnd();
-			}
+        //private string LoadTermsText()
+        //{
+        //    var assembly = typeof(TermsPage).GetTypeInfo().Assembly;
+        //    Stream stream = assembly.GetManifestResourceStream("HealthDemo.Terms.txt");
+        //    string text = string.Empty;
+        //    using (var reader = new System.IO.StreamReader(stream))
+        //    {
+        //        text = reader.ReadToEnd();
+        //    }
 
-			return text;
-
-		}
+        //    return text;
+        //}
 
 
 		protected override void OnAppearing()

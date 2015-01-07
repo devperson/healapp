@@ -14,7 +14,7 @@ namespace HealthDemo.Pages
         public FaqDetailPage()
             : base(false)
         {                        
-            lblTitle.Text = "FAQ item";
+            lblTitle.Text = AppResources.Faq_Title;
         }
 
         protected override void RenderContentView(StackLayout parent)

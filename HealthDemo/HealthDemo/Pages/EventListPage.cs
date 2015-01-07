@@ -12,14 +12,13 @@ namespace HealthDemo.Pages
 {
     public class EventListPage : MasterPage
     {
-        public static string HeaderTitle = "Events";
+        public static string HeaderTitle;
         private ListView lvEvent;
         public EventListPage()
             : base()
-        {
-            
-            //VM = ViewModelLocator.NewsVM;
+        {                        
             BindingContext = ViewModelLocator.EventVM;
+            HeaderTitle = AppResources.Event_Title;
             lblTitle.Text = HeaderTitle;
 
             lvEvent.ItemSelected += (s, e) =>

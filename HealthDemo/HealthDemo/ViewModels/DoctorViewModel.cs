@@ -40,24 +40,24 @@ namespace HealthDemo.ViewModels
         {
             IsLoading = true;
             WebService.SearchDoctors(new SearchDoctorRequest()
+            {
+                Title = SearchText,
+                PositionId = SelectedSpeicalties!=null ? SelectedSpeicalties.ID : 0
+            }, result =>
+            {
+                if (result.Success)
                 {
-                    Title = SearchText,
-                    PositionId = SelectedSpeicalties!=null ? SelectedSpeicalties.ID : 0
-                }, result =>
+                    DoctorList.Clear();
+                    DoctorList = result.Result;
+                    RaisePropertyChanged("DoctorList");
+                }
+                else
                 {
-                    if (result.Success)
-                    {
-                        DoctorList.Clear();
-                        DoctorList = result.Result;
-                        RaisePropertyChanged("DoctorList");
-                    }
-                    else
-                    {
-                        ShowError(result.ErrorMessage);
-                    }
-                    IsLoading = false;
-                    onComplete();
-                });
+                    ShowError(result.ErrorMessage);
+                }
+                IsLoading = false;
+                onComplete();
+            });
         }
 
         public void LoadSpeicalties(Action onComplete)
@@ -77,7 +77,7 @@ namespace HealthDemo.ViewModels
                             ShowError(result.ErrorMessage);
                         }
                         if (!SpeicaltyList.Any(s => s.ID == 0))
-                            SpeicaltyList.Insert(0, new DocPosition() { ID = 0, Title = "All" });
+                            SpeicaltyList.Insert(0, new DocPosition() { ID = 0, Title = AppResources.Doctors_All });
                         IsLoading = false;
                         onComplete();
 					});

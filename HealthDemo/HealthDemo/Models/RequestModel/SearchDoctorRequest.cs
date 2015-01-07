@@ -10,5 +10,6 @@ namespace HealthDemo.Service.RequestModel
     {
         public string Title { get; set; }
         public int PositionId { get; set; }
+        public string  Local { get; set; }
     }
 }

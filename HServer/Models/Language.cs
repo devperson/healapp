@@ -10,10 +10,22 @@ namespace HServer.Models
         public Language()
         {
             this.Doctors = new List<Doctor>();
+            this.Localizations = new List<LanguageLocalization>();
         }
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; }        
 
         public List<Doctor> Doctors { get; set; }
+        public List<LanguageLocalization> Localizations { get; set; }
+    }
+
+    public class LanguageLocalization
+    {
+        public int Id { get; set; }
+        public int LocalizationId { get; set; }
+        public int LanguageId { get; set; }
+        public string Name { get; set; }
+
+        public LocalizationLanguage Localization { get; set; }
+        public Language Language { get; set; }
     }
 }

@@ -9,12 +9,11 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class TipDetailPage : MasterPage
-    {
-        //private TipViewModel VM { get; set; }
+    {        
         public TipDetailPage()
             : base(false)
         {           
-            lblTitle.Text = "Health Tip";
+            lblTitle.Text = AppResources.Tips_Title;
         }
 
 
@@ -51,8 +50,7 @@ namespace HealthDemo.Pages
                 Padding = new Thickness(20, 10, 20, 20) 
             };
             var frmae2 = new ContentView() 
-            { 
-                //HasShadow = false, OutlineColor = Color.Black, 
+            {                 
                 BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(15, 15, 7, 15) 
             };
             frmae2.Content = lblDescription;
@@ -64,8 +62,7 @@ namespace HealthDemo.Pages
             stlayout.Children.Add(frame1);
             rootScrollView.Content = stlayout;
             if (Device.OS == TargetPlatform.Android)
-                rootScrollView.IsClippedToBounds = true;
-            //rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedTip"));
+                rootScrollView.IsClippedToBounds = true;            
             parent.Children.Add(rootScrollView);
         }
     }
