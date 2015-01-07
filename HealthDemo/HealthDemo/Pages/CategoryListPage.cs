@@ -11,14 +11,12 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class CategoryListPage : MasterPage
-    {
-        //private TipViewModel VM { get; set; }
+    {        
         private ListView lvCategories;
-        public static string HeaderTitle;
+        
         public CategoryListPage()
             : base()
-        {
-            HeaderTitle = AppResources.Category_Title;
+        {            
             BindingContext = ViewModelLocator.TipVM;
 
             lvCategories.ItemSelected += (s, e) =>
@@ -40,8 +38,8 @@ namespace HealthDemo.Pages
                     this.Navigation.PushAsync(PageViewLocator.HealthTipListPage);                    
                 }
             };
-           
-            lblTitle.Text = HeaderTitle;
+
+            lblTitle.Text = AppResources.Category_Title;
         }
 
         protected override void RenderContentView(StackLayout parent)

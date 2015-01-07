@@ -18,5 +18,10 @@ namespace HealthDemo
             PageViewLocator.NavigationPage = new NavigationPageEx(new MainPage());            
             return PageViewLocator.NavigationPage;
         }
+
+        public static Page GetLanguagesPage(IAppLoader appLoader)
+        {
+            return new LanguagesPage(appLoader);
+        }
     }
 }

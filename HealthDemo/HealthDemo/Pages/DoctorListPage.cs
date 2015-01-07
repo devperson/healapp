@@ -13,15 +13,13 @@ namespace HealthDemo.Pages
 {
     public class DoctorListPage : MasterPage
     {
-        private ListView lvResult;
-        //private DoctorViewModel VM { get; set; }
-        
+        private ListView lvResult;                
 
         public DoctorListPage()
             : base()
         {
             lblTitle.Text = AppResources.Doctors_Title;
-            //VM = ViewModelLocator.DoctorVM;            
+            
             BindingContext = ViewModelLocator.DoctorVM;
 
             lvResult.ItemSelected += (s, e) =>

@@ -9,12 +9,10 @@ using Xamarin.Forms.Labs.Controls;
 namespace HealthDemo.Pages
 {
     public class MainPage : MasterPage
-    {
-        public static string HeaderTitle;
+    {        
         ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq, btnEcommerce,btnCME,btnEvent;
         public MainPage() : base() 
-        {
-            HeaderTitle = AppResources.MainPage_Title;
+        {            
             btnDoctors.Clicked += (s, e) =>
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
@@ -119,7 +117,7 @@ namespace HealthDemo.Pages
             parent.Children.Add(scrollview);
 
             btnBack.Source = null;
-            lblTitle.Text = HeaderTitle;
+            lblTitle.Text = AppResources.MainPage_Title;
         }
 
         public static StackLayout CreateItemStacklayout()

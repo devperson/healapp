@@ -18,10 +18,7 @@ namespace HealthDemo.Pages
 
 
         protected override void RenderContentView(StackLayout parent)
-        {
-            //VM = ViewModelLocator.TipVM;
-            //BindingContext = VM;
-
+        {            
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 10, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 
@@ -44,18 +41,17 @@ namespace HealthDemo.Pages
             lblDescription.SetBinding(Label.TextProperty, new Binding("Description"));
             
             var frame1 = new ContentView() 
-            { 
-                //HasShadow = false, 
+            {                 
                 HorizontalOptions = LayoutOptions.FillAndExpand, 
                 Padding = new Thickness(20, 10, 20, 20) 
             };
-            var frmae2 = new ContentView() 
+            var frame2 = new ContentView() 
             {                 
                 BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(15, 15, 7, 15) 
             };
-            frmae2.Content = lblDescription;
+            frame2.Content = lblDescription;
             var border = new StackLayout() { BackgroundColor = Color.Black, Orientation = StackOrientation.Vertical, Padding = 1 };
-            border.Children.Add(frmae2);
+            border.Children.Add(frame2);
             frame1.Content = border;
 
             stlayout.Children.Add(stkl);

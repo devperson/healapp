@@ -18,53 +18,27 @@ using Xamarin.Forms.Labs;
 using XLabs.Serialization;
 using HealthDemo.Droid;
 using HealthDemo.Pages;
+using HealthDemo.Dependency;
 
 namespace HealthDemo.Droid
 {
-    [Activity(Label = "Health Demo", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]//, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : XFormsApplicationDroid
+    [Activity(Label = "Health Demo", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
+    public class MainActivity : XFormsApplicationDroid, IAppLoader
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            if (!Resolver.IsSet)
-            {
-                this.SetIoc();
-            }
-            else
-            {
-                var app = Resolver.Resolve<IXFormsApp>() as IXFormsApp<XFormsApplicationDroid>;
-                app.AppContext = this;
-            }
-
+           
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
-            SetPage(App.GetMainPage());				
+            SetPage(App.GetLanguagesPage(this));				            
         }
 
-        /// <summary>
-        /// Sets the IoC.
-        /// </summary>
-        private void SetIoc()
+        public void ShowMainPage()
         {
-            var resolverContainer = new SimpleContainer();
-
-            var app = new XFormsAppDroid();
-            app.Init(this);
-            resolverContainer.Register<IDevice>(t => AndroidDevice.CurrentDevice)
-                .Register<IDisplay>(t => t.Resolve<IDevice>().Display)
-                //.Register<IJsonSerializer, Services.Serialization.JsonNET.JsonSerializer>()
-                //.Register<IJsonSerializer, XLabs.Serialization.ServiceStack.JsonSerializer>()
-                .Register<IDependencyContainer>(resolverContainer)
-                .Register<IXFormsApp>(app);
-                //.Register<ISimpleCache>(
-                //    t => new SQLiteSimpleCache(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(),
-                //        new SQLite.Net.SQLiteConnectionString(pathToDatabase, true), t.Resolve<IJsonSerializer>()));
-
-            Resolver.SetResolver(resolverContainer.GetResolver());
-        }
-
+            StartActivity(new Intent(this, typeof(AppActivity)));
+            Finish();           
+        }        
     }
 }
 

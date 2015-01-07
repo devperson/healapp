@@ -9,13 +9,11 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class ContactPage : MasterPage
-    {
-        public static string HeaderTitle;
+    {        
         public ContactPage()
             : base(false)
-        {
-            HeaderTitle = AppResources.Contact_Title;
-            lblTitle.Text = HeaderTitle;
+        {            
+            lblTitle.Text = AppResources.Contact_Title;
         }
 
         protected override void RenderContentView(StackLayout parent)

@@ -12,8 +12,7 @@ namespace HealthDemo.Pages
     {
         public EventDetailPage()
             : base(false)
-        {
-            //VM = ViewModelLocator.NewsVM;
+        {            
             BindingContext = ViewModelLocator.EventVM.SelectedEvent;
             lblTitle.Text = AppResources.EventDetail_Title;
         }

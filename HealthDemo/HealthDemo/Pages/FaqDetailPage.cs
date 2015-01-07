@@ -9,8 +9,7 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class FaqDetailPage : MasterPage
-    {
-        //private FaqViewModel VM { get; set; }
+    {        
         public FaqDetailPage()
             : base(false)
         {                        
@@ -18,9 +17,7 @@ namespace HealthDemo.Pages
         }
 
         protected override void RenderContentView(StackLayout parent)
-        {
-            //VM = ViewModelLocator.FaqVM;
-
+        {            
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 0, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 
@@ -36,22 +33,16 @@ namespace HealthDemo.Pages
             {
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(14),
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                //VerticalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand,                
             };
             lblDescription.SetBinding(Label.TextProperty, new Binding("Description"));
-
-            //var stackLayoutDetails = new StackLayout() { BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, Padding = new Thickness(15, 15, 7, 15), Spacing = 10 };
-            //stackLayoutDetails.Children.Add(lblDescription);
+            
             var frame1 = new StackLayout() //Frame
-            { 
-                //HasShadow = false, 
+            {                 
                 HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 40) 
             };
             var frmae2 = new StackLayout() //Frame
-            { 
-                //HasShadow = false, 
-                //OutlineColor = Color.Black, 
+            {                 
                 BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(15, 15, 7, 15) 
             };
             frmae2.Children.Add(lblDescription);
@@ -64,7 +55,7 @@ namespace HealthDemo.Pages
             rootScrollView.Content = stlayout;
             if (Device.OS == TargetPlatform.Android)
                 rootScrollView.IsClippedToBounds = true;
-            //rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedFAQ"));
+            
             parent.Children.Add(rootScrollView);
         }
     }

@@ -11,12 +11,11 @@ namespace HealthDemo.Pages
     public class ServicesPage : MasterPage
     {
         ImageButton btnOpenFile, btnRequest, btnViewAppointment;
-        public static string HeaderTitle;
+        
         public ServicesPage()
 			: base(false)
-		{
-            HeaderTitle = AppResources.MasterPage_FOOTER_Service;
-			lblTitle.Text = HeaderTitle;
+		{            
+            lblTitle.Text = AppResources.MasterPage_FOOTER_Service;
 
 			btnOpenFile.Clicked += (s, e) => 
             {

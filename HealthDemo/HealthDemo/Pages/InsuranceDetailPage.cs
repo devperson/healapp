@@ -17,9 +17,7 @@ namespace HealthDemo.Pages
         }
 
         protected override void RenderContentView(StackLayout parent)
-        {
-            //VM = ViewModelLocator.InsuranceVM;
-
+        {            
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 10, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 

@@ -11,15 +11,15 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class EventListPage : MasterPage
-    {
-        public static string HeaderTitle;
+    {        
         private ListView lvEvent;
+
         public EventListPage()
             : base()
         {                        
             BindingContext = ViewModelLocator.EventVM;
-            HeaderTitle = AppResources.Event_Title;
-            lblTitle.Text = HeaderTitle;
+            
+            lblTitle.Text = AppResources.Event_Title;
 
             lvEvent.ItemSelected += (s, e) =>
             {

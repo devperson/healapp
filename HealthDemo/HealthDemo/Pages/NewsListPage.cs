@@ -11,15 +11,13 @@ using Xamarin.Forms;
 namespace HealthDemo.Pages
 {
     public class NewsListPage:MasterPage
-    {        
-        public static string HeaderTitle;
+    {                
         private ListView lvNews;
         public NewsListPage()
             : base()
         {            
-            BindingContext = ViewModelLocator.NewsVM;
-            HeaderTitle = AppResources.NewsList_Title;
-            lblTitle.Text = HeaderTitle;
+            BindingContext = ViewModelLocator.NewsVM;            
+            lblTitle.Text = AppResources.NewsList_Title;
 
             lvNews.ItemSelected += (s, e) =>
             {

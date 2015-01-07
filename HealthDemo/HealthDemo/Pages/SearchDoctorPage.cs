@@ -13,10 +13,9 @@ namespace HealthDemo.Pages
     {
         private Button btnSearch;
         private Picker btnCombo;
-        public static string HeaderTitle;        
+        
         public SearchDoctorPage() : base() 
-        {
-            HeaderTitle = AppResources.SearchDoctor_Title;
+        {            
             BindingContext = ViewModelLocator.DoctorVM;
             
 
@@ -89,7 +88,7 @@ namespace HealthDemo.Pages
 
             parent.Children.Add(content);
 
-            lblTitle.Text = HeaderTitle;
+            lblTitle.Text = AppResources.SearchDoctor_Title;
         }
 
         protected override void OnAppearing()

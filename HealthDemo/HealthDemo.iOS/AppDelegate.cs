@@ -11,6 +11,7 @@ using Xamarin;
 using XLabs.Ioc;
 using Xamarin.Forms.Labs.Mvvm;
 using Xamarin.Forms.Labs;
+using HealthDemo.Dependency;
 
 namespace HealthDemo.iOS
 {
@@ -18,7 +19,7 @@ namespace HealthDemo.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-	public partial class AppDelegate : XFormsApplicationDelegate
+	public partial class AppDelegate : XFormsApplicationDelegate, IAppLoader
     {
         // class-level declarations
         UIWindow window;
@@ -38,37 +39,37 @@ namespace HealthDemo.iOS
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            window.RootViewController = App.GetMainPage().CreateViewController();
+            window.RootViewController = App.GetLanguagesPage(this).CreateViewController();
 
 			window.MakeKeyAndVisible();
 
             return true;
         }
 
+        public void ShowMainPage()
+        {
+            window.RootViewController = App.GetMainPage().CreateViewController();
+            window.MakeKeyAndVisible();
+        }
+
 		/// <summary>
 		/// Sets the IoC.
 		/// </summary>
-		private void SetIoc()
-		{
-			var resolverContainer = new SimpleContainer();
+        private void SetIoc()
+        {
+            var resolverContainer = new SimpleContainer();
 
-			var app = new XFormsAppiOS();
-			app.Init(this);
+            var app = new XFormsAppiOS();
+            app.Init(this);
 
-//			var documents = app.AppDataDirectory;
-//			var pathToDatabase = Path.Combine(documents, "xforms.db");
+            resolverContainer.Register<IDevice>(t => AppleDevice.CurrentDevice)
+                .Register<IDisplay>(t => t.Resolve<IDevice>().Display)                
+                .Register<IXFormsApp>(app)
+                .Register<IDependencyContainer>(t => resolverContainer);
 
-			resolverContainer.Register<IDevice> (t => AppleDevice.CurrentDevice)
-				.Register<IDisplay> (t => t.Resolve<IDevice> ().Display)
-			//.Register<IJsonSerializer, XLabs.Serialization.ServiceStack.JsonSerializer>()
-			//.Register<IJsonSerializer, Services.Serialization.SystemJsonSerializer>()
-				.Register<IXFormsApp> (app)
-				.Register<IDependencyContainer> (t => resolverContainer);
-//				.Register<ISimpleCache>(
-//					t => new SQLiteSimpleCache(new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS(),
-//						new SQLite.Net.SQLiteConnectionString(pathToDatabase, true), t.Resolve<IJsonSerializer>()));
+            Resolver.SetResolver(resolverContainer.GetResolver());
+        }
 
-			Resolver.SetResolver(resolverContainer.GetResolver());
-		}
+        
     }
 }

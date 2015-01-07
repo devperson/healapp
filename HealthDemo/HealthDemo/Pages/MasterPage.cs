@@ -39,7 +39,7 @@ namespace HealthDemo.Pages
                     return;
                 OnBackPressed();
                 PageViewLocator.ReadyToPush = false;
-                if (lblTitle.Text != MainPage.HeaderTitle)                    
+                if (lblTitle.Text != AppResources.MainPage_Title)                    
 					Navigation.PopAsync();                
             };
 
@@ -48,7 +48,7 @@ namespace HealthDemo.Pages
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
 
-                if (lblTitle.Text != AboutPage.HeaderTitle)
+                if (lblTitle.Text != AppResources.About_HeaderTitle)
                 {
                     PageViewLocator.ReadyToPush = true;                    
                     PushWithClear(new AboutPage());                    
@@ -60,7 +60,7 @@ namespace HealthDemo.Pages
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
 
-                if (lblTitle.Text != ContactPage.HeaderTitle)
+                if (lblTitle.Text != AppResources.Contact_Title)
                 {
                     PageViewLocator.ReadyToPush = true;                    
                     PushWithClear(new ContactPage());                       
@@ -72,7 +72,7 @@ namespace HealthDemo.Pages
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
 
-                if (lblTitle.Text != LocationPage.HeaderTitle)
+                if (lblTitle.Text != AppResources.Location_Title)
                 {
                     PageViewLocator.ReadyToPush = true;
                     PushWithClear(new LocationPage());
@@ -84,7 +84,7 @@ namespace HealthDemo.Pages
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
 
-                if (lblTitle.Text != ServicesPage.HeaderTitle)
+                if (lblTitle.Text != AppResources.MasterPage_FOOTER_Service)
                 {
                     PageViewLocator.ReadyToPush = true;
                     PushWithClear(new ServicesPage());
@@ -367,42 +367,42 @@ namespace HealthDemo.Pages
                 switch (selected.PageType)
                 {
                     case PageType.Main:
-                        if (lblTitle.Text != MainPage.HeaderTitle)
+                        if (lblTitle.Text != AppResources.MainPage_Title)
                         {
                             PageViewLocator.ReadyToPush = false;
                             Navigation.PopToRootAsync();
                         }
                         break;
                     case PageType.SearchDoctor:
-                        if (lblTitle.Text != SearchDoctorPage.HeaderTitle)
+                        if (lblTitle.Text != AppResources.SearchDoctor_Title)
                         {
                             PageViewLocator.ReadyToPush = true;
                             this.PushWithClear(new SearchDoctorPage());
                         }
                         break;
                     case PageType.HealthTipList:
-                        if (lblTitle.Text != CategoryListPage.HeaderTitle)
+                        if (lblTitle.Text != AppResources.Category_Title)
                         {
                             PageViewLocator.ReadyToPush = true;                            
                             this.PushWithClear(new CategoryListPage());                                
                         }
                         break;
                     case PageType.Insurances:
-                        if (lblTitle.Text != InsuranceListPage.HeaderTitle)
+                        if (lblTitle.Text != AppResources.InsuranceList_Title)
                         {
                             PageViewLocator.ReadyToPush = true;
                             this.PushWithClear(new InsuranceListPage());
                         }
                         break;
                     case PageType.FAQ:
-                        if (lblTitle.Text != FaqListPage.HeaderTitle)
+                        if (lblTitle.Text != AppResources.FaqList_Title)
                         {
                             PageViewLocator.ReadyToPush = true;                            
                             this.PushWithClear(new FaqListPage());                                
                         }
                         break;
                     case PageType.News:
-                        if (lblTitle.Text != NewsListPage.HeaderTitle)
+                        if (lblTitle.Text != AppResources.NewsList_Title)
                         {
                             PageViewLocator.ReadyToPush = true;
                             this.PushWithClear(new NewsListPage());

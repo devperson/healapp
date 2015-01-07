@@ -10,14 +10,12 @@ using Xamarin.Forms.Maps;
 namespace HealthDemo.Pages
 {
     public class LocationPage : MasterPage
-    {
-        public static string HeaderTitle;
+    {        
         public LocationPage() : base(false, Device.OnPlatform(false, true, true)) { }
 
         protected override void RenderContentView(Xamarin.Forms.StackLayout parent)
         {
-            HeaderTitle = AppResources.Location_Title;
-            lblTitle.Text = HeaderTitle;
+            lblTitle.Text = AppResources.Location_Title;
             var position = new Position(24.230388, 55.733529);
             var pin = new Pin
             {
