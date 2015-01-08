@@ -32,6 +32,16 @@ using Android.App;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
+[assembly: UsesPermission(Android.Manifest.Permission.AccessFineLocation)]
+[assembly: UsesPermission(Android.Manifest.Permission.AccessCoarseLocation)]
+[assembly: UsesPermission(Android.Manifest.Permission.AccessLocationExtraCommands)]
+[assembly: UsesPermission(Android.Manifest.Permission.AccessMockLocation)]
+[assembly: UsesPermission(Android.Manifest.Permission.AccessNetworkState)]
+[assembly: UsesPermission(Android.Manifest.Permission.AccessWifiState)]
+[assembly: UsesPermission(Android.Manifest.Permission.CallPhone)]
+[assembly: UsesPermission("com.xamarin.healthdemo.permission.MAPS_RECEIVE")]
+[assembly: Permission(Name="com.xamarin.healthdemo.permission.MAPS_RECEIVE", ProtectionLevel = Android.Content.PM.Protection.Signature)]
+	
 
 #if DEBUG
 [assembly: Application(Debuggable=true)]

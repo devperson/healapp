@@ -14,5 +14,5 @@
 	</application>
 	<uses-feature android:glEsVersion="0x00020000" android:required="true"></uses-feature>
 	<!-- Google Maps for Android v2 will cache map tiles on external storage -->
-	<permission android:name="com.xamarin.mobilecrm.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+  
 </manifest>
