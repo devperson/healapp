@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using HealthDemo;
 
 
 namespace HealthDemo.Cells
@@ -17,8 +18,8 @@ namespace HealthDemo.Cells
             {
                 Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand,                
-                Padding = new Thickness(0, 0, 8, 0) 
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Padding = this.IsEn() ? new Thickness(0, 0, 8, 0) : new Thickness(8, 0, 0, 0)
             };
 
             var stackLayout1 = new StackLayout()
@@ -33,7 +34,7 @@ namespace HealthDemo.Cells
             var lblDTitle = new Label()
             {
                 TextColor = Color.Black,
-                Font = Font.SystemFontOfSize(17)
+                Font = Font.SystemFontOfSize(17),                
             };
             lblDTitle.SetBinding(Label.TextProperty, new Binding("Title"));
             var lblPosition = new Label()
@@ -53,7 +54,7 @@ namespace HealthDemo.Cells
             {
                 Source = this.IsEn() ? "accesory.png" : "left_accesory.png",
                 WidthRequest = 26,
-                VerticalOptions = this.IsEn() ? LayoutOptions.FillAndExpand : LayoutOptions.StartAndExpand
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
 
 
@@ -64,6 +65,9 @@ namespace HealthDemo.Cells
             rootLayout.Children.Add(stackLayout1);
             rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
 
+            if (!this.IsEn())            
+                rootLayout.AlignLabelesToRight();
+            
             View = rootLayout;
         }
     }
