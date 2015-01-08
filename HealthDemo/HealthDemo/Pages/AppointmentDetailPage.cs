@@ -77,7 +77,15 @@ namespace HealthDemo.Pages
                     new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)}
                 }
             };
-
+            if (!this.IsEn())
+            {
+                //contentGrid.Padding = new Thickness(15, 10, 5, 25);
+                contentGrid.ColumnDefinitions = new ColumnDefinitionCollection()
+                {
+                    new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition { Width = GridLength.Auto }
+                };
+            }
             contentGrid.AddLabel(AppResources.Appointment_FORM_Head, 0);
             contentGrid.AddLabel(string.Empty, 0, 1);
             contentGrid.AddLabel(AppResources.Appointment_FORM_Name, 1);
@@ -180,8 +188,10 @@ namespace HealthDemo.Pages
             for (int i = 1; i < 7; i++)
 			{
                 btnComboClinical.Items.Add(AppResources.Appointment_FORM_Clinical + " " + i.ToString());
-			}            
-            contentGrid.Children.Add(comboLayouyt, 1, row);
+			}
+            int col = 1;
+            if (!contentGrid.IsEn()) col = 0;
+            contentGrid.Children.Add(comboLayouyt, col, row);
 		}
 
 	}

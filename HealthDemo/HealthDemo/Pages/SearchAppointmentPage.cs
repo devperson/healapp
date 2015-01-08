@@ -54,6 +54,15 @@ namespace HealthDemo.Pages
                 }
             };
 
+            if (!this.IsEn())
+            {   
+                contentGrid.ColumnDefinitions = new ColumnDefinitionCollection()
+                {   
+                    new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition { Width = GridLength.Auto }
+                };
+            }
+
             contentGrid.AddLabel(AppResources.SearchAppointment_Emirate, 0);
             contentGrid.AddTextField("Emirate", 0, Keyboard.Numeric);
             contentGrid.AddLabel(AppResources.SearchAppointment_MRN, 1);

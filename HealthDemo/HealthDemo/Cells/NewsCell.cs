@@ -39,24 +39,27 @@ namespace HealthDemo.Cells
             {
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(15),
-                Text = "Date:"
+                Text = AppResources.News_Date
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal};
             stackDate.Children.Add(labelForDate);
-            stackDate.Children.Add(lblDate);
+            stackDate.Children.Insert(this.IsEn() ? 1 : 0, lblDate);
             var stackLayoutTitle = new StackLayout() {Spacing = 0, Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
             stackLayoutTitle.Children.Add(lblTitle);
             stackLayoutTitle.Children.Add(stackDate);
 
+            var imgSource = this.IsEn() ? "accesory.png" : "left_accesory.png";
             var imgAccesory = new Image
             {
-                Source = Device.OnPlatform("accesory.png", "accesory.png", "Images/accesory.png"),
+                Source = imgSource,
                 WidthRequest = 26,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
             rootLayout.Children.Add(stackLayoutTitle);
-            rootLayout.Children.Add(imgAccesory);
+            rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
+            if (!this.IsEn())
+                rootLayout.AlignLabelesToRight();
 
             View = rootLayout;
         }

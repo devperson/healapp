@@ -34,8 +34,9 @@ namespace HealthDemo
                 Text = title,
                 TextColor = Color.Black,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.EndAndExpand
+                HorizontalOptions = contentGrid.IsEn() ? LayoutOptions.EndAndExpand : LayoutOptions.StartAndExpand
             };
+            if (!contentGrid.IsEn()) col = col == 0 ? 1 : 0;
             contentGrid.Children.Add(lbl, col, row);
 
             return lbl;
@@ -65,7 +66,9 @@ namespace HealthDemo
             if (key != null)
                 entry.Keyboard = key;
             entry.SetBinding(Entry.TextProperty, binding, BindingMode.TwoWay);
-            contentGrid.Children.Add(entry, 1, row);
+            var col = 1;
+            if (!contentGrid.IsEn()) col = 0;
+            contentGrid.Children.Add(entry, col, row);
             return entry;
         }
 
@@ -77,7 +80,9 @@ namespace HealthDemo
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
             switchControl.SetBinding(Switch.IsToggledProperty, binding, BindingMode.TwoWay);
-            contentGrid.Children.Add(switchControl, 1, row);
+            var col = 1;
+            if (!contentGrid.IsEn()) col = 0;
+            contentGrid.Children.Add(switchControl, col, row);
         }
 
         public static Button CreateButton(this Page p, string title)

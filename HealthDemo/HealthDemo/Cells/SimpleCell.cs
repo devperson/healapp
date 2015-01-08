@@ -26,8 +26,7 @@ namespace HealthDemo.Cells
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(17),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.Center,
-                XAlign = this.IsEn() ? TextAlignment.Start : TextAlignment.End
+                VerticalOptions = LayoutOptions.Center
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
 
@@ -39,16 +38,12 @@ namespace HealthDemo.Cells
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
-            if (this.IsEn())
-            {
-                rootLayout.Children.Add(lblTitle);
-                rootLayout.Children.Add(imgAccesory);
-            }
-            else
-            {
-                rootLayout.Children.Add(imgAccesory);
-                rootLayout.Children.Add(lblTitle);
-            }
+
+            rootLayout.Children.Add(lblTitle);
+            rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
+            if (!this.IsEn())
+                rootLayout.AlignLabelesToRight();
+
 
             View = rootLayout;
         }
@@ -75,10 +70,13 @@ namespace HealthDemo.Cells
                 Font = Font.SystemFontOfSize(17),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Center,
-                XAlign = this.IsEn() ? TextAlignment.Start : TextAlignment.End
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
             rootLayout.Children.Add(lblTitle);
+
+            if (!this.IsEn())
+                rootLayout.AlignLabelesToRight();
+
             View = rootLayout;
         }
     }
