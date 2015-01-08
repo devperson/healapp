@@ -92,6 +92,41 @@ namespace HealthDemo
             };
         }
 
+        public static void AlignLabelesToRight(this IViewContainer<View> root)
+        {
+            foreach (var lbl in root.GetAllLables())
+            {
+                lbl.XAlign = TextAlignment.End;
+                lbl.HorizontalOptions = LayoutOptions.EndAndExpand;                
+            }
+        }
+
+        public static List<Label> GetAllLables(this IViewContainer<View> root)
+        {
+            List<Label> lbls = new List<Label>();
+            foreach (var item in root.Children)
+            {
+                View child = item;
+
+                while(child is ScrollView || child is ContentView)
+                {
+                    if (child is ScrollView)
+                        child = (child as ScrollView).Content;
+                    if (child is ContentView)
+                        child = (child as ContentView).Content;
+                }                
+                
+                if (child is Label)
+                    lbls.Add(child as Label);
+                if (child is IViewContainer<View>)
+                    lbls.AddRange((child as IViewContainer<View>).GetAllLables());                
+            }
+
+            return lbls;
+        }
+
+        
+
         public static bool IsEn(this object p)
         {
             return App.CurrentLanguage == Languages.En;

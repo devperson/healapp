@@ -242,6 +242,10 @@ namespace HealthDemo.Pages
             }
 
             this.Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 0);
+
+            if (!this.IsEn())
+                rootAbsoluteLAyout.AlignLabelesToRight();
+
             this.Content = rootAbsoluteLAyout;
             
         }

@@ -60,10 +60,9 @@ namespace HealthDemo.Pages
             var doctorLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
             doctorLayout.Children.Add(new Label() 
             {
-                HorizontalOptions = App.CurrentLanguage == Languages.En ? LayoutOptions.StartAndExpand : LayoutOptions.EndAndExpand, 
+                HorizontalOptions = LayoutOptions.StartAndExpand, 
                 TextColor = Color.Black, 
-                Text = AppResources.SearchDoctor_Find
-                //XAlign = App.CurrentLanguage == Languages.En ? TextAlignment.Start : TextAlignment.End
+                Text = AppResources.SearchDoctor_Find                
             });
             var txt = new CustomTextBox() { HorizontalOptions = LayoutOptions.FillAndExpand, TextColor = Color.Black };
             txt.SetBinding(CustomTextBox.TextProperty, "SearchText", BindingMode.TwoWay);
@@ -72,10 +71,9 @@ namespace HealthDemo.Pages
             var specLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
             specLayout.Children.Add(new Label() 
             {
-                HorizontalOptions = App.CurrentLanguage == Languages.En ? LayoutOptions.StartAndExpand : LayoutOptions.EndAndExpand, 
+                HorizontalOptions = LayoutOptions.StartAndExpand, 
                 TextColor = Color.Black, 
-                Text = AppResources.SearchDoctor_Spec,
-                //XAlign = App.CurrentLanguage == Languages.En ? TextAlignment.Start : TextAlignment.End
+                Text = AppResources.SearchDoctor_Spec,                
             });
             specLayout.Children.Add(this.CreateComboBox(ref btnCombo));
 
