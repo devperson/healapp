@@ -30,15 +30,20 @@ namespace HealthDemo.Cells
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
 
+            var imgSource = this.IsEn() ? "accesory.png" : "left_accesory.png";
             var imgAccesory = new Image
             {
-                Source = Device.OnPlatform("accesory.png", "accesory.png", "Images/accesory.png"),
+                Source = imgSource,
                 WidthRequest = 26,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
+
             rootLayout.Children.Add(lblTitle);
-            rootLayout.Children.Add(imgAccesory);
+            rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
+            if (!this.IsEn())
+                rootLayout.AlignLabelesToRight();
+
 
             View = rootLayout;
         }
@@ -64,10 +69,14 @@ namespace HealthDemo.Cells
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(17),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.Center
+                VerticalOptions = LayoutOptions.Center,
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
             rootLayout.Children.Add(lblTitle);
+
+            if (!this.IsEn())
+                rootLayout.AlignLabelesToRight();
+
             View = rootLayout;
         }
     }

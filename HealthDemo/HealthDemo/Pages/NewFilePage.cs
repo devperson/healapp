@@ -64,6 +64,15 @@ namespace HealthDemo.Pages
                 }
             };
 
+            if (!this.IsEn())
+            {   
+                contentGrid.ColumnDefinitions = new ColumnDefinitionCollection()
+                {   
+                    new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition { Width = new GridLength(80, GridUnitType.Absolute)}
+                };
+            }
+
             contentGrid.AddLabel(AppResources.NewFile_Head, 0);
             contentGrid.AddLabel(string.Empty, 0, 1);
             contentGrid.AddLabel(AppResources.NewFile_Name, 1);
@@ -93,8 +102,8 @@ namespace HealthDemo.Pages
 
             var uploadStack = new StackLayout() { Spacing = 2, Orientation = StackOrientation.Horizontal, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand};
             uploadStack.Children.Add(txtUpload);
-            uploadStack.Children.Add(btnUpload);
-            contentGrid.Children.Add(uploadStack, 1, 4);
+            uploadStack.Children.Insert(this.IsEn() ? 1 : 0, btnUpload);
+            contentGrid.Children.Add(uploadStack, this.IsEn() ? 1 : 0, 4);
 
             btnSubmit = new Button()
             {

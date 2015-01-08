@@ -7,8 +7,8 @@ namespace HealthDemo
 {
     public class Constants
     {
-        public static string BaseUrl = "http://xusanpc:49417/";
-        //public static string BaseUrl = "http://testhserver.apphb.com/";
+        //public static string BaseUrl = "http://xusanpc:49417/";
+        public static string BaseUrl = "http://testhserver.apphb.com/";
         public static string ApiUrl = BaseUrl + "/api/";
         public static string NoInternetMessage; //= "Seems like our connection dropped or timed out. Please try again.";
     }
