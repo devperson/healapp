@@ -43,7 +43,7 @@ namespace HealthDemo.Pages
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal };
             stackDate.Children.Add(labelForDate);
-            stackDate.Children.Add(lblDate);
+            stackDate.Children.Insert(this.IsEn() ? 1 : 0, lblDate);
 
             var header = new StackLayout() {Spacing =0, Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 0, 0, 0) };
             header.Children.Add(lblTitle);
