@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HealthDemo.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace HealthDemo.Pages
+namespace HealthDemo
 {
     public static class PageExtensions
     {
@@ -89,6 +90,11 @@ namespace HealthDemo.Pages
                 TextColor = Color.Black,
                 Text = title
             };
+        }
+
+        public static bool IsEn(this object p)
+        {
+            return App.CurrentLanguage == Languages.En;
         }
     }
 }

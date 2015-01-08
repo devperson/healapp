@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
+
 namespace HealthDemo.Cells
 {
     public class DoctorCell : CustomCell
@@ -16,17 +17,16 @@ namespace HealthDemo.Cells
             {
                 Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                //BackgroundColor = Color.White,
+                HorizontalOptions = LayoutOptions.FillAndExpand,                
                 Padding = new Thickness(0, 0, 8, 0) 
             };
 
             var stackLayout1 = new StackLayout()
             {
                 Orientation = StackOrientation.Vertical,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = this.IsEn() ? LayoutOptions.FillAndExpand : LayoutOptions.EndAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                Padding = new Thickness(10, 20, 0, 0),
+                Padding = this.IsEn() ? new Thickness(10, 20, 0, 0) : new Thickness(0, 20, 10, 0),
                 Spacing = 0
             };
 
@@ -50,18 +50,19 @@ namespace HealthDemo.Cells
             lblDepartament.SetBinding(Label.TextProperty, new Binding("Department"));
 
             var imgAccesory = new Image
-            {   
-                Source = Device.OnPlatform("accesory.png", "accesory.png", "Images/accesory.png"),
+            {
+                Source = this.IsEn() ? "accesory.png" : "left_accesory.png",
                 WidthRequest = 26,
-                VerticalOptions = LayoutOptions.FillAndExpand
+                VerticalOptions = this.IsEn() ? LayoutOptions.FillAndExpand : LayoutOptions.StartAndExpand
             };
 
 
             stackLayout1.Children.Add(lblDTitle);
             stackLayout1.Children.Add(lblPosition);
             stackLayout1.Children.Add(lblDepartament);
+
             rootLayout.Children.Add(stackLayout1);
-            rootLayout.Children.Add(imgAccesory);
+            rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
 
             View = rootLayout;
         }

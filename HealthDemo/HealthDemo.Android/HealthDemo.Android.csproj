@@ -137,6 +137,7 @@
     <AndroidResource Include="Resources\Drawable\appointlist.png" />
     <AndroidResource Include="Resources\Drawable\ar.png" />
     <AndroidResource Include="Resources\Drawable\eng.png" />
+    <AndroidResource Include="Resources\Drawable\left_accesory.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />

@@ -106,6 +106,7 @@
     <BundleResource Include="Resources\events.jpg" />
     <BundleResource Include="Resources\ar.png" />
     <BundleResource Include="Resources\eng.png" />
+    <BundleResource Include="Resources\left_accesory.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="RestSharp.MonoTouch">
