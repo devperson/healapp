@@ -16,9 +16,7 @@ namespace HealthDemo.Pages
             lblTitle.Text = AppResources.Profile_Title;
         }
         protected override void RenderContentView(StackLayout parent)
-        {
-            //VM = ViewModelLocator.DoctorVM;            
-
+        {            
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             var stlayout = new StackLayout() { Padding = new Thickness(0, 10, 0, 0), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 
@@ -29,7 +27,7 @@ namespace HealthDemo.Pages
                 BackgroundColor = Color.White,
                 Padding = new Thickness(0, 0, 17, 0)
             };
-
+            
             var stackLayout1 = new StackLayout()
             {
                 Orientation = StackOrientation.Vertical,
@@ -68,8 +66,9 @@ namespace HealthDemo.Pages
             stackLayout1.Children.Add(lblDTitle);
             stackLayout1.Children.Add(lblPosition);
             stackLayout1.Children.Add(lblDepartament);
+
             headerLayout.Children.Add(stackLayout1);
-            headerLayout.Children.Add(imgDoctor);
+            headerLayout.Children.Insert(this.IsEn() ? 1 : 0, imgDoctor);
 
             var stackLayoutDetails = new StackLayout() { BackgroundColor = Color.White, Orientation = StackOrientation.Vertical, Padding = new Thickness(15, 15, 7, 15), Spacing = 10 };
             stackLayoutDetails.Children.Add(CreateDetailsItem(AppResources.Profile_Bio, "Bio"));

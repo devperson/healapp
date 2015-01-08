@@ -244,7 +244,10 @@ namespace HealthDemo.Pages
             this.Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 0);
 
             if (!this.IsEn())
+            {
                 rootAbsoluteLAyout.AlignLabelesToRight();
+                rootAbsoluteLAyout.ReverseLayoutPaddings();
+            }
 
             this.Content = rootAbsoluteLAyout;
             
@@ -254,7 +257,7 @@ namespace HealthDemo.Pages
         {
             var titleHeight = Device.OnPlatform(30, 40, 30);
             titleLayout = new AbsoluteLayout() { MinimumHeightRequest = titleHeight, HeightRequest = titleHeight, HorizontalOptions = LayoutOptions.FillAndExpand };
-            var imgSource = App.CurrentLanguage == Languages.En ? "upper.png" : "upperar.png";
+            var imgSource = this.IsEn() ? "upper.png" : "upperar.png";
             titleImage = new Image
             {
                 Aspect = Aspect.Fill,
@@ -270,7 +273,6 @@ namespace HealthDemo.Pages
                 Font = Font.SystemFontOfSize(15)
             };
             
-
             var stackLayoutTitle = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
@@ -278,16 +280,9 @@ namespace HealthDemo.Pages
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            if (App.CurrentLanguage == Languages.En)
-            {
-                lblTitle.HorizontalOptions = LayoutOptions.StartAndExpand;
-                stackLayoutTitle.Padding = new Thickness(10, 0, 0, 0);
-            }
-            else
-            {
-                lblTitle.HorizontalOptions = LayoutOptions.EndAndExpand;
-                stackLayoutTitle.Padding = new Thickness(0, 0, 10, 0);
-            }
+            lblTitle.HorizontalOptions = LayoutOptions.StartAndExpand;
+            stackLayoutTitle.Padding = new Thickness(10, 0, 0, 0);
+            
             stackLayoutTitle.Children.Add(lblTitle);
             titleLayout.Children.Add(titleImage, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             titleLayout.Children.Add(stackLayoutTitle, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
@@ -501,6 +496,7 @@ namespace HealthDemo.Pages
         {
 
         }
+
     }
 
     public class TransparentButton: Button
