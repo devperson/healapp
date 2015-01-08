@@ -41,8 +41,12 @@ namespace HealthDemo.Cells
 
             rootLayout.Children.Add(lblTitle);
             rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
+
             if (!this.IsEn())
-                rootLayout.AlignLabelesToRight();
+            {
+                rootLayout.ReverseLabelesAligment();
+                rootLayout.ReverseLayoutPaddings();
+            }
 
 
             View = rootLayout;
@@ -75,7 +79,10 @@ namespace HealthDemo.Cells
             rootLayout.Children.Add(lblTitle);
 
             if (!this.IsEn())
-                rootLayout.AlignLabelesToRight();
+            {
+                rootLayout.ReverseLabelesAligment();
+                rootLayout.ReverseLayoutPaddings();
+            }
 
             View = rootLayout;
         }

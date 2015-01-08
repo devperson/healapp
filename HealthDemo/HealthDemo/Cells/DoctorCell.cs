@@ -67,7 +67,7 @@ namespace HealthDemo.Cells
 
             if (!this.IsEn())
             {
-                rootLayout.AlignLabelesToRight();
+                rootLayout.ReverseLabelesAligment();
                 rootLayout.ReverseLayoutPaddings();
             }
             

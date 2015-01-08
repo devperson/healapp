@@ -27,7 +27,7 @@ namespace HealthDemo.Pages
                 Font = Font.SystemFontOfSize(16)
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
-            var stkl = new StackLayout() { HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 0, 0, 0), Children = { lblTitle } };
+            var stkl = new ContentView() { HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 0, 0), Content = lblTitle  };
 
             var lblDescription = new Label()
             {
@@ -37,18 +37,18 @@ namespace HealthDemo.Pages
             };
             lblDescription.SetBinding(Label.TextProperty, new Binding("Description"));
             
-            var frame1 = new StackLayout() //Frame
+            var frame1 = new ContentView()
             {                 
                 HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 40) 
             };
-            var frmae2 = new StackLayout() //Frame
+            var frame2 = new ContentView()
             {                 
                 BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(15, 15, 7, 15) 
             };
-            frmae2.Children.Add(lblDescription);
-            var border = new StackLayout() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Black, Orientation = StackOrientation.Vertical, Padding = 1 };
-            border.Children.Add(frmae2);
-            frame1.Children.Add(border);
+            frame2.Content = lblDescription;
+            var border = new ContentView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Black, Padding = new Thickness(1, 1, 1, Device.OnPlatform(1, 2, 1)) };
+            border.Content = frame2;
+            frame1.Content = border;
 
             stlayout.Children.Add(stkl);
             stlayout.Children.Add(frame1);

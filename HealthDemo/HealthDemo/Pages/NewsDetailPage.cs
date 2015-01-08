@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using HealthDemo;
 
 namespace HealthDemo.Pages
 {
@@ -41,10 +42,12 @@ namespace HealthDemo.Pages
                 Text = AppResources.News_Date
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal };
+            if (!this.IsEn())
+                stackDate.HorizontalOptions = LayoutOptions.EndAndExpand;
             stackDate.Children.Add(labelForDate);
-            stackDate.Children.Add(lblDate);
+            stackDate.Children.Insert(this.IsEn() ? 1 : 0, lblDate);
 
-            var header = new StackLayout() {Spacing =0, Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 0, 0, 0) };
+            var header = new StackLayout() {Spacing =0, Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 0, 20, 0) };
             header.Children.Add(lblTitle);
             header.Children.Add(stackDate);
 

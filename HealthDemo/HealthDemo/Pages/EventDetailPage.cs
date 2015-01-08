@@ -32,16 +32,18 @@ namespace HealthDemo.Pages
             var lblDate = new Label()
             {
                 TextColor = Color.Black,
-                Font = Font.SystemFontOfSize(14)
+                Font = Font.SystemFontOfSize(14)                
             };
             lblDate.SetBinding(Label.TextProperty, new Binding("DateFormated"));
             var labelForDate = new Label()
             {
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(14),
-                Text = AppResources.EventDetail_Date
+                Text = AppResources.EventDetail_Date                
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal };
+            if (!this.IsEn())
+                stackDate.HorizontalOptions = LayoutOptions.EndAndExpand;
             stackDate.Children.Add(labelForDate);
             stackDate.Children.Insert(this.IsEn() ? 1 : 0, lblDate);
 

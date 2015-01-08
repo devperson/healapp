@@ -50,6 +50,14 @@ namespace HealthDemo.Pages
                     new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)}
                 }
             };
+            if (!this.IsEn())
+            {
+                contentGrid.ColumnDefinitions = new ColumnDefinitionCollection()
+                {
+                    new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition { Width = GridLength.Auto }
+                };
+            }
 
             contentGrid.AddLabel(AppResources.CME_Title, 0);
             contentGrid.AddLabelWithBinding("Title", 0, 1);

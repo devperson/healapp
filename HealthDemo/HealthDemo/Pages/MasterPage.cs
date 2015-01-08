@@ -172,16 +172,18 @@ namespace HealthDemo.Pages
                 HeightRequest = 40, HorizontalOptions = LayoutOptions.FillAndExpand,
                 Source = Device.OnPlatform("downhealth.jpg", "downhealth.jpg", "Images/downhealth.jpg"),
             };
-            var toolbarStack = new StackLayout() 
-            { 
-                Orientation = StackOrientation.Horizontal, Spacing = 0,
-                VerticalOptions = LayoutOptions.FillAndExpand, 
-                HorizontalOptions = LayoutOptions.FillAndExpand
+            var toolbarStack = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = Device.OnPlatform(20, 0, 0),
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Padding = new Thickness(Device.OnPlatform(10, 3, 0), 0, Device.OnPlatform(10, 3, 0), 0)
             };
             btnInfo = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Info };
             btnContact = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Contact };
-            btnLocation = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Location, WidthRequest = 80 };
-            btnEServices = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Service, WidthRequest = 100 };
+            btnLocation = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Location/*, WidthRequest = 80*/ };
+            btnEServices = new TransparentButton() { Text = AppResources.MasterPage_FOOTER_Service/*, WidthRequest = 100*/ };
             toolbarStack.Children.Add(btnInfo);
             toolbarStack.Children.Add(btnContact);
             toolbarStack.Children.Add(btnLocation);
@@ -245,7 +247,7 @@ namespace HealthDemo.Pages
 
             if (!this.IsEn())
             {
-                rootAbsoluteLAyout.AlignLabelesToRight();
+                rootAbsoluteLAyout.ReverseLabelesAligment();
                 rootAbsoluteLAyout.ReverseLayoutPaddings();
             }
 
@@ -357,18 +359,26 @@ namespace HealthDemo.Pages
             var rootStack = new StackLayout() { Spacing = 0, TranslationX = 400, BackgroundColor = Color.FromHex("52000000"), Orientation = StackOrientation.Horizontal, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
 
             var titleHeight = Device.OnPlatform(30, 40, 30);
+            var titleContainer = new ContentView()
+            {                
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                MinimumHeightRequest = titleHeight,
+                HeightRequest = titleHeight,                
+                BackgroundColor = Color.FromHex("FF4EA3D2"),                                
+            };
             var lblMenuTitle = new Label()
             {
                 TextColor = Color.White,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                MinimumHeightRequest = titleHeight,
+                //MinimumHeightRequest = titleHeight,
                 HeightRequest = titleHeight,
                 XAlign = TextAlignment.Start,
                 YAlign = TextAlignment.Center,
-                BackgroundColor = Color.FromHex("FF4EA3D2"),
+                //BackgroundColor = Color.FromHex("FF4EA3D2"),
                 Font = Font.SystemFontOfSize(15),
                 Text = " " + AppResources.MasterPage_Menu
             };
+            titleContainer.Content = lblMenuTitle;
             lvMenu = new ListView() { BackgroundColor = Color.White, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
             lvMenu.ItemTemplate = new DataTemplate(typeof(SimpleCell2));
             lvMenu.RowHeight = Device.OnPlatform(60, 70, 60);
@@ -431,7 +441,8 @@ namespace HealthDemo.Pages
             };
 
             var menuContent = new StackLayout() { Spacing = 0, Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
-            menuContent.Children.Add(lblMenuTitle);
+            
+            menuContent.Children.Add(titleContainer);
             menuContent.Children.Add(lvMenu);
 
             var hideButton = new Button() { VerticalOptions = LayoutOptions.FillAndExpand, WidthRequest = 79, BackgroundColor = Color.Transparent };
@@ -505,7 +516,7 @@ namespace HealthDemo.Pages
         {
             BackgroundColor = Color.Transparent;
             TextColor = Color.Black;
-            WidthRequest = 75;
+            //WidthRequest = 60;
             VerticalOptions = LayoutOptions.CenterAndExpand;
             Font = Font.SystemFontOfSize(14);
         }

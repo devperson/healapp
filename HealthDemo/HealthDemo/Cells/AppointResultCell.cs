@@ -16,8 +16,7 @@ namespace HealthDemo.Cells
             {
                 Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                //BackgroundColor = Color.White,
+                HorizontalOptions = LayoutOptions.FillAndExpand,                
                 Padding = new Thickness(0, 10, 0, 10)
             };
 
@@ -25,6 +24,13 @@ namespace HealthDemo.Cells
             rootLayout.Children.Add(CreateLabel("FormattedApptLocation", 140));
             rootLayout.Children.Add(CreateLabel("DateFormated", 75));
             rootLayout.Children.Add(CreateLabel("TimeFormatted", 75));
+
+            if (!this.IsEn())
+            {
+                rootLayout.ReverseLabelesAligment();
+                rootLayout.ReverseLayoutPaddings();
+            }
+
             View = rootLayout;
         }
 

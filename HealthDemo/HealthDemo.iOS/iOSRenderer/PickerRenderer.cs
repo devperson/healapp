@@ -17,7 +17,7 @@ namespace HealthDemo.iOS
 			var native = Control as UITextField;
 			native.BackgroundColor = UIColor.Clear;
 			native.TextColor = UIColor.Black;
-            native.TextAlignment = UITextAlignment.Right;
+            native.TextAlignment = this.IsEn() ? UITextAlignment.Left : UITextAlignment.Right;
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace HealthDemo
             var comboBackground = new Image()
             {
                 Aspect = Aspect.Fill,
-                Source = App.CurrentLanguage == Languages.En ? "comboback.png" : "combobackar.png",
+                Source = p.IsEn() ? "comboback.png" : "combobackar.png",
                 HeightRequest = 35,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
@@ -34,7 +34,7 @@ namespace HealthDemo
                 Text = title,
                 TextColor = Color.Black,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = contentGrid.IsEn() ? LayoutOptions.EndAndExpand : LayoutOptions.StartAndExpand
+                HorizontalOptions = LayoutOptions.EndAndExpand
             };
             if (!contentGrid.IsEn()) col = col == 0 ? 1 : 0;
             contentGrid.Children.Add(lbl, col, row);
@@ -51,6 +51,7 @@ namespace HealthDemo
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
             lbl.SetBinding(Label.TextProperty, new Binding(binding));
+            if (!contentGrid.IsEn()) col = col == 0 ? 1 : 0;
             contentGrid.Children.Add(lbl, col, row);
 
             return lbl;
@@ -76,7 +77,7 @@ namespace HealthDemo
         {
             var switchControl = new Switch()
             {
-                HorizontalOptions = LayoutOptions.Start,
+                HorizontalOptions = contentGrid.IsEn() ? LayoutOptions.Start : LayoutOptions.End,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
             switchControl.SetBinding(Switch.IsToggledProperty, binding, BindingMode.TwoWay);
@@ -97,12 +98,19 @@ namespace HealthDemo
             };
         }
 
-        public static void AlignLabelesToRight(this IViewContainer<View> root)
+        public static void ReverseLabelesAligment(this IViewContainer<View> root)
         {
             foreach (var lbl in root.GetAllLables())
-            {
+            {                
+                if (lbl.XAlign == TextAlignment.End || lbl.HorizontalOptions.Alignment == LayoutAlignment.End)
+                {
+                    lbl.XAlign = TextAlignment.Start;
+                    lbl.HorizontalOptions = LayoutOptions.StartAndExpand;
+                    continue;
+                }
+
                 lbl.XAlign = TextAlignment.End;
-                lbl.HorizontalOptions = LayoutOptions.EndAndExpand;                
+                lbl.HorizontalOptions = LayoutOptions.EndAndExpand;
             }
         }
 
@@ -142,7 +150,7 @@ namespace HealthDemo
         }
 
        
-        #region VisualTree
+        #region VisualTree Helper
         public static IEnumerable<Layout> GetAllLayouts(this Layout root)
         {
             Queue<Layout> remaining = new Queue<Layout>();

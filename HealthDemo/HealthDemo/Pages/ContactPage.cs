@@ -21,11 +21,13 @@ namespace HealthDemo.Pages
             var stackLayout = new StackLayout()
             {
                 Spacing = 6,
-                Padding = new Thickness(20, 35, 20, 10),
+                Padding = new Thickness(20, 15, 20, 10),
                 Orientation = StackOrientation.Vertical,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            if (!this.IsEn())
+                stackLayout.HorizontalOptions = LayoutOptions.EndAndExpand;
 
             var label = new Label()
             {   
@@ -42,6 +44,9 @@ namespace HealthDemo.Pages
                 Orientation = StackOrientation.Vertical,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            if (!this.IsEn())
+                stackLayout.HorizontalOptions = LayoutOptions.EndAndExpand;
+
             var lbltitle = new Label()
             {   
                 HorizontalOptions = LayoutOptions.Center,
@@ -67,6 +72,10 @@ namespace HealthDemo.Pages
                 Spacing = Device.OnPlatform(5, 0, 5),
                 Orientation = StackOrientation.Horizontal
             };
+
+            if (!this.IsEn())
+                telLayout.HorizontalOptions = LayoutOptions.EndAndExpand;
+
             var lblcenter = new Label()
             {
                 VerticalOptions = LayoutOptions.Center,
@@ -80,8 +89,10 @@ namespace HealthDemo.Pages
                 TextColor = Color.Blue,
                 BackgroundColor = Color.Transparent,
                 VerticalOptions = LayoutOptions.Center,
-                Text = number
+                Text = number,
+                HeightRequest = 30
             };
+
             lblNumber.Clicked += (s, e) =>
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
@@ -91,10 +102,18 @@ namespace HealthDemo.Pages
                 telFeature.Tel(lblNumber.Text);
             };
 
-
-
-            telLayout.Children.Add(lblcenter);
-            telLayout.Children.Add(lblNumber);
+            if (this.IsEn())
+            {
+                telLayout.Children.Add(lblcenter);
+                telLayout.Children.Add(lblNumber);
+            }
+            else
+            {
+                lblNumber.HorizontalOptions = LayoutOptions.End;
+                telLayout.Children.Add(lblNumber);
+                telLayout.Children.Add(lblcenter);                
+            }
+            
             return telLayout;
         }        
     }

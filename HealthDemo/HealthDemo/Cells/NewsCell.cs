@@ -32,7 +32,8 @@ namespace HealthDemo.Cells
             var lblDate = new Label()
             {
                 TextColor = Color.Black,
-                Font = Font.SystemFontOfSize(15)
+                Font = Font.SystemFontOfSize(15),
+                YAlign = TextAlignment.Center
             };
             lblDate.SetBinding(Label.TextProperty, new Binding("DateFormated"));
             var labelForDate = new Label()
@@ -42,6 +43,8 @@ namespace HealthDemo.Cells
                 Text = AppResources.News_Date
             };
             var stackDate = new StackLayout() { Orientation = StackOrientation.Horizontal};
+            if (!this.IsEn())
+                stackDate.HorizontalOptions = LayoutOptions.EndAndExpand;
             stackDate.Children.Add(labelForDate);
             stackDate.Children.Insert(this.IsEn() ? 1 : 0, lblDate);
             var stackLayoutTitle = new StackLayout() {Spacing = 0, Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
@@ -58,8 +61,12 @@ namespace HealthDemo.Cells
 
             rootLayout.Children.Add(stackLayoutTitle);
             rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
+
             if (!this.IsEn())
-                rootLayout.AlignLabelesToRight();
+            {
+                rootLayout.ReverseLabelesAligment();
+                rootLayout.ReverseLayoutPaddings();
+            }
 
             View = rootLayout;
         }

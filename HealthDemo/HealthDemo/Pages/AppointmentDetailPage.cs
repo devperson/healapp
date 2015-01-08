@@ -78,8 +78,7 @@ namespace HealthDemo.Pages
                 }
             };
             if (!this.IsEn())
-            {
-                //contentGrid.Padding = new Thickness(15, 10, 5, 25);
+            {                
                 contentGrid.ColumnDefinitions = new ColumnDefinitionCollection()
                 {
                     new ColumnDefinition { Width =  new GridLength(1, GridUnitType.Star)},
