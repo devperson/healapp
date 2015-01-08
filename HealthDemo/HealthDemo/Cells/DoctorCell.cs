@@ -19,7 +19,7 @@ namespace HealthDemo.Cells
                 Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                Padding = this.IsEn() ? new Thickness(0, 0, 8, 0) : new Thickness(8, 0, 0, 0)
+                Padding = new Thickness(0, 0, 8, 0)
             };
 
             var stackLayout1 = new StackLayout()
@@ -27,7 +27,7 @@ namespace HealthDemo.Cells
                 Orientation = StackOrientation.Vertical,
                 HorizontalOptions = this.IsEn() ? LayoutOptions.FillAndExpand : LayoutOptions.EndAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                Padding = this.IsEn() ? new Thickness(10, 20, 0, 0) : new Thickness(0, 20, 10, 0),
+                Padding = new Thickness(10, 20, 0, 0),
                 Spacing = 0
             };
 
@@ -65,8 +65,11 @@ namespace HealthDemo.Cells
             rootLayout.Children.Add(stackLayout1);
             rootLayout.Children.Insert(this.IsEn() ? 1 : 0, imgAccesory);
 
-            if (!this.IsEn())            
+            if (!this.IsEn())
+            {
                 rootLayout.AlignLabelesToRight();
+                rootLayout.ReverseLayoutPaddings();
+            }
             
             View = rootLayout;
         }
