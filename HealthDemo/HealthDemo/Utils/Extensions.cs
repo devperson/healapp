@@ -15,7 +15,7 @@ namespace HealthDemo.Pages
             var comboBackground = new Image()
             {
                 Aspect = Aspect.Fill,
-                Source = Device.OnPlatform("comboback.png", "comboback.png", "Images/comboback.png"),
+                Source = App.CurrentLanguage == Languages.En ? "comboback.png" : "combobackar.png",
                 HeightRequest = 35,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };

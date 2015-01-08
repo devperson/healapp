@@ -10,7 +10,19 @@ namespace HealthDemo
 {
     public class App
     {
-        public static string SelectedLocal = "En"; //Ar
+        public static string _selectedLocal = "En"; //Ar
+        public static string SelectedLocal
+        {
+            get { return _selectedLocal; }
+            set
+            {
+                _selectedLocal = value;
+                if (value == "En")
+                    CurrentLanguage = Languages.En;
+                else CurrentLanguage = Languages.Ar;
+            }
+        }
+        public static Languages CurrentLanguage { get; set; }
         public static Page GetMainPage()
         {
             if (SelectedLocal.ToLower() != "en")
@@ -23,5 +35,11 @@ namespace HealthDemo
         {
             return new LanguagesPage(appLoader);
         }
+    }
+
+    public enum Languages
+    {
+        En,
+        Ar
     }
 }

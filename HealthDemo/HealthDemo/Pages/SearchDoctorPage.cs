@@ -58,13 +58,25 @@ namespace HealthDemo.Pages
             };
 
             var doctorLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
-            doctorLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = AppResources.SearchDoctor_Find});
+            doctorLayout.Children.Add(new Label() 
+            { 
+                HorizontalOptions = LayoutOptions.StartAndExpand, 
+                TextColor = Color.Black, 
+                Text = AppResources.SearchDoctor_Find,
+                XAlign = App.CurrentLanguage == Languages.En ? TextAlignment.Start : TextAlignment.End
+            });
             var txt = new CustomTextBox() { HorizontalOptions = LayoutOptions.FillAndExpand, TextColor = Color.Black };
             txt.SetBinding(CustomTextBox.TextProperty, "SearchText", BindingMode.TwoWay);
             doctorLayout.Children.Add(txt);
 
             var specLayout = new StackLayout() { Spacing = 5, Orientation = StackOrientation.Vertical };
-            specLayout.Children.Add(new Label() { HorizontalOptions = LayoutOptions.StartAndExpand, TextColor = Color.Black, Text = AppResources.SearchDoctor_Spec });
+            specLayout.Children.Add(new Label() 
+            { 
+                HorizontalOptions = LayoutOptions.StartAndExpand, 
+                TextColor = Color.Black, 
+                Text = AppResources.SearchDoctor_Spec,
+                XAlign = App.CurrentLanguage == Languages.En ? TextAlignment.Start : TextAlignment.End
+            });
             specLayout.Children.Add(this.CreateComboBox(ref btnCombo));
 
             btnSearch = new Button()

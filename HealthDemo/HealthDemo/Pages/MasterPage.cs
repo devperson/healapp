@@ -153,33 +153,7 @@ namespace HealthDemo.Pages
             
 
             //title
-            var titleHeight = Device.OnPlatform(30, 40, 30);
-            titleLayout = new AbsoluteLayout() { MinimumHeightRequest = titleHeight, HeightRequest = titleHeight, HorizontalOptions = LayoutOptions.FillAndExpand };
-            titleImage = new Image
-            {
-                Aspect = Aspect.Fill,
-                Source = Device.OnPlatform("upper.png", "upper.png", "Images/upper.png"),
-                HeightRequest = titleHeight,
-                HorizontalOptions = LayoutOptions.FillAndExpand
-            };
-            
-            lblTitle = new Label() 
-            { 
-                TextColor = Color.White,
-                HorizontalOptions = LayoutOptions.StartAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand, 
-                Font = Font.SystemFontOfSize(15)
-            };
-            var stackLayoutTitle = new StackLayout()
-            {
-                Orientation = StackOrientation.Horizontal,
-                Spacing = 0,
-                Padding = new Thickness(10, 0, 0, 0),
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-            stackLayoutTitle.Children.Add(lblTitle);
-            titleLayout.Children.Add(titleImage, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
-            titleLayout.Children.Add(stackLayoutTitle, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
+            CreateTitlePanel();
             
             //content
             contentStack = new StackLayout() 
@@ -270,6 +244,49 @@ namespace HealthDemo.Pages
             this.Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 0);
             this.Content = rootAbsoluteLAyout;
             
+        }
+
+        private void CreateTitlePanel()
+        {
+            var titleHeight = Device.OnPlatform(30, 40, 30);
+            titleLayout = new AbsoluteLayout() { MinimumHeightRequest = titleHeight, HeightRequest = titleHeight, HorizontalOptions = LayoutOptions.FillAndExpand };
+            var imgSource = App.CurrentLanguage == Languages.En ? "upper.png" : "upperar.png";
+            titleImage = new Image
+            {
+                Aspect = Aspect.Fill,
+                Source = imgSource,
+                HeightRequest = titleHeight,
+                HorizontalOptions = LayoutOptions.FillAndExpand
+            };
+
+            lblTitle = new Label()
+            {
+                TextColor = Color.White,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                Font = Font.SystemFontOfSize(15)
+            };
+            
+
+            var stackLayoutTitle = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 0,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            if (App.CurrentLanguage == Languages.En)
+            {
+                lblTitle.HorizontalOptions = LayoutOptions.StartAndExpand;
+                stackLayoutTitle.Padding = new Thickness(10, 0, 0, 0);
+            }
+            else
+            {
+                lblTitle.HorizontalOptions = LayoutOptions.EndAndExpand;
+                stackLayoutTitle.Padding = new Thickness(0, 0, 10, 0);
+            }
+            stackLayoutTitle.Children.Add(lblTitle);
+            titleLayout.Children.Add(titleImage, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
+            titleLayout.Children.Add(stackLayoutTitle, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
         }
 
         private ContentView CreateActivityIndicator()

@@ -148,6 +148,8 @@
     <AndroidResource Include="Resources\Drawable\placeholder.png" />
     <AndroidResource Include="Resources\Drawable\events.jpg" />
     <AndroidResource Include="Resources\Drawable\calendar.png" />
+    <AndroidResource Include="Resources\Drawable\upperar.png" />
+    <AndroidResource Include="Resources\Drawable\combobackar.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HealthDemo\HealthDemo.csproj">

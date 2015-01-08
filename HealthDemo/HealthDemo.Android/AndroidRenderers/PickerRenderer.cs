@@ -26,6 +26,8 @@ namespace HealthDemo.Droid.AndroidRenderers
             var native = Control as EditText;
             native.Background = null;
             native.SetTextColor(Android.Graphics.Color.Black);
+            if (App.CurrentLanguage == Languages.Ar)
+                native.TextAlignment = Android.Views.TextAlignment.TextEnd;
         }
     }
 }

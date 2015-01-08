@@ -193,4 +193,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\calendar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\upperar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\combobackar.png" />
+  </ItemGroup>
 </Project>
