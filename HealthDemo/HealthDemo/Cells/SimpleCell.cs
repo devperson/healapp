@@ -26,19 +26,29 @@ namespace HealthDemo.Cells
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(17),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.Center
+                VerticalOptions = LayoutOptions.Center,
+                XAlign = this.IsEn() ? TextAlignment.Start : TextAlignment.End
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
 
+            var imgSource = this.IsEn() ? "accesory.png" : "left_accesory.png";
             var imgAccesory = new Image
             {
-                Source = Device.OnPlatform("accesory.png", "accesory.png", "Images/accesory.png"),
+                Source = imgSource,
                 WidthRequest = 26,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
-            rootLayout.Children.Add(lblTitle);
-            rootLayout.Children.Add(imgAccesory);
+            if (this.IsEn())
+            {
+                rootLayout.Children.Add(lblTitle);
+                rootLayout.Children.Add(imgAccesory);
+            }
+            else
+            {
+                rootLayout.Children.Add(imgAccesory);
+                rootLayout.Children.Add(lblTitle);
+            }
 
             View = rootLayout;
         }
@@ -64,7 +74,8 @@ namespace HealthDemo.Cells
                 TextColor = Color.Black,
                 Font = Font.SystemFontOfSize(17),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.Center
+                VerticalOptions = LayoutOptions.Center,
+                XAlign = this.IsEn() ? TextAlignment.Start : TextAlignment.End
             };
             lblTitle.SetBinding(Label.TextProperty, new Binding("Title"));
             rootLayout.Children.Add(lblTitle);
