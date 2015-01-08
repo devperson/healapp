@@ -130,7 +130,51 @@ namespace HealthDemo
             return lbls;
         }
 
-        
+        public static void ReverseLayoutPaddings(this Layout root)
+        {
+            foreach (var layout in root.GetAllLayouts())
+            {
+                if (layout.Padding.Left > 0 || layout.Padding.Right > 0)
+                {
+                    layout.Padding = new Thickness(layout.Padding.Right, layout.Padding.Top, layout.Padding.Left, layout.Padding.Bottom);
+                }
+            }
+        }
+
+       
+        #region VisualTree
+        public static IEnumerable<Layout> GetAllLayouts(this Layout root)
+        {
+            Queue<Layout> remaining = new Queue<Layout>();
+            remaining.Enqueue(root);
+
+            while (remaining.Count > 0)
+            {
+                var layout = remaining.Dequeue();
+                yield return layout;
+
+                foreach (var child in layout.GetLayoutChildren())
+                {
+                    if (child is Layout)
+                        remaining.Enqueue(child as Layout);
+                }
+            }
+        }
+
+        public static List<View> GetLayoutChildren(this Layout root)
+        {
+            if (root is ContentView)
+                return new List<View> { (root as ContentView).Content };
+            if (root is ScrollView)
+                return new List<View> { (root as ScrollView).Content };
+
+            if (root is IViewContainer<View>)
+            {
+                return (root as IViewContainer<View>).Children.ToList();
+            }
+            return new List<View>();
+        }
+        #endregion
 
         public static bool IsEn(this object p)
         {
