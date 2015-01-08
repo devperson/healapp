@@ -24,9 +24,8 @@ namespace HealthDemo
         }
         public static Languages CurrentLanguage { get; set; }
         public static Page GetMainPage()
-        {
-            if (SelectedLocal.ToLower() != "en")
-                DependencyService.Get<ILocalize>().SetLocale(SelectedLocal);            
+        {            
+            DependencyService.Get<ILocalize>().SetLocale(SelectedLocal);            
             PageViewLocator.NavigationPage = new NavigationPageEx(new MainPage());            
             return PageViewLocator.NavigationPage;
         }

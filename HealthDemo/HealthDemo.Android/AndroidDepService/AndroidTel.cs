@@ -25,7 +25,7 @@ namespace HealthDemo.Droid.AndroidDepService
                 Intent intent = new Intent(Intent.ActionCall, Android.Net.Uri.Parse("tel:" + number));
                 Forms.Context.StartActivity(intent);
             }
-            catch
+            catch(Exception ex)
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Forms.Context);
                 AlertDialog dialog = builder.Create();
