@@ -10,12 +10,18 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+
+    /// <summary>
+    /// This class creates UI page for News list page.
+    /// </summary>
     public class NewsListPage:MasterPage
     {                
         private ListView lvNews;
         public NewsListPage()
             : base()
-        {            
+        {
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.NewsVM;            
             lblTitle.Text = AppResources.NewsList_Title;
 
@@ -41,6 +47,10 @@ namespace HealthDemo.Pages
             
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvNews = new ListView()
@@ -54,6 +64,9 @@ namespace HealthDemo.Pages
             parent.Children.Add(lvNews);
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -63,6 +76,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.NewsVM.LoadNews();
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo
 {
+    /// <summary>
+    /// Application main class.
+    /// </summary>
     public class App
     {
         public static string _selectedLocal = "En"; //Ar
@@ -23,6 +26,10 @@ namespace HealthDemo
             }
         }
         public static Languages CurrentLanguage { get; set; }
+
+        /// <summary>
+        /// Retrives app main page.
+        /// </summary>        
         public static Page GetMainPage()
         {            
             DependencyService.Get<ILocalize>().SetLocale(SelectedLocal);            
@@ -30,6 +37,9 @@ namespace HealthDemo
             return PageViewLocator.NavigationPage;
         }
 
+        /// <summary>
+        /// Retrives app start page.
+        /// </summary>        
         public static Page GetLanguagesPage(IAppLoader appLoader)
         {
             return new LanguagesPage(appLoader);

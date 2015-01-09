@@ -9,16 +9,19 @@ using Xamarin.Forms.Labs.Controls;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Doctor search page.
+    /// </summary>
     public class SearchDoctorPage : MasterPage
     {
         private Button btnSearch;
         private Picker btnCombo;
         
         public SearchDoctorPage() : base() 
-        {            
-            BindingContext = ViewModelLocator.DoctorVM;
-            
+        {
+            //Bind page with data and handle button click events
 
+            BindingContext = ViewModelLocator.DoctorVM;            
             btnCombo.SelectedIndexChanged += (sender, args) =>
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
@@ -46,6 +49,10 @@ namespace HealthDemo.Pages
             };           
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var content = new StackLayout()
@@ -101,6 +108,9 @@ namespace HealthDemo.Pages
             lblTitle.Text = AppResources.SearchDoctor_Title;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -119,6 +129,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.DoctorVM.ShowAlert = this.DisplayAlert;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
@@ -127,7 +140,8 @@ namespace HealthDemo.Pages
         }
     }
 
-    public class CustomTextBox : Entry { }
+    
+    public class CustomTextBox : Entry { }    
     public class CustomPicker : Picker { }
 
    

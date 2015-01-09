@@ -9,11 +9,16 @@ using HealthDemo;
 
 namespace HealthDemo.Cells
 {
+    /// <summary>
+    /// This class represents UI cell for Doctor list.
+    /// </summary>
     public class DoctorCell : CustomCell
-    {
+    {        
         public DoctorCell()
             : base()
         {
+            // Create layout for cell and bind with data.
+
             var rootLayout = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,

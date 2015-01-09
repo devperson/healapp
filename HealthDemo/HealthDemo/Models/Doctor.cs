@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents Doctor object, and contains doctor related informations.
+    /// </summary>
     public class Doctor : ViewModelBase
     {
         

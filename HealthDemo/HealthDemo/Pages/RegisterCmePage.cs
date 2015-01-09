@@ -9,12 +9,17 @@ using HealthDemo.Utils;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Cme registraction page.
+    /// </summary>
     public class RegisterCmePage : MasterPage
     {
         private Button btnRegister, btnReset;
         public RegisterCmePage()
             : base()
         {
+            //Handle button click events
+
             btnRegister.Clicked += (sender, args) =>
             {
                 ViewModelLocator.CmeVM.RegisterCME(async (success) =>
@@ -31,9 +36,12 @@ namespace HealthDemo.Pages
             {
                 ViewModelLocator.CmeVM.ResetReg();
             };
-
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ViewModelLocator.CmeVM.NewCMERegistration = new Models.CMEReg();
@@ -65,7 +73,9 @@ namespace HealthDemo.Pages
         }
 
         
-
+        /// <summary>
+        /// Helper method for creating labeled Text box control for user input.        
+        /// </summary>        
         private StackLayout CreateItem(string title, string binding, object context,Keyboard key = null, bool isLabel = false)
         {
             var titleStack = new StackLayout() { Orientation = StackOrientation.Vertical };
@@ -91,6 +101,9 @@ namespace HealthDemo.Pages
             return titleStack;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -98,6 +111,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.CmeVM.ShowAlert = this.DisplayAlert;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

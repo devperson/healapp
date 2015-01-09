@@ -10,13 +10,18 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Faq list page.
+    /// </summary>
     public class FaqListPage : MasterPage
     {                
         private ListView lvFaq;
 
         public FaqListPage()
             : base()
-        {            
+        {
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.FaqVM;
             
             lblTitle.Text = AppResources.FaqList_Title;
@@ -43,6 +48,10 @@ namespace HealthDemo.Pages
             };            
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvFaq = new ListView()
@@ -56,6 +65,9 @@ namespace HealthDemo.Pages
             parent.Children.Add(lvFaq);
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -64,6 +76,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.FaqVM.ShowAlert = this.DisplayAlert;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// Base class for all ViewModel clases
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
         public ViewModelBase()
@@ -17,6 +20,9 @@ namespace HealthDemo.ViewModels
         #region INotify
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// INotifyPropertyChanged implementation its required to update UI when models changes.
+        /// </summary>
         public void RaisePropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -24,14 +30,7 @@ namespace HealthDemo.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); 
             }
         }        
-
-        public void RaisePropertyChanged(object owner, string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(owner, new PropertyChangedEventArgs(propertyName));
-            }
-        }       
+       
         #endregion        
 
         private bool _isloading;
@@ -70,7 +69,9 @@ namespace HealthDemo.ViewModels
 
     public static class ObservableBaseEx
     {
-        //override 1
+        /// <summary>
+        /// This is extenstion for RaisePropertyChanged which allows us to pass properties instead of string property name. 
+        /// </summary>
         public static void RaisePropertyChanged<T, TProperty>(this T observableBase, Expression<Func<T, TProperty>> expression) where T : ViewModelBase
         {
             observableBase.RaisePropertyChanged(observableBase.GetPropertyName(expression));

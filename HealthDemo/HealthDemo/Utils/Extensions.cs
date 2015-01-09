@@ -8,8 +8,14 @@ using Xamarin.Forms;
 
 namespace HealthDemo
 {
+    /// <summary>
+    /// This class represents helper methods for all pages.
+    /// </summary>
     public static class PageExtensions
     {
+        /// <summary>
+        /// Helper method for creating combo box like control.
+        /// </summary>        
         public static AbsoluteLayout CreateComboBox(this Page p, ref Picker btnComboFor)
         {
             var comboLayout = new AbsoluteLayout() { HeightRequest = 35, HorizontalOptions = LayoutOptions.FillAndExpand};
@@ -27,6 +33,9 @@ namespace HealthDemo
             return comboLayout;
         }
 
+        /// <summary>
+        /// Adds basic text label with specified text, row, col parameters to Grid panel
+        /// </summary>        
         public static Label AddLabel(this Grid contentGrid, string title, int row, int col = 0)
         {
             var lbl = new Label
@@ -42,6 +51,9 @@ namespace HealthDemo
             return lbl;
         }
 
+        /// <summary>
+        /// Adds basic text label with specified data binding path, row, col parameters to Grid panel
+        /// </summary>       
         public static Label AddLabelWithBinding(this Grid contentGrid, string binding, int row, int col = 0)
         {
             var lbl = new Label
@@ -57,6 +69,9 @@ namespace HealthDemo
             return lbl;
         }
 
+        /// <summary>
+        /// Adds basic text field with specified data binding path, row parameters to Grid panel
+        /// </summary>       
         public static Entry AddTextField(this Grid contentGrid, string binding, int row, Keyboard key = null)
         {
             var entry = new CustomTextBox
@@ -73,6 +88,9 @@ namespace HealthDemo
             return entry;
         }
 
+        /// <summary>
+        /// Adds basic switch control with specified data binding path, row parameters to Grid panel
+        /// </summary>  
         public static void AddSwitchField(this Grid contentGrid, string binding, int row)
         {
             var switchControl = new Switch()
@@ -86,6 +104,9 @@ namespace HealthDemo
             contentGrid.Children.Add(switchControl, col, row);
         }
 
+        /// <summary>
+        /// Creates simple button with specified text.
+        /// </summary>  
         public static Button CreateButton(this Page p, string title)
         {
             return new Button()
@@ -98,6 +119,9 @@ namespace HealthDemo
             };
         }
 
+        /// <summary>
+        /// Finds all labels and reverses their aligment.
+        /// </summary>        
         public static void ReverseLabelesAligment(this IViewContainer<View> root)
         {
             foreach (var lbl in root.GetAllLables())
@@ -114,6 +138,9 @@ namespace HealthDemo
             }
         }
 
+        /// <summary>
+        /// Finds all labels in specified panel.
+        /// </summary>        
         public static List<Label> GetAllLables(this IViewContainer<View> root)
         {
             List<Label> lbls = new List<Label>();
@@ -138,6 +165,9 @@ namespace HealthDemo
             return lbls;
         }
 
+        /// <summary>
+        /// Finds all controls with padding set and reverses their values.
+        /// </summary>        
         public static void ReverseLayoutPaddings(this Layout root)
         {
             foreach (var layout in root.GetAllLayouts())
@@ -151,6 +181,9 @@ namespace HealthDemo
 
        
         #region VisualTree Helper
+        /// <summary>
+        /// Helper method for getting all controls from specified control by traversing visual tree
+        /// </summary>        
         public static IEnumerable<Layout> GetAllLayouts(this Layout root)
         {
             Queue<Layout> remaining = new Queue<Layout>();
@@ -169,6 +202,9 @@ namespace HealthDemo
             }
         }
 
+        /// <summary>
+        /// Retrives any possible child of specified control.
+        /// </summary>        
         public static List<View> GetLayoutChildren(this Layout root)
         {
             if (root is ContentView)
@@ -184,6 +220,9 @@ namespace HealthDemo
         }
         #endregion
 
+        /// <summary>
+        /// Indicates is whether English localization being used.
+        /// </summary>        
         public static bool IsEn(this object p)
         {
             return App.CurrentLanguage == Languages.En;

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+
+    /// <summary>
+    /// This class represents tip category object.
+    /// </summary>
     public class HealthCategory
     {
         public int ID { get; set; }

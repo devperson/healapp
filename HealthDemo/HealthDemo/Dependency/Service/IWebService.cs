@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Service
 {
+    /// <summary>
+    /// Interface abstracts accessing Web API data.
+    /// </summary>
     public interface IWebService
     {
         void SearchDoctors(SearchDoctorRequest request, Action<DoctorResponse> onCompleted);
         void GetCategories(Action<CategoryResponse> onCompleted);
         void GetHealthTipsByCategory(int categoryID, Action<HealthTipResponse> onCompleted);
-        void GetSpeicalties(Action<PositionResponse> onCompleted);
+        void GetSpecialties(Action<PositionResponse> onCompleted);
         void GetInsurances(Action<InsuranceResponse> onCompleted);
         void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase;
         void CreateAppointment(Appointment appoint, Action<ResponseBase> onCompleted);

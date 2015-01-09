@@ -67,7 +67,7 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
-        public async void GetSpeicalties(Action<PositionResponse> onCompleted)
+        public async void GetSpecialties(Action<PositionResponse> onCompleted)
         {
             var asyncResult = await ExecuteServiceMethod<PositionResponse>(AddLocalVar("position"), Method.GET, content =>
                 {

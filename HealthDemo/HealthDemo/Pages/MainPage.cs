@@ -8,11 +8,16 @@ using Xamarin.Forms.Labs.Controls;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates app main page which lists all modules e.g. Tips, Doctors and e.t.c.
+    /// </summary>
     public class MainPage : MasterPage
     {        
         ImageButton btnDoctors, btnTips, btnInsurance, btnNews, btnFaq, btnEcommerce,btnCME,btnEvent;
         public MainPage() : base() 
-        {            
+        {
+            //Handle button click events
+
             btnDoctors.Clicked += (s, e) =>
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
@@ -67,6 +72,10 @@ namespace HealthDemo.Pages
             Constants.NoInternetMessage = AppResources.NO_INTERNET_MSG;
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
@@ -120,6 +129,9 @@ namespace HealthDemo.Pages
             lblTitle.Text = AppResources.MainPage_Title;
         }
 
+        /// <summary>
+        /// Helper method for creating stacking panel with basic settings.        
+        /// </summary>     
         public static StackLayout CreateItemStacklayout()
         {
             var itemContent = new StackLayout()
@@ -132,6 +144,9 @@ namespace HealthDemo.Pages
             return itemContent;
         }
 
+        /// <summary>
+        /// Helper method for creating buttons with basic settings including icon and text.        
+        /// </summary>     
         public static ImageButton CreateButton(ImageSource imgSource, string text)
         {
             return new ImageButton()
@@ -148,6 +163,9 @@ namespace HealthDemo.Pages
             };
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();

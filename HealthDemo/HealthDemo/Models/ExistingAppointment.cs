@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents ExistingAppointment object, and contains appointment related informations.
+    /// </summary>
     public class ExistingAppointment
     {
         public int Id { get; set; }

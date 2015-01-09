@@ -9,6 +9,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for About us page.
+    /// </summary>
     public class AboutPage : MasterPage
     {        
         public AboutPage()
@@ -16,7 +19,12 @@ namespace HealthDemo.Pages
         {                        
             lblTitle.Text = AppResources.About_HeaderTitle;
         }
+        
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var stackLayout = new StackLayout() 

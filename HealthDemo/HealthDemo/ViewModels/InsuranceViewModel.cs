@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents Insurance view model and contains related data and actions.
+    /// </summary>
     public class InsuranceViewModel : ViewModelBase
     {
         public InsuranceViewModel()
@@ -15,6 +18,10 @@ namespace HealthDemo.ViewModels
         }
         public Insurance SelectedInsurance { get; set; }
         public List<Insurance> InsuranceList { get; set; }
+
+        /// <summary>
+        /// Load all insurance objects from server.
+        /// </summary>
         public void LoadInsurances()
         {
             if (InsuranceList.Count == 0)

@@ -9,6 +9,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Appointment result page.
+    /// </summary>
     public class AppointResultPage : MasterPage
     {
         public AppointResultPage()
@@ -18,6 +21,10 @@ namespace HealthDemo.Pages
         }
         private ListView lvResult;
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var rootlayout = new StackLayout() { Spacing = 0, Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand};
@@ -47,6 +54,10 @@ namespace HealthDemo.Pages
             parent.Children.Add(rootlayout);
         }
 
+
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -55,6 +66,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.AppointmentVM.SearchAppointment();
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
@@ -62,6 +76,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.AppointmentVM.ShowAlert = null;
         }
 
+        /// <summary>
+        /// helper method for creating lables with specified width and text.
+        /// </summary>        
         private Label CreateLabel(string title, double width = 0)
         {
             var lbl = new Label()

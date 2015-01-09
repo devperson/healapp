@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents Appointment view model and contains related data and actions.
+    /// </summary>
     public class AppointmentViewModel : ViewModelBase
     {
         public List<ExistingAppointment> SearchedAppointList { get; set; }
         public Appointment NewAppointment { get; set; }
         public string Emirate { get; set; }
         public string Mrn { get; set; }
+
+        /// <summary>
+        /// Registers new appointment data on server.
+        /// </summary>        
         public void SendAppointment(Action<bool> oncomplete)
         {
             if (!string.IsNullOrEmpty(NewAppointment.Name) ||
@@ -25,19 +32,21 @@ namespace HealthDemo.ViewModels
             {
                 IsLoading = true;
                 WebService.CreateAppointment(NewAppointment, result =>
+                {
+                    IsLoading = false;
+                    if (!result.Success)
                     {
-                        IsLoading = false;
-                        if (!result.Success)
-                        {
-                            ShowError(result.ErrorMessage);
-                        }
-                        oncomplete(result.Success);
-                    });
+                        ShowError(result.ErrorMessage);
+                    }
+                    oncomplete(result.Success);
+                });
             }
             else ShowAlert(AppResources.DLG_Error, AppResources.Appointment_SEND_DLG_Msg, "OK");
         }
 
-
+        /// <summary>
+        /// Retrives appointments from server that matches by mrn and emirate.
+        /// </summary>
         public void SearchAppointment()
         {
             IsLoading = true;
@@ -63,6 +72,9 @@ namespace HealthDemo.ViewModels
             });
         }
 
+        /// <summary>
+        /// Resets all fields
+        /// </summary>
         public void ResetFields()
         {
             Emirate = string.Empty;

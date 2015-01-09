@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Doctor details page.
+    /// </summary>
     public class ProfilePage : MasterPage
     {        
         public ProfilePage()
@@ -15,6 +18,11 @@ namespace HealthDemo.Pages
         {                        
             lblTitle.Text = AppResources.Profile_Title;
         }
+
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {            
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -75,18 +83,19 @@ namespace HealthDemo.Pages
             stackLayoutDetails.Children.Add(this.CreateQualificationsItem());
             stackLayoutDetails.Children.Add(CreateDetailsItem(AppResources.Profile_Language, "Language"));
             var frame1 = new ContentView() 
-            { 
-                //HasShadow = false, 
+            {                 
                 HorizontalOptions = LayoutOptions.FillAndExpand, Padding = new Thickness(20, 10, 20, 20) 
             };
-            var frmae2 = new ContentView() 
-            { 
-                //HasShadow = false, OutlineColor = Color.Black, 
-                BackgroundColor = Color.White, HorizontalOptions = LayoutOptions.FillAndExpand, Padding = 1 
+            var frame2 = new ContentView()
+            {
+                BackgroundColor = Color.White,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Padding = 1,
+                Content = stackLayoutDetails
             };
-            frmae2.Content = stackLayoutDetails;
+            
             var border = new StackLayout() { BackgroundColor = Color.Black, Orientation = StackOrientation.Vertical, Padding = 1 };
-            border.Children.Add(frmae2);
+            border.Children.Add(frame2);
             frame1.Content = border;
 
             stlayout.Children.Add(headerLayout);
@@ -97,7 +106,9 @@ namespace HealthDemo.Pages
             parent.Children.Add(rootScrollView);
         }
 
-
+        /// <summary>
+        /// Helper method for creating Text area with heading.        
+        /// </summary>     
         private StackLayout CreateDetailsItem(string title, string binding, bool hasBinding = true)
         {
             var lblDTitle = new Label()
@@ -123,6 +134,9 @@ namespace HealthDemo.Pages
             return stackLayout;
         }
 
+        /// <summary>
+        /// Helper method for creating list of qualifications.        
+        /// </summary>  
         private StackLayout CreateQualificationsItem()
         {
             StackLayout stackQualifications = new StackLayout() { Spacing = 0, Orientation = StackOrientation.Vertical };
@@ -143,21 +157,13 @@ namespace HealthDemo.Pages
                 };
                 stackQualifications.Children.Add(lblDetails);
             }            
-
-            //if (hasBinding)
-            //    lblDetails.SetBinding(Label.TextProperty, new Binding(binding));
-            //else lblDetails.Text = binding;
-
+            
             var stackLayout = new StackLayout() { Spacing = 0, HorizontalOptions = LayoutOptions.FillAndExpand };
             stackLayout.Children.Add(lblDTitle);
             stackLayout.Children.Add(stackQualifications);
 
             return stackLayout;
         }
-
-        protected override void OnBackPressed()
-        {
-            //VM.SelectedDoctor = null;
-        }
+       
     }
 }

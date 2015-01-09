@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents News object.
+    /// </summary>
     public class News
     {
         public int ID { get; set; }

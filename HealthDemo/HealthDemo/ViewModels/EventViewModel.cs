@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents Event view model and contains related data and actions.
+    /// </summary>
     public class EventViewModel : ViewModelBase
     {
         public EventViewModel()
@@ -18,6 +21,10 @@ namespace HealthDemo.ViewModels
         public Event SelectedEvent { get; set; }
         public List<Event> EventsList { get; set; }
         private bool IsPrevCME { get; set; }
+
+        /// <summary>
+        /// Load all event objects from server.
+        /// </summary>
         public void LoadEvents()
         {   
             IsLoading = true;

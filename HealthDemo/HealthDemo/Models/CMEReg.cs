@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents CMEReg object.
+    /// </summary>
     public class CMEReg : ViewModelBase
     {
         public string Name { get; set; }

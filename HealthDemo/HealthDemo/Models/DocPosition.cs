@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents DocPosition object.
+    /// </summary>
     public class DocPosition
     {
         public int ID { get; set; }

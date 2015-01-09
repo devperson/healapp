@@ -11,6 +11,9 @@ using System.Diagnostics;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Doctor list page.
+    /// </summary>
     public class DoctorListPage : MasterPage
     {
         private ListView lvResult;                
@@ -18,6 +21,8 @@ namespace HealthDemo.Pages
         public DoctorListPage()
             : base()
         {
+            //Bind page with data and handle button click events
+
             lblTitle.Text = AppResources.Doctors_Title;
             
             BindingContext = ViewModelLocator.DoctorVM;
@@ -44,6 +49,10 @@ namespace HealthDemo.Pages
             };
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvResult = new ListView() 

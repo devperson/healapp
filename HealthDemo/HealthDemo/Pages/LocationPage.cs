@@ -9,10 +9,17 @@ using Xamarin.Forms.Maps;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates page with Map UI control.
+    /// </summary>
     public class LocationPage : MasterPage
     {        
         public LocationPage() : base(false, Device.OnPlatform(false, true, true)) { }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(Xamarin.Forms.StackLayout parent)
         {
             lblTitle.Text = AppResources.Location_Title;

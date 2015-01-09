@@ -10,11 +10,16 @@ using HealthDemo.ViewModels;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Terms page.
+    /// </summary>
     public class TermsPage : MasterPage
     {   
         private Button btnOk;        
         public TermsPage():base()
         {            
+            //Bind page with data and handle events
+
             this.BindingContext = ViewModelLocator.FileVM;
             btnOk.Clicked += (s, e) =>
             {
@@ -31,6 +36,11 @@ namespace HealthDemo.Pages
                 });
             };
         }
+
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var rootLayout = new StackLayout() { Spacing = 5, Padding = new Thickness(15, 10, 15, 15), Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
@@ -77,14 +87,18 @@ namespace HealthDemo.Pages
         //    return text;
         //}
 
-
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			ViewModelLocator.FileVM.ShowAlert = this.DisplayAlert;
 		}
 
-
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();

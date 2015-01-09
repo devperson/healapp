@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents Tip view model and contains related data and actions.
+    /// </summary>
     public class TipViewModel : ViewModelBase
     {
         public TipViewModel()
@@ -41,6 +44,9 @@ namespace HealthDemo.ViewModels
         public List<HealthCategory> CategoryList { get; set; }
         public List<HealthTip> TipsList { get; set; }
 
+        /// <summary>
+        /// Load all tip category objects from server.
+        /// </summary>
         public void LoadCategories()
         {
             if (CategoryList.Count == 0)
@@ -62,6 +68,9 @@ namespace HealthDemo.ViewModels
             }
         }
 
+        /// <summary>
+        /// Load all tip objects from server.
+        /// </summary>
         public void LoadTips()
         {
             if (TipsList.Count == 0 || (TipsList.Count > 0 && !TipsList.All(s => s.CategoryID == SelectedCategory.ID)))

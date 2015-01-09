@@ -10,13 +10,18 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Event list page.
+    /// </summary>
     public class EventListPage : MasterPage
     {        
         private ListView lvEvent;
 
         public EventListPage()
             : base()
-        {                        
+        {
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.EventVM;
             
             lblTitle.Text = AppResources.Event_Title;
@@ -34,11 +39,7 @@ namespace HealthDemo.Pages
                     var selected = e.SelectedItem as Event;
                     ViewModelLocator.EventVM.SelectedEvent = selected;
                     lvEvent.SelectedItem = null;
-                    Navigation.PushAsync(new EventDetailPage());
-                    //if (PageViewLocator.NewsDetailPage == null)
-                    //    PageViewLocator.NewsDetailPage = new NewsDetailPage();
-                    //PageViewLocator.NewsDetailPage.BindingContext = selected;
-                    //Navigation.PushAsync(PageViewLocator.NewsDetailPage);
+                    Navigation.PushAsync(new EventDetailPage());                    
                 }
             };
 
@@ -47,6 +48,10 @@ namespace HealthDemo.Pages
             
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvEvent = new ListView()
@@ -60,17 +65,19 @@ namespace HealthDemo.Pages
             parent.Children.Add(lvEvent);
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            ViewModelLocator.EventVM.ShowAlert = this.DisplayAlert;
-            //lvMenu.SelectedItem = GetCurrentPageAsMenu();
-            //if (IsCME)
-            //    ViewModelLocator.EventVM.LoadEvents(ViewModelLocator.CmeVM.SelectedCme.Id);
-            //else ViewModelLocator.EventVM.LoadEvents();
+            ViewModelLocator.EventVM.ShowAlert = this.DisplayAlert;          
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents Cme view model and contains related data and actions.
+    /// </summary>
     public class CmeViewModel : ViewModelBase
     {
         public CmeViewModel()
@@ -18,6 +21,10 @@ namespace HealthDemo.ViewModels
         public CMEReg NewCMERegistration { get; set; }
         public Cme SelectedCme { get; set; }
         public List<Cme> CmesList { get; set; }
+
+        /// <summary>
+        /// Retrives all cme objects from server.
+        /// </summary>
         public void LoadCme()
         {
             if (CmesList.Count == 0)
@@ -39,6 +46,9 @@ namespace HealthDemo.ViewModels
             }
         }
 
+        /// <summary>
+        /// Registers new Cme on server.
+        /// </summary>        
         public void RegisterCME(Action<bool> oncomplete)
         {
             if (!string.IsNullOrEmpty(NewCMERegistration.Name) ||
@@ -60,6 +70,9 @@ namespace HealthDemo.ViewModels
             else ShowAlert(AppResources.DLG_Error, AppResources.Cme_REGISTER_DLG_Msg, "OK");
         }
 
+        /// <summary>
+        /// Resets all fields
+        /// </summary>
         public void ResetReg()
         {
             NewCMERegistration.Name = string.Empty;

@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Contact us page.
+    /// </summary>
     public class ContactPage : MasterPage
     {        
         public ContactPage()
@@ -16,6 +19,10 @@ namespace HealthDemo.Pages
             lblTitle.Text = AppResources.Contact_Title;
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var stackLayout = new StackLayout()
@@ -65,6 +72,9 @@ namespace HealthDemo.Pages
             parent.Children.Add(stackLayout);
         }
 
+        /// <summary>
+        /// Helper method which creates two stacked text lables one for title and one for tel number.
+        /// </summary>        
         public StackLayout CreateTelItem(string title, string number)
         {
             var telLayout = new StackLayout()

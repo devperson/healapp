@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents Faq object, and contains faq related informations.
+    /// </summary>
     public class Faq
     {
         public int ID { get; set; }

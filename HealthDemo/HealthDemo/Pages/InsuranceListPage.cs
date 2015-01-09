@@ -10,12 +10,17 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Insurance list page.
+    /// </summary>
     public class InsuranceListPage : MasterPage
     {                
         private ListView lvInsurances;
         public InsuranceListPage()
             : base()
-        {            
+        {
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.InsuranceVM;
 
             lblTitle.Text = AppResources.InsuranceList_Title;
@@ -45,6 +50,10 @@ namespace HealthDemo.Pages
             
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvInsurances = new ListView()
@@ -58,6 +67,9 @@ namespace HealthDemo.Pages
             parent.Children.Add(lvInsurances);
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -66,6 +78,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.InsuranceVM.ShowAlert = this.DisplayAlert;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

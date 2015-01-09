@@ -9,13 +9,19 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+
+    /// <summary>
+    /// This class creates UI page for New file page.
+    /// </summary>
     public class NewFilePage : MasterPage
     {
         private Grid contentGrid;
         private Button btnUpload, btnSubmit;
         public NewFilePage()
             : base()
-        {            
+        {
+            //Bind page with data and handle button click events
+
             ViewModelLocator.FileVM.NewFile = new FileModel();
             this.BindingContext = ViewModelLocator.FileVM;
             this.contentGrid.BindingContext = ViewModelLocator.FileVM.NewFile;
@@ -35,6 +41,10 @@ namespace HealthDemo.Pages
             };
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };

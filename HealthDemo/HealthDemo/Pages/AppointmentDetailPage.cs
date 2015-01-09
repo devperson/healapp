@@ -9,9 +9,11 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Appointment detail page.
+    /// </summary>
     public class AppointmentDetailPage : MasterPage
-    {
-        //private AppointmentViewModel VM { get; set; }
+    {        
         private Picker btnComboClinical;
         private Button btnSubmit { get; set; }
         private Grid contentGrid;
@@ -21,7 +23,8 @@ namespace HealthDemo.Pages
         public AppointmentDetailPage()
             : base()
         {
-            //VM = ViewModelLocator.AppointmentVM;
+            //Bind page with data and handle button click events
+
             ViewModelLocator.AppointmentVM.NewAppointment = new Appointment();
             lblTitle.Text = AppResources.Appointment_Title;
             this.BindingContext = ViewModelLocator.AppointmentVM;
@@ -50,6 +53,10 @@ namespace HealthDemo.Pages
             };            
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };
@@ -142,6 +149,9 @@ namespace HealthDemo.Pages
             
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -151,6 +161,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.AppointmentVM.NewAppointment.PropertyChanged += NewAppointment_PropertyChanged;            
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
@@ -159,6 +172,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.AppointmentVM.NewAppointment.PropertyChanged -= NewAppointment_PropertyChanged;        
         }
 
+        /// <summary>
+        /// Event handler method fires when model property changes.
+        /// </summary>        
         private void NewAppointment_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ThiqaYes")
@@ -181,6 +197,9 @@ namespace HealthDemo.Pages
             }
         }
 
+        /// <summary>
+        /// Helper method adds combo box like control to specified row in grid panel.
+        /// </summary>        
         public void AddComboField(int row)
         {
             var comboLayouyt = this.CreateComboBox(ref btnComboClinical);

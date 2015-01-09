@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents Faq view model and contains related data and actions.
+    /// </summary>
     public class FaqViewModel : ViewModelBase
     {
         public FaqViewModel()
@@ -17,6 +20,10 @@ namespace HealthDemo.ViewModels
 
         public Faq SelectedFAQ { get; set; }
         public List<Faq> FAQList { get; set; }
+
+        /// <summary>
+        /// Load all faq objects from server.
+        /// </summary>
         public void LoadFaq()
         {
             if (FAQList.Count == 0)

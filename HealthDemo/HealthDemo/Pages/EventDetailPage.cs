@@ -8,16 +8,23 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Event details page.
+    /// </summary>
     public class EventDetailPage : MasterPage
     {
         public EventDetailPage()
             : base(false)
-        {            
+        {
+            //Bind page with data
             BindingContext = ViewModelLocator.EventVM.SelectedEvent;
             lblTitle.Text = AppResources.EventDetail_Title;
         }
 
-
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };

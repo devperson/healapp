@@ -4,6 +4,9 @@ using System.Windows;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class holds all view model instance referances.
+    /// </summary>
     public class ViewModelLocator
     {
         private static DoctorViewModel _doctorVM;

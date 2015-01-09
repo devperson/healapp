@@ -9,6 +9,9 @@ using HealthDemo;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for News details page.
+    /// </summary>
     public class NewsDetailPage:MasterPage
     {        
         public NewsDetailPage()
@@ -18,6 +21,10 @@ namespace HealthDemo.Pages
         }
 
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -80,8 +87,7 @@ namespace HealthDemo.Pages
             stlayout.Children.Add(content);
             rootScrollView.Content = stlayout;
             if (Device.OS == TargetPlatform.Android)
-                rootScrollView.IsClippedToBounds = true;
-            //rootScrollView.SetBinding(ScrollView.BindingContextProperty, new Binding("SelectedNews"));
+                rootScrollView.IsClippedToBounds = true;            
             parent.Children.Add(rootScrollView);
         }
     }

@@ -10,13 +10,17 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Tip categories list page.
+    /// </summary>
     public class CategoryListPage : MasterPage
     {        
         private ListView lvCategories;
         
-        public CategoryListPage()
-            : base()
-        {            
+        public CategoryListPage() : base()
+        {
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.TipVM;
 
             lvCategories.ItemSelected += (s, e) =>
@@ -42,6 +46,10 @@ namespace HealthDemo.Pages
             lblTitle.Text = AppResources.Category_Title;
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvCategories = new ListView()
@@ -51,11 +59,13 @@ namespace HealthDemo.Pages
                 RowHeight = 65,
                 ItemTemplate = new DataTemplate(typeof(SimpleCell))
             };
-            lvCategories.SetBinding(ListView.ItemsSourceProperty, new Binding("CategoryList"));
-            //lvCategories.SetBinding(ListView.SelectedItemProperty, new Binding("SelectedCategory", BindingMode.TwoWay));
+            lvCategories.SetBinding(ListView.ItemsSourceProperty, new Binding("CategoryList"));            
             parent.Children.Add(lvCategories);
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -64,6 +74,9 @@ namespace HealthDemo.Pages
             ViewModelLocator.TipVM.ShowAlert = this.DisplayAlert;
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

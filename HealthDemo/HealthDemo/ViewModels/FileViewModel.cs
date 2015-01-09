@@ -12,17 +12,26 @@ using XLabs.Ioc;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents NewFile page view model and contains related data and actions.
+    /// </summary>
     public class FileViewModel : ViewModelBase
     {
         public FileModel NewFile { get; set; }
         public MediaFile ImgFile { get; set; }
 
+        /// <summary>
+        /// Sends file to server for storage.
+        /// </summary>        
         public void SendFile(Action<bool> oncompleted)
         {
             IsLoading = true;
             Task.Run(() => SendMail(oncompleted));
         }
 
+        /// <summary>
+        /// Helper method which send file to server.
+        /// </summary>        
         private void SendMail(Action<bool> oncompleted)
         {
             if (ImgFile != null)
@@ -50,6 +59,10 @@ namespace HealthDemo.ViewModels
             });
         }
 
+
+        /// <summary>
+        /// Helper method calls Phone media gallery.
+        /// </summary>        
         public async Task ShowMediaPicker()
         {
             try
@@ -73,6 +86,9 @@ namespace HealthDemo.ViewModels
             }
         }
 
+        /// <summary>
+        /// Validates properties.
+        /// </summary>        
         public bool CheckValidation()
         {
             return (!string.IsNullOrEmpty(NewFile.Name) ||
@@ -80,6 +96,9 @@ namespace HealthDemo.ViewModels
                 !string.IsNullOrEmpty(NewFile.Thiqa));
         }
 
+        /// <summary>
+        /// Helper method for converting bytes to Base64 string.
+        /// </summary>        
         private string WrapImageData(byte[] imageBytes, string extenssion)
         {
             var mimeTypeString = extenssion == ".jpg" ? "image/jpeg" : "image/png";

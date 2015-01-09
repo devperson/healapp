@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Faq detail page.
+    /// </summary>
     public class FaqDetailPage : MasterPage
     {        
         public FaqDetailPage()
@@ -16,6 +19,10 @@ namespace HealthDemo.Pages
             lblTitle.Text = AppResources.Faq_Title;
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {            
             var rootScrollView = new ScrollView() { Orientation = ScrollOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };

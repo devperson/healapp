@@ -11,6 +11,9 @@ using Xamarin.Forms.Labs.Enums;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class represents functionality and UI which are used by all pages in app, e.g heading, footer and e.t.c.
+    /// </summary>
     public class MasterPage : ContentPage
     {
         protected DoubleClickDetecter DoubleClickDetecter = new DoubleClickDetecter();

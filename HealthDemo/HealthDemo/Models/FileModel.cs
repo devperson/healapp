@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+
+    /// <summary>
+    /// This class represents File object, and contains file related informations.
+    /// </summary>
     public class FileModel : ViewModelBase
     {
         public string Name { get; set; }

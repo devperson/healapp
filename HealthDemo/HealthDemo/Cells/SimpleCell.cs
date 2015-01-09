@@ -7,6 +7,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Cells
 {
+    /// <summary>
+    /// Basic cell for basic usage contains UI for lable and accessory icon.
+    /// </summary>
     public class SimpleCell : CustomCell
     {
         public SimpleCell()
@@ -53,6 +56,9 @@ namespace HealthDemo.Cells
         }
     }
 
+    /// <summary>
+    /// Basic cell for basic usage contains lable UI.
+    /// </summary>
     public class SimpleCell2 : CustomCell
     {
         public SimpleCell2()

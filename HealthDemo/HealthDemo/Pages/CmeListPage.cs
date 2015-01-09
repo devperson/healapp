@@ -10,13 +10,19 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Calendar list page.
+    /// </summary>
     public class CalendarListPage : MasterPage
     {        
         private ListView lvCme;
 
         public CalendarListPage()
             : base()
-        {            
+        {
+
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.CmeVM;
             lblTitle.Text = AppResources.Calendar_Title;
 
@@ -38,6 +44,10 @@ namespace HealthDemo.Pages
             };
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             lvCme = new ListView()
@@ -51,15 +61,20 @@ namespace HealthDemo.Pages
             parent.Children.Add(lvCme);
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page appears.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            ViewModelLocator.CmeVM.ShowAlert = this.DisplayAlert;
-            //lvMenu.SelectedItem = GetCurrentPageAsMenu();
+            ViewModelLocator.CmeVM.ShowAlert = this.DisplayAlert;            
             ViewModelLocator.CmeVM.LoadCme();
         }
 
+        /// <summary>
+        /// This is a system method and is executed right before page disappears.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

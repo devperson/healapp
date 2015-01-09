@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Cme details page.
+    /// </summary>
     public class CMEDetailsPage : MasterPage
     {
         private Grid contentGrid;
@@ -15,6 +18,8 @@ namespace HealthDemo.Pages
         public CMEDetailsPage()
             : base(false)
         {
+            //Bind page with data and handle button click events
+
             BindingContext = ViewModelLocator.CmeVM.SelectedCme;
             lblTitle.Text = AppResources.CME_Head;
             btnRegister.Clicked += (s, e) =>
@@ -23,6 +28,10 @@ namespace HealthDemo.Pages
             };
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };

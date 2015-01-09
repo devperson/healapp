@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for appointment search page.
+    /// </summary>
     public class SearchAppointmentPage : MasterPage
     {
         private Button btnSearch, btnReset;
@@ -32,6 +35,10 @@ namespace HealthDemo.Pages
                 };
         }
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };

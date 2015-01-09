@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents Event object, and contains event related informations.
+    /// </summary>
     public class Event
     {
         public int Id { get; set; }

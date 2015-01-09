@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for Languages page, its first page of app and where user selects app language.
+    /// </summary>
     public class LanguagesPage : ContentPage
     {
         IAppLoader _appLoader;
@@ -17,6 +20,9 @@ namespace HealthDemo.Pages
             this.Content = this.CreateLayout();
         }
 
+        /// <summary>
+        /// Creates page layout and controls.
+        /// </summary>        
         private View CreateLayout()
         {            
             StackLayout verticalStack = new StackLayout();
@@ -62,7 +68,10 @@ namespace HealthDemo.Pages
 
             return contentControl;
         }
-       
+
+        /// <summary>
+        /// Creates page buttons for selecting language.
+        /// </summary>
         private Image GetImageButton(string imgFile)
         {
             var btn = new Image();

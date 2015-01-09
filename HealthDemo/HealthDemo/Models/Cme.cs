@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents Cme object.
+    /// </summary>
     public class Cme
     {
         

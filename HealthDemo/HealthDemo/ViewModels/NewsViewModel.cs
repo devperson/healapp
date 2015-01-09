@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.ViewModels
 {
+    /// <summary>
+    /// This class represents News view model and contains related data and actions.
+    /// </summary>
     public class NewsViewModel : ViewModelBase
     {
         public NewsViewModel()
@@ -17,6 +20,10 @@ namespace HealthDemo.ViewModels
 
         public News SelectedNews { get; set; }
         public List<News> NewsList { get; set; }
+
+        /// <summary>
+        /// Load all news objects from server.
+        /// </summary>
         public void LoadNews()
         {
             if (NewsList.Count == 0)

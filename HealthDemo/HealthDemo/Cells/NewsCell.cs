@@ -7,8 +7,10 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Cells
 {
-    public class 
-        NewsCell: CustomCell
+    /// <summary>
+    /// This class represents UI cell for News list.
+    /// </summary>
+    public class NewsCell: CustomCell
     {
         public NewsCell()
             : base()

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents Insurance object.
+    /// </summary>
     public class Insurance
     {
         public int ID { get; set; }

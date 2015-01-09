@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HealthDemo.Models
 {
+    /// <summary>
+    /// This class represents Appointment object.
+    /// </summary>
     public class Appointment : ViewModelBase
     {
         public string Name { get; set; }

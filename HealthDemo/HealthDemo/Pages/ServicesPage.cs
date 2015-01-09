@@ -8,6 +8,9 @@ using Xamarin.Forms.Labs.Controls;
 
 namespace HealthDemo.Pages
 {
+    /// <summary>
+    /// This class creates UI page for e-Services page.
+    /// </summary>
     public class ServicesPage : MasterPage
     {
         ImageButton btnOpenFile, btnRequest, btnViewAppointment;
@@ -15,6 +18,9 @@ namespace HealthDemo.Pages
         public ServicesPage()
 			: base(false)
 		{            
+
+            //Handle button click events
+
             lblTitle.Text = AppResources.MasterPage_FOOTER_Service;
 
 			btnOpenFile.Clicked += (s, e) => 
@@ -39,6 +45,10 @@ namespace HealthDemo.Pages
 			};
 		}
 
+        /// <summary>
+        /// This method is used for providing page content.
+        /// </summary>
+        /// <param name="parent">Panel which represents content area on page.</param>
         protected override void RenderContentView(StackLayout parent)
         {
             ScrollView scrollview = new ScrollView() { HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };

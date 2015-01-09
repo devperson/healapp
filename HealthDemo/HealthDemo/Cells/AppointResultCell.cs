@@ -7,11 +7,17 @@ using Xamarin.Forms;
 
 namespace HealthDemo.Cells
 {
+    /// <summary>
+    /// This class represents UI cell for AppointResult list.
+    /// </summary>
     public class AppointResultCell: CustomCell
     {
         public AppointResultCell()
             : base()
         {
+
+            // Create layout for cell and bind with data.
+
             var rootLayout = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
