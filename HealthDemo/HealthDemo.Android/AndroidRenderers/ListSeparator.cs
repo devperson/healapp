@@ -18,15 +18,18 @@ using HealthDemo.Cells;
 [assembly: ExportRenderer(typeof(CustomCell), typeof(DoctorCellRenderer))]
 namespace HealthDemo.Droid.AndroidRenderers
 {
+    /// <summary>
+    /// Cell renderer allows customizing cell visual for android.
+    /// </summary>
     public class DoctorCellRenderer : ViewCellRenderer
     {
+        /// <summary>
+        /// System method and called for each cell.
+        /// </summary>        
         protected override Android.Views.View GetCellCore(Cell item, Android.Views.View convertView, ViewGroup parent, Context context)
         {
             //Get Android's ListView 
             var thisCellsListView = (Android.Widget.ListView)parent;
-
-            //This CustomListView is a Xamarin.Forms.ListView that has a Custom ListView Renderer in my IOS version
-            //var tableParent = (ListView)base.ParentView;
 
             thisCellsListView.Divider = new ColorDrawable(Xamarin.Forms.Color.Black.ToAndroid());
             thisCellsListView.DividerHeight = 1;

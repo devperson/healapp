@@ -8,8 +8,14 @@ using HealthDemo.Pages;
 [assembly: ExportRenderer(typeof(CustomPicker), typeof(CustomPickerIOSRenderer))]
 namespace HealthDemo.iOS
 {
+    /// <summary>
+    /// Picker renderer allows customizing picker visual for iOS.
+    /// </summary>
 	public class CustomPickerIOSRenderer : PickerRenderer
 	{
+        /// <summary>
+        /// System method and called when control loads.
+        /// </summary>     
 		protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
 		{
 			base.OnElementChanged(e);

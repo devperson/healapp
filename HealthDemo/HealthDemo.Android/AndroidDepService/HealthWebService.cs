@@ -14,6 +14,9 @@ using HealthDemo.Models;
 [assembly: Xamarin.Forms.Dependency(typeof(HealthWebService))]
 namespace HealthDemo
 {
+    /// <summary>
+    /// This class provides functions for accessing data service.
+    /// </summary>
     public class HealthWebService : IWebService
     {
         private RestClient client;
@@ -32,10 +35,17 @@ namespace HealthDemo
 			client.AddDefaultHeader("Accept", "application/json");
 		}
 
+        /// <summary>
+        /// Helper method produce string with local param
+        /// </summary>        
         private string AddLocalVar(string apiName)
         {
             return string.Format("{0}?local={1}", apiName, _local);
         }
+
+        /// <summary>
+        /// Method provides Search doctors service call.
+        /// </summary>        
         public async void SearchDoctors(SearchDoctorRequest request, Action<DoctorResponse> onCompleted)
         {
             request.Local = this._local;
@@ -47,6 +57,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Method provides load tip categories service call.
+        /// </summary>     
         public async void GetCategories(Action<CategoryResponse> onCompleted)
         {
             var asyncResult = await ExecuteServiceMethod<CategoryResponse>(AddLocalVar("TipCategories"), Method.GET, content =>
@@ -57,6 +70,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Method provides load tips service call.
+        /// </summary>    
         public async void GetHealthTipsByCategory(int categoryID, Action<HealthTipResponse> onCompleted)
         {
             var asyncResult = await ExecuteServiceMethod<HealthTipResponse>(string.Format("Tips/GetByCatId/?id={0}&local={1}", categoryID, _local), Method.GET, content =>
@@ -67,6 +83,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Method provides load specialties service call.
+        /// </summary>    
         public async void GetSpecialties(Action<PositionResponse> onCompleted)
         {
             var asyncResult = await ExecuteServiceMethod<PositionResponse>(AddLocalVar("position"), Method.GET, content =>
@@ -77,6 +96,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Method provides load insurances service call.
+        /// </summary>    
         public async void GetInsurances(Action<InsuranceResponse> onCompleted)
         {
             var asyncResult = await ExecuteServiceMethod<InsuranceResponse>(AddLocalVar("insurance"), Method.GET, content =>
@@ -87,6 +109,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Method provides register appointment service call.
+        /// </summary>    
 		public async void CreateAppointment(Appointment appoint, Action<ResponseBase> onCompleted)
 		{
 			var asyncResult = await ExecuteServiceMethod<ResponseBase> ("appointment/RequestAppointment", Method.POST, content => {
@@ -96,6 +121,9 @@ namespace HealthDemo
 			onCompleted(asyncResult);
 		}
 
+        /// <summary>
+        /// Method provides register file service call.
+        /// </summary>    
 		public async void CreateFile(FileModel file, Action<ResponseBase> onCompleted)
 		{
 			var asyncResult = await ExecuteServiceMethod<ResponseBase> ("fileservice/createfile", Method.POST, content => {
@@ -105,6 +133,9 @@ namespace HealthDemo
 			onCompleted(asyncResult);
 		}
 
+        /// <summary>
+        /// Method provides register object service call.
+        /// </summary>    
         public async void PostObject<T>(string requestUrl, T obj, Action<ResponseBase> onCompleted)
         {
             var asyncResult = await ExecuteServiceMethod<ResponseBase>(requestUrl, Method.POST, content =>
@@ -115,6 +146,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Helper method for sending http commands.
+        /// </summary>        
         public Task<T> ExecuteServiceMethod<T>(string resource, Method method, Func<string, T> deserialiser, object requestObject = null) where T : ResponseBase
         {
             var restRequest = new RestRequest(resource, method);
@@ -159,7 +193,9 @@ namespace HealthDemo
             });
         }
 
-
+        /// <summary>
+        /// Helper method for validating service result.
+        /// </summary>        
         public void CheckServer(string responsString)
         {
             string htmlContent = "<!DOCTYPE";
@@ -167,7 +203,9 @@ namespace HealthDemo
                 throw new Exception("Server is down please try later.");
         }
 
-
+        /// <summary>
+        /// Generic method for retriving list data from service
+        /// </summary>        
         public async void GetList<T, modelT>(string uri, Action<T> onCompleted) where T : ResponseBase
         {
             var asyncResult = await ExecuteServiceMethod<T>(AddLocalVar(uri), Method.GET, content =>
@@ -180,6 +218,9 @@ namespace HealthDemo
             onCompleted(asyncResult);
         }
 
+        /// <summary>
+        /// Helper method for setting localization information.
+        /// </summary>        
         public void SetLocal(string localName)
         {
             this._local = localName;

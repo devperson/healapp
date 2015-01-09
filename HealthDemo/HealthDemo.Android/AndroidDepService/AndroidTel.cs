@@ -16,8 +16,14 @@ using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidTel))]
 namespace HealthDemo.Droid.AndroidDepService
 {
+    /// <summary>
+    /// This class contains Phone call functionality for Android
+    /// </summary>
     public class AndroidTel : ITel
     {
+        /// <summary>
+        /// Handles phone call for android.
+        /// </summary>        
         public void Tel(string number)
         {
             try

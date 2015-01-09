@@ -8,8 +8,14 @@ using HealthDemo.iOS;
 [assembly: ExportRenderer(typeof(CustomTextBox), typeof(UiTextFieldRenderer))]
 namespace HealthDemo.iOS
 {
+    /// <summary>
+    /// UiTextField renderer allows customizing textBox visual for iOS.
+    /// </summary>
 	public class UiTextFieldRenderer : EntryRenderer
 	{
+        /// <summary>
+        /// System method and called when control loads.
+        /// </summary>    
 		protected override void OnElementChanged (ElementChangedEventArgs<Xamarin.Forms.Entry> e)
 		{
 			base.OnElementChanged (e);
@@ -18,8 +24,7 @@ namespace HealthDemo.iOS
 
 			searchtxt.Layer.BorderColor = UIColor.FromRGB (80, 80, 80).CGColor;
 			searchtxt.Layer.BorderWidth = 2;
-			searchtxt.Layer.CornerRadius = 5;
-			//buttonLocation.Layer.MasksToBounds = true;     
+			searchtxt.Layer.CornerRadius = 5;			
 		}
 	}
 }

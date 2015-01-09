@@ -17,8 +17,14 @@ using HealthDemo.Pages;
 [assembly: ExportRenderer(typeof(CustomPicker), typeof(CustomPickerRenderer))]
 namespace HealthDemo.Droid.AndroidRenderers
 {
+    /// <summary>
+    /// Picker renderer allows customizing picker visual for android.
+    /// </summary>
     public class CustomPickerRenderer : PickerRenderer
     {
+        /// <summary>
+        /// System method and called when control loads.
+        /// </summary>      
         protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
             base.OnElementChanged(e);

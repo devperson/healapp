@@ -17,8 +17,14 @@ using HealthDemo.Droid.AndroidRenderers;
 [assembly: ExportRenderer(typeof(CustomTextBox), typeof(CustomTextBoxRenderer))]
 namespace HealthDemo.Droid.AndroidRenderers
 {
+    /// <summary>
+    /// TextBox renderer allows customizing textBox visual for android.
+    /// </summary>
     public class CustomTextBoxRenderer : EntryRenderer
     {
+        /// <summary>
+        /// System method and called when control loads.
+        /// </summary>    
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Entry> e)
         {
             base.OnElementChanged(e);
