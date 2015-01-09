@@ -6,6 +6,9 @@ using System.Web;
 
 namespace HServer.Models.DataAccess
 {
+    /// <summary>
+    /// This is EF data context class it holds all tables.
+    /// </summary>
     public class DataBaseContext : DbContext
     {
         public DataBaseContext()
@@ -16,11 +19,15 @@ namespace HServer.Models.DataAccess
             Configuration.AutoDetectChangesEnabled = true;
         }
 
+        //Constructor sets initializer
         static DataBaseContext()
         {
             Database.SetInitializer<DataBaseContext>(new DataBaseInitializer());
         }
 
+        /// <summary>
+        /// Configure table to object mapping.
+        /// </summary>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,6 +37,8 @@ namespace HServer.Models.DataAccess
             modelBuilder.Configurations.Add(new TipModelConfig());
             modelBuilder.Configurations.Add(new ExistingAppointConfig());
         }
+
+        //These properties represents Tables in Database.
 
         public DbSet<Tip> Tips { get; set; }
         public DbSet<TipCategory> TipCategories { get; set; }

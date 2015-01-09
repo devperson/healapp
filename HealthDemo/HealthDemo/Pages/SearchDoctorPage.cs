@@ -114,7 +114,7 @@ namespace HealthDemo.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            lvMenu.SelectedItem = GetCurrentPageAsMenu();
+            lvMenu.SelectedItem = this.MenuItems.FirstOrDefault(s => s.Title == lblTitle.Text);
             ViewModelLocator.DoctorVM.LoadSpeicalties(() =>
             {
                 if (btnCombo.Items == null || (btnCombo.Items != null && btnCombo.Items.Count == 0))

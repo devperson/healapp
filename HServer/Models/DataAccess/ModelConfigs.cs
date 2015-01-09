@@ -5,7 +5,9 @@ using System.Linq;
 using System.Web;
 
 namespace HServer.Models.DataAccess
-{    
+{
+    //These classes configures some of the mapping from Db table column to object properties, by default all mappings from db column to object properties happens by name matching.
+
     public class TipModelConfig : EntityTypeConfiguration<Tip>
     {
         public TipModelConfig()

@@ -71,7 +71,7 @@ namespace HealthDemo.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            lvMenu.SelectedItem = GetCurrentPageAsMenu();
+            lvMenu.SelectedItem = this.MenuItems.FirstOrDefault(s => s.Title == lblTitle.Text);
             ViewModelLocator.FaqVM.LoadFaq();
             ViewModelLocator.FaqVM.ShowAlert = this.DisplayAlert;
         }

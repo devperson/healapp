@@ -169,7 +169,7 @@ namespace HealthDemo.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            lvMenu.SelectedItem = GetCurrentPageAsMenu();
+            lvMenu.SelectedItem = this.MenuItems.FirstOrDefault(s => s.Title == lblTitle.Text);
 
             if (PageViewLocator.ReadyToPush)
             {

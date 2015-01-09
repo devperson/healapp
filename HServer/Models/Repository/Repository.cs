@@ -9,6 +9,9 @@ using LinqKit;
 
 namespace HServer.Models.Repository
 {
+    /// <summary>
+    /// Base class for data base access, and contains basic Crud operations.
+    /// </summary>
     public class Repository<T> : IDisposable where T : class
     {
         protected DbContext _context;

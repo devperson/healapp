@@ -28,6 +28,9 @@ namespace HealthDemo.Pages
         private bool WithLoadIndecator = true, WIthMenu;
         public List<MenuItem> MenuItems;
         
+        /// <summary>
+        /// Page class constructor
+        /// </summary>        
         public MasterPage(bool withLoadIndicator=true, bool withMenu = true)
         {
             WithLoadIndecator = withLoadIndicator;
@@ -40,7 +43,7 @@ namespace HealthDemo.Pages
             {
                 if (this.DoubleClickDetecter.IsDoubleClick())
                     return;
-                OnBackPressed();
+                
                 PageViewLocator.ReadyToPush = false;
                 if (lblTitle.Text != AppResources.MainPage_Title)                    
 					Navigation.PopAsync();                
@@ -97,6 +100,9 @@ namespace HealthDemo.Pages
            	           
         }
 
+        /// <summary>
+        /// Helper method which clears all prev pages from stack and pushes new page to stack.
+        /// </summary>        
         public void PushWithClear(Page page)
         {            
             if (this is MainPage)
@@ -110,6 +116,9 @@ namespace HealthDemo.Pages
             }            
         }        
 
+        /// <summary>
+        /// The main method of this class contains implementation of page header, footer and specifies page content area.
+        /// </summary>
         private void RenderTemplateView()
         {            
             var rootAbsoluteLAyout = new AbsoluteLayout(){VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -152,8 +161,7 @@ namespace HealthDemo.Pages
             
 			headerStack.Children.Add(btnBack);
             headerStack.Children.Add(banner);
-            headerStack.Children.Add(btnMenu);
-            
+            headerStack.Children.Add(btnMenu);            
 
             //title
             CreateTitlePanel();
@@ -195,13 +203,11 @@ namespace HealthDemo.Pages
             toolbarLayout.Children.Add(toolbarBackground, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             toolbarLayout.Children.Add(toolbarStack, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
 
-            OnMasterViewRendered();
-
+            
             rootStack.Children.Add(headerStack);
             rootStack.Children.Add(titleLayout);
             rootStack.Children.Add(contentStack);
             rootStack.Children.Add(toolbarLayout);
-
             
             rootAbsoluteLAyout.Children.Add(rootStack, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             if (this.WithLoadIndecator)
@@ -210,7 +216,6 @@ namespace HealthDemo.Pages
 				LoadingIndicator.SetBinding(ContentView.IsVisibleProperty, new Binding("IsLoading"));
                 rootAbsoluteLAyout.Children.Add(LoadingIndicator, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
             }
-
 
             if (WIthMenu)
             {
@@ -254,10 +259,12 @@ namespace HealthDemo.Pages
                 rootAbsoluteLAyout.ReverseLayoutPaddings();
             }
 
-            this.Content = rootAbsoluteLAyout;
-            
+            this.Content = rootAbsoluteLAyout;            
         }
 
+        /// <summary>
+        /// Creates heading for pages.
+        /// </summary>
         private void CreateTitlePanel()
         {
             var titleHeight = Device.OnPlatform(30, 40, 30);
@@ -293,6 +300,9 @@ namespace HealthDemo.Pages
             titleLayout.Children.Add(stackLayoutTitle, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
         }
 
+        /// <summary>
+        /// Creates data loading indicator for pages.
+        /// </summary>        
         private ContentView CreateActivityIndicator()
         {
             ActivityIndicator activityIndicator = new ActivityIndicator
@@ -319,13 +329,9 @@ namespace HealthDemo.Pages
             };
             
             var frame = new ContentView()
-            {
-                //HasShadow = false,
-                Padding = new Thickness(40, 20, 40, 20),
-                //OutlineColor = Color.White,
-                BackgroundColor = Color.Black,
-                //VerticalOptions = LayoutOptions.Center,
-                //HorizontalOptions = LayoutOptions.Center
+            {                
+                Padding = new Thickness(40, 20, 40, 20),                
+                BackgroundColor = Color.Black,             
             };
             
 
@@ -357,6 +363,9 @@ namespace HealthDemo.Pages
             return backgroundLayout;
         }
 
+        /// <summary>
+        /// Creates right top menu control for pages.
+        /// </summary>        
         public StackLayout CreateMenuLayout()
         {
             var rootStack = new StackLayout() { Spacing = 0, TranslationX = 400, BackgroundColor = Color.FromHex("52000000"), Orientation = StackOrientation.Horizontal, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -372,12 +381,10 @@ namespace HealthDemo.Pages
             var lblMenuTitle = new Label()
             {
                 TextColor = Color.White,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                //MinimumHeightRequest = titleHeight,
+                HorizontalOptions = LayoutOptions.FillAndExpand,                
                 HeightRequest = titleHeight,
                 XAlign = TextAlignment.Start,
-                YAlign = TextAlignment.Center,
-                //BackgroundColor = Color.FromHex("FF4EA3D2"),
+                YAlign = TextAlignment.Center,                
                 Font = Font.SystemFontOfSize(15),
                 Text = " " + AppResources.MasterPage_Menu
             };
@@ -461,11 +468,9 @@ namespace HealthDemo.Pages
             return rootStack;
         }
 
-        public MenuItem GetCurrentPageAsMenu()
-        {
-            return MenuItems.FirstOrDefault(s => s.Title == lblTitle.Text);
-        }
-
+        /// <summary>
+        /// Helper method hides right top menu control from page.
+        /// </summary>      
         private void HideMenu()
         {
             if (Device.OS == TargetPlatform.Android)
@@ -488,6 +493,10 @@ namespace HealthDemo.Pages
             }
         }
 
+
+        /// <summary>
+        /// Retrives menu items for to be displayed in top-right menu
+        /// </summary>        
         private List<MenuItem> GetMenuItems()
         {
             return new List<MenuItem>() 
@@ -501,18 +510,17 @@ namespace HealthDemo.Pages
             };
         }        
 
-        protected virtual void RenderContentView(StackLayout parent) { }
-        protected virtual void OnMasterViewRendered() { }
-        protected virtual void OnBackPressed() { }
-       
-
-        public virtual void ClearObjects()
-        {
-
-        }
-
+        /// <summary>
+        /// Abstract method for rendring page content area 
+        /// This method is implemented by each page class in app.
+        /// </summary>        
+        protected virtual void RenderContentView(StackLayout parent) { }        
     }
 
+
+    /// <summary>
+    /// Custom button class, used for footer buttons.
+    /// </summary>
     public class TransparentButton: Button
     {
         public TransparentButton() : base() 
@@ -525,19 +533,14 @@ namespace HealthDemo.Pages
         }
     }
 
+    /// <summary>
+    /// Represents menu items in top right menu control.
+    /// </summary>
     public class MenuItem
     {
         public string Title { get; set; }
         public PageType PageType { get; set; }
-    }
-
-    public static class ImagesourceExtension
-    {
-        public static ImageSource FromFilePlatform(this ImageSource s, string filename)
-        {
-            return ImageSource.FromFile(Device.OnPlatform(filename, filename, "Images/" + filename));
-        }
-    }
+    }   
 
     public enum PageType
     {

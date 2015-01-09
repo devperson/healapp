@@ -6,8 +6,16 @@ using System.Web;
 
 namespace HServer.Models.DataAccess
 {
+    /// <summary>
+    /// This class used before to make connection to DataBase, 
+    /// here we can make configurations such as CreateDatabaseIfNotExists, DropCreateDatabaseAlways, DropCreateDatabaseIfModelChanges
+    /// </summary>
     public class DataBaseInitializer : CreateDatabaseIfNotExists<DataBaseContext>
     {
+
+        /// <summary>
+        /// Populates database tables with default data if any, note this method will only run when database is being created.
+        /// </summary>
         protected override void Seed(DataBaseContext context)
         {
             var arabicLocal = new LocalizationLanguage() { Name = "Ar" };
@@ -203,7 +211,7 @@ namespace HServer.Models.DataAccess
             var lanAr = this.GetLanguage("Arabic", "العربية", englishLocal, arabicLocal);
             
             //Pos            
-            var pSP = this.GetPosision("Specialist Radiologist", "أشعة متخصص", englishLocal, arabicLocal);
+            var pSP = this.GetPosition("Specialist Radiologist", "أشعة متخصص", englishLocal, arabicLocal);
             var depCIR = this.GetDepartment("Clinical Imaging Radiology", "السريرية التصوير الإشعاعي", englishLocal, arabicLocal);                                  
             
             //Doc1
@@ -245,7 +253,7 @@ namespace HServer.Models.DataAccess
                                            "محمد حسين علي عبد الصمد",
                                            "الدكتور تخرج من جامعة عين شمس محمد، مصر في عام 1986 وأنهى تدريبه ضابط منزل في مستشفى جامعة وقبل انضمامه إلى الرعاية الصحية الأولية لمدة 18 شهرا. من 1990 - 1994 ه كان لها الإقامة في المعهد القومي للقلب في القاهرة أين BECAM ح اختصاصي مساعد في وقت لاحق، قال أخصائي هناك العطور حتى عام 2002. وعمل ولا متخصص صدى في مؤسسة حمد الطبية والعطور قطر حتى عام 2004 وحتى طبيب القلب المتخصص المستشفى العسكري في خميس مشيط، أبها، العطور SAP حتى عام 2006. وقد تم العمل في مستشفى العين أو أمراض القلب التخصصي منذ عام 2006.", englishLocal, arabicLocal);           
             doc3.ImageFileName = "img3.jpg";
-            doc3.Position = this.GetPosision("Specialist Cardiologist", "أمراض القلب التخصصي", englishLocal, arabicLocal);
+            doc3.Position = this.GetPosition("Specialist Cardiologist", "أمراض القلب التخصصي", englishLocal, arabicLocal);
             doc3.Department = depMI;
             doc3.SubDepartment = this.GetSubDepartment("Cardiology", "طب القلب", englishLocal, arabicLocal);
             doc3.Qualifications.Add(this.GetQualification("MBBch, Master Degree in Cardiology and PhD in Cardiology, Ain Shams University, Cairo, Egypt.", "MBBCH، درجة الماجستير في طب القلب ودرجة الدكتوراه في أمراض القلب، جامعة عين شمس، القاهرة، مصر.", englishLocal, arabicLocal));
@@ -261,7 +269,7 @@ namespace HServer.Models.DataAccess
                                           "غسان عطا",
                                           "الدكتور مستشفى غسان العين الإلتحاق تصل خلال عام 2009 بعد ثلاث سنوات ولا طبيب أعصاب متخصص في NMC المستشفيات المميزة في دبي وأبو ظبي و آل عين. انه شام لدولة الإمارات العربية المتحدة في عام 2006 من إنجلترا التالية دورات تدريبية إضافية تصل خلال 2005-2006. قبل ذلك، كان يعمل ولا طبيب أعصاب متخصص ومدرس جامعي في العراق الكندي التعليمي مستشفى كلية / الطبية - جامعة بغداد.", englishLocal, arabicLocal);                
             doc4.ImageFileName = "img4.jpg";
-            doc4.Position = this.GetPosision("Specialist Neurologist", "طبيب أعصاب متخصص", englishLocal, arabicLocal); 
+            doc4.Position = this.GetPosition("Specialist Neurologist", "طبيب أعصاب متخصص", englishLocal, arabicLocal); 
             doc4.Department = depMI;
             doc4.SubDepartment = this.GetSubDepartment("Neurology", "علم الأعصاب", englishLocal, arabicLocal);
             doc4.Qualifications.Add(this.GetQualification("FICMS (neurology board) - 2002.", "FICMS (علم الأعصاب مجلس) - 2002.", englishLocal, arabicLocal));
@@ -277,7 +285,7 @@ namespace HServer.Models.DataAccess
                                           "جون بهرندت",
                                           "بعد أن عمل في مستشفيات مختلفة في ألمانيا لأكثر من 22 عاما، والدكتور جون مستعدة لتحد جديد. والتحق مستشفى العين في أغسطس 2009 للعمل في إدارة أمراض الجهاز الهضمي والكبد.", englishLocal, arabicLocal);                
             doc5.ImageFileName = "img5.jpg";
-            doc5.Position = this.GetPosision("Consultant Gastroenterologist", "استشاري أمراض الجهاز الهضمي", englishLocal, arabicLocal);
+            doc5.Position = this.GetPosition("Consultant Gastroenterologist", "استشاري أمراض الجهاز الهضمي", englishLocal, arabicLocal);
             doc5.Department = depMI;
             doc5.SubDepartment = this.GetSubDepartment("Gastroenterology & Hepatology", "أمراض الجهاز الهضمي والكبد", englishLocal, arabicLocal);
             doc5.Qualifications.Add(this.GetQualification("Graduate Doctor from Medical College at Free University, Berlin, Germany.", "طبيب تخرج من كلية الطب في الجامعة الحرة في برلين، ألمانيا.", englishLocal, arabicLocal));
@@ -621,7 +629,10 @@ namespace HServer.Models.DataAccess
             context.SaveChanges();
             #endregion
         }
-
+        
+        /// <summary>
+        /// Creates doctor model object.
+        /// </summary>        
         private Doctor GetDoctorObject(string enName, string enBio, string arName, string arBio, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
         {
             var enDoctor = new DoctorLocalization();
@@ -639,6 +650,9 @@ namespace HServer.Models.DataAccess
             return doc;
         }
 
+        /// <summary>
+        /// Creates qualification model object.
+        /// </summary>        
         private Qualification GetQualification(string enName, string arName, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
         {
             var enQ = new QualificationLocalization();
@@ -653,7 +667,10 @@ namespace HServer.Models.DataAccess
             return q;
         }
 
-        private Position GetPosision(string enName, string arName, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
+        /// <summary>
+        /// Creates position model object.
+        /// </summary>        
+        private Position GetPosition(string enName, string arName, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
         {
             var enPos = new PositionLocalization();
             enPos.Localization = englishLocal;
@@ -668,6 +685,9 @@ namespace HServer.Models.DataAccess
             return pSP;
         }
 
+        /// <summary>
+        /// Creates Language model object.
+        /// </summary>        
         private Language GetLanguage(string enName, string arName, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
         {
             var enLoc = new LanguageLocalization();
@@ -683,6 +703,9 @@ namespace HServer.Models.DataAccess
             return lan;
         }
 
+        /// <summary>
+        /// Creates doctor department model object.
+        /// </summary> 
         private Department GetDepartment(string enName, string arName, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
         {
             var enLoc = new DepartmentLocalization();
@@ -698,6 +721,9 @@ namespace HServer.Models.DataAccess
             return dep;
         }
 
+        /// <summary>
+        /// Creates doctor subdepartment model object.
+        /// </summary> 
         private SubDepartment GetSubDepartment(string enName, string arName, LocalizationLanguage englishLocal, LocalizationLanguage arabicLocal)
         {
             var enLoc = new SubDepartmentLocalization();

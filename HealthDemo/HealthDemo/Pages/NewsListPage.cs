@@ -72,7 +72,7 @@ namespace HealthDemo.Pages
             base.OnAppearing();
 
             ViewModelLocator.NewsVM.ShowAlert = this.DisplayAlert;
-            lvMenu.SelectedItem = GetCurrentPageAsMenu();
+            lvMenu.SelectedItem = this.MenuItems.FirstOrDefault(s => s.Title == lblTitle.Text);
             ViewModelLocator.NewsVM.LoadNews();
         }
 

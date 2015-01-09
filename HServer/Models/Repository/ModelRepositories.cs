@@ -9,6 +9,8 @@ using System.Web;
 
 namespace HServer.Models.Repository
 {
+    // THESE Classes provides database access for each db table.
+
     public class TipRepository : Repository<Tip>
     {
         public TipRepository()

@@ -23,9 +23,7 @@ namespace HServer.Utils
 
         /// <summary>
         /// Reads resource as string
-        /// </summary>
-        /// <param name="resourceName">Name of resource to read from assembly root folder, as Resources.AddToFullTrust.vbs</param>
-        /// <returns>String representation of resource file</returns>
+        /// </summary>        
         public string ReadResourceAsString(string resourceName)
         {
             using (var file = _assembly.GetManifestResourceStream(GetResourceName(resourceName)))
@@ -39,9 +37,7 @@ namespace HServer.Utils
         }
         /// <summary>
         /// Reads resource as byte array
-        /// </summary>
-        /// <param name="resourceName">Name of resource to read from assembly root folder, as Resources.AddToFullTrust.vbs</param>
-        /// <returns>Binary representation of resource file</returns>
+        /// </summary>        
         public byte[] ReadResourceBytes(string resourceName)
         {
             using (var file = _assembly.GetManifestResourceStream(GetResourceName(resourceName)))
