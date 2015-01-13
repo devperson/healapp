@@ -89,7 +89,7 @@ namespace HServer.Models.Repository
 
         public IEnumerable<Cme> GetCME()
         {
-            var result = _context.Set<Cme>().Include("Localizations.Localization").Where(s => _context.Set<Event>().Any(e => e.Date.Day == s.Date.Day && e.Date.Month == s.Date.Month && e.Date.Year == s.Date.Year));
+            var result = _context.Set<Cme>().Include("Localizations.Localization"); //.Where(s => _context.Set<Event>().Any(e => e.Date.Day == s.Date.Day && e.Date.Month == s.Date.Month && e.Date.Year == s.Date.Year));
             return result;
         }
     }

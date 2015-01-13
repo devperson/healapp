@@ -28,7 +28,6 @@ namespace HealthDemo
                 return client;
             }
         }
-
         public HealthWebService()
 		{            
 			client = new RestClient(Constants.ApiUrl);
